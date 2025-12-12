@@ -9,7 +9,7 @@ module.exports = {
 
   // GitHub pages deployment config.
   organizationName: 'Tayyaba10', // Usually your GitHub org/user name.
-  projectName: 'ai-native-robotics-textbook', // Usually your repo name.
+  projectName: 'physical-ai-textbook-2025', // Usually your repo name.
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
@@ -19,11 +19,11 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/Tayyaba10/ai-native-robotics-textbook/edit/main/',
+          editUrl: 'https://github.com/Tayyaba10/physical-ai-textbook-2025/edit/main/',
         },
         blog: {
           showReadingTime: true,
-          editUrl: 'https://github.com/Tayyaba10/ai-native-robotics-textbook/edit/main/blog/',
+          editUrl: 'https://github.com/Tayyaba10/physical-ai-textbook-2025/edit/main/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -34,7 +34,7 @@ module.exports = {
 
   themeConfig: {
     navbar: {
-      title: 'AI-Native Robotics Textbook',
+      title: 'Physical-ai-textbook-2025',
       logo: {
         alt: 'Robotics Logo',
         src: 'img/robot-logo.svg',  // You can create this logo or use a placeholder
@@ -47,7 +47,7 @@ module.exports = {
           label: 'Textbook',
         },
         {
-          href: 'https://github.com/your-username/ai-native-robotics-textbook',
+          href: 'https://github.com/Tayyaba10/physical-ai-textbook-2025',
           label: 'GitHub',
           position: 'right',
         },
@@ -99,12 +99,12 @@ module.exports = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/your-username/ai-native-robotics-textbook',
+              href: 'https://github.com/Tayyyaba10/physical-ai-textbook-2025',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} AI-Native Robotics Textbook. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Physical Ai Textbook-2025. Built with Docusaurus.`,
     },
     prism: {
       theme: require('prism-react-renderer/themes/github'),
