@@ -1,14 +1,14 @@
 module.exports = {
   title: 'AI-Native Robotics Textbook',
   tagline: 'From ROS 2 Foundation to Vision-Language-Action Integration',
-  url: 'https://your-domain.github.io',  // Replace with your actual domain
+  url: 'https://Tayyaba10.github.io',  // Replace with your actual domain
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
 
   // GitHub pages deployment config.
-  organizationName: 'your-username', // Usually your GitHub org/user name.
+  organizationName: 'Tayyaba10', // Usually your GitHub org/user name.
   projectName: 'ai-native-robotics-textbook', // Usually your repo name.
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
@@ -19,11 +19,11 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/your-username/ai-native-robotics-textbook/edit/main/',
+          editUrl: 'https://github.com/Tayyaba10/ai-native-robotics-textbook/edit/main/',
         },
         blog: {
           showReadingTime: true,
-          editUrl: 'https://github.com/your-username/ai-native-robotics-textbook/edit/main/blog/',
+          editUrl: 'https://github.com/Tayyaba10/ai-native-robotics-textbook/edit/main/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
