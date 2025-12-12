@@ -31,7 +31,11 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- Technical Accuracy: Verify all technical claims align with official documentation
+- Clarity and Accessibility: Ensure content is suitable for target audience
+- Engineering-Focused: Confirm practical workflows match industry standards
+- Reproducibility: Validate all code/examples can be reproduced
+- Industry Alignment: Verify technologies and practices match current standards
 
 ## Project Structure
 

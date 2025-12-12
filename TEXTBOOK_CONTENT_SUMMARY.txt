@@ -1,0 +1,31 @@
+This is the complete AI-Native Robotics Textbook covering modules on:
+
+Module 1: Robotic Nervous System (ROS 2)
+- Chapter 1: Why ROS 2 – Robotic Middleware Evolution
+- Chapter 2: Nodes, Topics, Services & Actions  
+- Chapter 3: Bridging Python AI Agents with rclpy
+- Chapter 4: URDF & Xacro for Humanoid Modeling
+- Chapter 5: Building & Launching ROS 2 Packages
+
+Module 2: Digital Twin & Simulation
+- Chapter 6: Physics Simulation Fundamentals
+- Chapter 7: Isaac Sim Setup & World Building
+- Chapter 8: Simulating LiDAR, Depth Cameras & IMUs
+- Chapter 9: Unity HDRP Visualization & HRI
+- Chapter 10: Debugging Simulations & Best Practices
+
+Module 3: AI-Robot Brain (NVIDIA Isaac)
+- Chapter 11: NVIDIA Isaac Platform Overview
+- Chapter 12: Isaac Sim – Photorealistic Simulation & Synthetic Data
+- Chapter 13: Isaac ROS – Hardware-Accelerated VSLAM & Nav2
+- Chapter 14: Bipedal Locomotion & Balance Control
+- Chapter 15: Reinforcement Learning & Sim-to-Real
+
+Module 4: Vision-Language-Action (VLA)
+- Chapter 16: LLMs Meet Robotics
+- Chapter 17: Voice-to-Action with OpenAI Whisper
+- Chapter 18: Cognitive Task Planning with GPT-4o
+- Chapter 19: Multi-modal Perception Fusion
+- Chapter 20: Capstone – Autonomous Humanoid (Voice → Plan → Navigate → Manipulate)
+
+The textbook teaches students to design, simulate, and control humanoid robots using modern Physical AI stack with hands-on learning through runnable code, simulations, labs, and a full capstone project.

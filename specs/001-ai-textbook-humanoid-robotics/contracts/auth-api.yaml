@@ -1,0 +1,201 @@
+# API Contract: User Authentication Service
+
+## Overview
+The User Authentication Service provides user registration, login, and profile management functionality. It uses BetterAuth principles for secure authentication.
+
+## Base URL
+`/api/auth`
+
+## Authentication
+Session-based authentication for protected endpoints
+
+## Endpoints
+
+### 1. Health Check
+```
+GET /health
+```
+
+#### Description
+Check if the authentication service is running
+
+#### Request
+No request body required
+
+#### Response
+```json
+{
+  "status": "healthy",
+  "timestamp": "2025-12-12T10:30:00Z"
+}
+```
+
+### 2. Register User
+```
+POST /register
+```
+
+#### Description
+Register a new user account
+
+#### Request
+```json
+{
+  "email": "student@example.com",
+  "password": "securePassword123",
+  "name": "John Doe",
+  "preferred_language": "en",
+  "learning_difficulty": "intermediate"
+}
+```
+
+#### Response
+```json
+{
+  "user_id": "UUID",
+  "email": "student@example.com",
+  "name": "John Doe",
+  "session_token": "JWT_TOKEN",
+  "message": "User registered successfully"
+}
+```
+
+### 3. Login User
+```
+POST /login
+```
+
+#### Description
+Authenticate a user and return a session token
+
+#### Request
+```json
+{
+  "email": "student@example.com",
+  "password": "securePassword123"
+}
+```
+
+#### Response
+```json
+{
+  "user_id": "UUID",
+  "email": "student@example.com",
+  "name": "John Doe",
+  "session_token": "JWT_TOKEN",
+  "message": "Login successful"
+}
+```
+
+### 4. Get User Profile
+```
+GET /profile
+```
+
+#### Description
+Retrieve the authenticated user's profile information
+
+#### Request
+Headers:
+- Authorization: Bearer {session_token}
+
+#### Response
+```json
+{
+  "user_id": "UUID",
+  "email": "student@example.com",
+  "name": "John Doe",
+  "preferred_language": "en",
+  "learning_difficulty": "intermediate",
+  "learning_path": "module_1",
+  "created_at": "2025-12-12T10:30:00Z",
+  "updated_at": "2025-12-12T10:30:00Z"
+}
+```
+
+### 5. Update User Profile
+```
+PUT /profile
+```
+
+#### Description
+Update the authenticated user's profile information
+
+#### Request
+Headers:
+- Authorization: Bearer {session_token}
+
+Body:
+```json
+{
+  "name": "John Doe",
+  "preferred_language": "ur",
+  "learning_difficulty": "advanced",
+  "learning_path": "module_2"
+}
+```
+
+#### Response
+```json
+{
+  "user_id": "UUID",
+  "email": "student@example.com",
+  "name": "John Doe",
+  "preferred_language": "ur",
+  "learning_difficulty": "advanced",
+  "learning_path": "module_2",
+  "updated_at": "2025-12-12T10:35:00Z",
+  "message": "Profile updated successfully"
+}
+```
+
+### 6. Submit Questionnaire
+```
+POST /questionnaire
+```
+
+#### Description
+Submit background questionnaire responses for personalization
+
+#### Request
+Headers:
+- Authorization: Bearer {session_token}
+
+Body:
+```json
+{
+  "background_in_robots": "none",
+  "programming_experience": "intermediate",
+  "ai_knowledge": "beginner",
+  "goals": ["build humanoid robot", "learn robotics"],
+  "preferred_learning_style": "hands_on"
+}
+```
+
+#### Response
+```json
+{
+  "user_id": "UUID",
+  "questionnaire_submitted": true,
+  "message": "Questionnaire submitted successfully"
+}
+```
+
+### 7. Logout User
+```
+POST /logout
+```
+
+#### Description
+Invalidate the user's session token
+
+#### Request
+Headers:
+- Authorization: Bearer {session_token}
+
+#### Response
+```json
+{
+  "message": "Logout successful"
+}
+```

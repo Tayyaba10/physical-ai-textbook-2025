@@ -1,0 +1,44 @@
+{
+  "include": [
+    "**/*",
+    "../module-1-robotic-nervous-system/*",
+    "../module-2-digital-twin/*",
+    "../module-3-ai-robot-brain/*",
+    "../module-4-vision-language-action/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    ".docusaurus",
+    "package-lock.json",
+    "*.tmp",
+    "*.log"
+  ],
+  "compilerOptions": {
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES6"
+    ],
+    "target": "ES2020",
+    "baseUrl": ".",
+    "paths": {
+      "@site/*": ["./*"],
+      "@theme/*": ["../../node_modules/@docusaurus/theme-classic/lib/*"],
+      "@docusaurus/*": ["../../node_modules/@docusaurus/*"]
+    }
+  }
+}

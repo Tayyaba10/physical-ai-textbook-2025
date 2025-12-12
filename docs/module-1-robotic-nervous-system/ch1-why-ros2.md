@@ -1,0 +1,286 @@
+---
+title: Ch1 - Why ROS 2 - Robotic Middleware Evolution
+module: 1
+chapter: 1
+sidebar_label: Ch1: Why ROS 2
+description: Understanding the evolution from ROS 1 to ROS 2 and the modern robotic middleware landscape
+tags: [ros2, middleware, introduction, robotics]
+difficulty: beginner
+estimated_duration: 45
+---
+
+import MermaidDiagram from '@site/src/components/MermaidDiagram';
+
+# Why ROS 2 – Robotic Middleware Evolution
+
+## Learning Outcomes
+- Understand the fundamental differences between ROS 1 and ROS 2
+- Identify key architectural changes that make ROS 2 suitable for production robotics
+- Recognize the advantages of ROS 2 for building robust, scalable robotic applications
+- Explain how ROS 2 addresses limitations of ROS 1
+- Know when to choose ROS 2 over other middleware solutions
+
+## Theory
+
+### The Evolution from ROS 1 to ROS 2
+
+Robot Operating System (ROS) has been a pivotal framework in robotics research and development since its inception in 2007. However, as robotics applications evolved from research prototypes to production systems, the limitations of ROS 1 became increasingly apparent.
+
+ROS 1 was built around a single-master architecture, which created a central point of failure. If the master node went down, the entire system would collapse. This architecture was acceptable for research environments but not for production systems where reliability is critical.
+
+ROS 2, released in 2015 with the initial Alpha version and reaching its first Long Term Support (LTS) release in 2018, addresses these limitations by adopting a distributed architecture based on Data Distribution Service (DDS). DDS is a middleware standard designed for real-time systems with high reliability and performance requirements.
+
+### Key Architectural Changes
+
+<MermaidDiagram chart={`
+graph TD;
+    A[ROS 1 Architecture] --> B[Single Master];
+    B --> C[Central Point of Failure];
+    A --> D[No Native Support for Multi-robot Systems];
+    A --> E[Limited Security Features];
+    
+    F[ROS 2 Architecture] --> G[DDS-based Communication];
+    G --> H[Distributed Architecture];
+    F --> I[Real-time Performance];
+    F --> J[Enhanced Security];
+`} />
+
+### DDS in ROS 2
+
+DDS (Data Distribution Service) is the underlying middleware that enables ROS 2's distributed architecture. DDS provides several benefits:
+
+1. **Decentralized Communication**: Nodes can communicate directly without requiring a central master
+2. **Quality of Service (QoS) Settings**: Different communication patterns can be specified for different types of data
+3. **Real-time Performance**: DDS is designed for deterministic real-time systems
+4. **Multi-robot Systems**: Native support for communication between multiple robots
+5. **Security**: Built-in security features for production environments
+
+### Quality of Service (QoS) Profiles
+
+ROS 2 introduces QoS profiles that allow fine-tuning of communication behavior:
+
+- **Reliability**: Choose between reliable (like TCP) or best-effort (like UDP) delivery
+- **Durability**: Specify whether late-joining subscribers should receive past messages
+- **History**: Control how many messages to keep in history
+- **Deadline**: Set deadlines for message delivery
+- **Liveliness**: Monitor the liveness of publishers and subscribers
+
+## Step-by-Step Labs
+
+### Lab 1: Setting up ROS 2 Environment
+
+1. **Install ROS 2 Humble Hawksbill** (LTS version as of 2022):
+   ```bash
+   # Update locale settings
+   locale-gen en_US en_US.UTF-8
+   export LANG=en_US.UTF-8
+   
+   # Setup sources
+   sudo apt update && sudo apt install curl gnupg lsb-release
+   sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+   
+   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(source /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+   
+   # Install ROS 2
+   sudo apt update
+   sudo apt install ros-humble-desktop
+   ```
+
+2. **Source the ROS 2 environment**:
+   ```bash
+   source /opt/ros/humble/setup.bash
+   ```
+
+3. **Set up ROS 2 environment permanently**:
+   ```bash
+   echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+   ```
+
+### Lab 2: Create Your First ROS 2 Workspace
+
+1. **Create a new workspace directory**:
+   ```bash
+   mkdir -p ~/ros2_ws/src
+   cd ~/ros2_ws
+   ```
+
+2. **Build the workspace** (even though it's empty):
+   ```bash
+   colcon build --symlink-install
+   ```
+
+3. **Source the workspace**:
+   ```bash
+   source install/setup.bash
+   ```
+
+### Lab 3: Run the Talker/Listener Example
+
+1. **Launch the talker node** in a new terminal:
+   ```bash
+   source /opt/ros/humble/setup.bash
+   ros2 run demo_nodes_cpp talker
+   ```
+
+2. **Launch the listener node** in another terminal:
+   ```bash
+   source /opt/ros/humble/setup.bash
+   ros2 run demo_nodes_cpp listener
+   ```
+
+3. **Observe the communication** between the nodes without any central master.
+
+## Runnable Code Example
+
+```cpp
+// publisher_member_function.cpp
+#include "rclcpp/rclcpp.hpp"
+#include "std_msgs/msg/string.hpp"
+
+#include <memory>
+
+class MinimalPublisher : public rclcpp::Node
+{
+public:
+    MinimalPublisher()
+    : Node("minimal_publisher"), count_(0)
+    {
+        publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
+        timer_ = this->create_wall_timer(
+            500ms, std::bind(&MinimalPublisher::timer_callback, this));
+    }
+
+private:
+    void timer_callback()
+    {
+        auto message = std_msgs::msg::String();
+        message.data = "Hello, ROS 2! " + std::to_string(count_++);
+        RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
+        publisher_->publish(message);
+    }
+    rclcpp::TimerBase::SharedPtr timer_;
+    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
+    size_t count_;
+};
+
+int main(int argc, char * argv[])
+{
+    rclcpp::init(argc, argv);
+    rclcpp::spin(std::make_shared<MinimalPublisher>());
+    rclcpp::shutdown();
+    return 0;
+}
+```
+
+```python
+# publisher_member_function.py
+import rclpy
+from rclpy.node import Node
+
+from std_msgs.msg import String
+
+
+class MinimalPublisher(Node):
+
+    def __init__(self):
+        super().__init__('minimal_publisher')
+        self.publisher_ = self.create_publisher(String, 'topic', 10)
+        timer_period = 0.5  # seconds
+        self.timer = self.create_timer(timer_period, self.timer_callback)
+        self.i = 0
+
+    def timer_callback(self):
+        msg = String()
+        msg.data = 'Hello, ROS 2! %d' % self.i
+        self.publisher_.publish(msg)
+        self.get_logger().info('Publishing: "%s"' % msg.data)
+        self.i += 1
+
+
+def main(args=None):
+    rclpy.init(args=args)
+
+    minimal_publisher = MinimalPublisher()
+
+    rclpy.spin(minimal_publisher)
+
+    # Destroy the node explicitly
+    minimal_publisher.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
+```
+
+### CMakeLists.txt for the C++ publisher:
+```cmake
+cmake_minimum_required(VERSION 3.8)
+project(demo_nodes_cpp)
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+# Find dependencies
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+
+# Create executable
+add_executable(talker src/publisher_member_function.cpp)
+ament_target_dependencies(talker rclcpp std_msgs)
+
+# Install targets
+install(TARGETS
+  talker
+  DESTINATION lib/${PROJECT_NAME})
+
+ament_package()
+```
+
+### package.xml for the package:
+```xml
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>demo_nodes_cpp</name>
+  <version>0.0.0</version>
+  <description>Example nodes for ROS 2</description>
+  <maintainer email="user@example.com">Your Name</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
+```
+
+## Mini-project
+
+Create a simple ROS 2 package that includes:
+1. A publisher node that publishes the current system time
+2. A subscriber node that receives and logs the time messages
+3. A launch file that starts both nodes
+4. Add a QoS profile parameter to the publisher (e.g., reliable vs best-effort)
+
+Verify that the nodes can communicate without a central master by running them in separate terminals.
+
+## Summary
+
+This chapter provided an overview of ROS 2 and why it represents a significant evolution from ROS 1. Key takeaways include:
+
+- ROS 2 uses a distributed architecture based on DDS, eliminating the single point of failure
+- Quality of Service (QoS) profiles allow fine-tuning of communication behavior
+- ROS 2 is designed for production systems with security, real-time performance, and multi-robot support
+- The migration from ROS 1 requires understanding both architectural and API differences
+
+ROS 2 is the current standard for robotic middleware in both research and production environments, making it essential knowledge for modern robotics practitioners.

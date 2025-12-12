@@ -1,0 +1,220 @@
+# API Contract: Content Personalization Service
+
+## Overview
+The Content Personalization Service provides functionality to adjust content difficulty and learning paths based on user preferences and progress.
+
+## Base URL
+`/api/personalize`
+
+## Authentication
+Bearer token required for all endpoints (except health check)
+
+## Endpoints
+
+### 1. Health Check
+```
+GET /health
+```
+
+#### Description
+Check if the personalization service is running
+
+#### Request
+No request body required
+
+#### Response
+```json
+{
+  "status": "healthy",
+  "timestamp": "2025-12-12T10:30:00Z"
+}
+```
+
+### 2. Get Personalized Content
+```
+POST /content
+```
+
+#### Description
+Retrieve personalized version of textbook content based on user preferences
+
+#### Request
+```json
+{
+  "user_id": "UUID",
+  "content_id": "UUID",
+  "requested_difficulty": "intermediate",
+  "include_code_examples": true,
+  "include_diagrams": true
+}
+```
+
+#### Response
+```json
+{
+  "content_id": "UUID",
+  "title": "Why ROS 2 - Robotic Middleware Evolution",
+  "module_number": 1,
+  "chapter_number": 1,
+  "personalized_content": {
+    "text": "Personalized version of the content adjusted for intermediate difficulty...",
+    "complexity_level": "intermediate",
+    "adjusted_sections": ["simplified_explanation", "additional_detail"],
+    "modified_examples": ["simplified_code", "detailed_explanation"]
+  },
+  "learning_outcomes": [
+    "Understand the evolution from ROS 1 to ROS 2",
+    "Identify key architectural differences"
+  ],
+  "lab_exercises": [
+    {
+      "title": "Setting up your first ROS 2 workspace",
+      "difficulty": "intermediate",
+      "steps": ["Create workspace", "Build packages", "Run example"]
+    }
+  ],
+  "code_examples": [
+    {
+      "title": "Simple Publisher Node",
+      "complexity": "intermediate",
+      "code": "Modified version of the example for intermediate level"
+    }
+  ]
+}
+```
+
+### 3. Get Learning Path Recommendation
+```
+POST /learning-path
+```
+
+#### Description
+Get personalized learning path based on user progress, questionnaire responses, and learning goals
+
+#### Request
+```json
+{
+  "user_id": "UUID",
+  "current_module": 1,
+  "current_chapter": 3,
+  "completed_content": ["UUID1", "UUID2", "UUID3"],
+  "preferred_pace": "moderate",
+  "available_time_per_week": 6
+}
+```
+
+#### Response
+```json
+{
+  "recommended_path": [
+    {
+      "module": 1,
+      "chapter": 4,
+      "estimated_time": 2.5,
+      "prerequisites_met": true
+    },
+    {
+      "module": 1,
+      "chapter": 5,
+      "estimated_time": 3.0,
+      "prerequisites_met": false
+    }
+  ],
+  "suggested_pace": "moderate",
+  "time_to_completion": "12 weeks"
+}
+```
+
+### 4. Update Personalization Preferences
+```
+PUT /preferences
+```
+
+#### Description
+Update user's personalization preferences
+
+#### Request
+Headers:
+- Authorization: Bearer {session_token}
+
+```json
+{
+  "user_id": "UUID",
+  "learning_difficulty": "advanced",
+  "preferred_language": "ur",
+  "learning_style": "visual",
+  "time_per_week": 8,
+  "goal_timeline": "3_months",
+  "content_preferences": {
+    "show_advanced_math": true,
+    "more_practical_examples": true,
+    "fewer_theoretical_sections": false
+  }
+}
+```
+
+#### Response
+```json
+{
+  "user_id": "UUID",
+  "message": "Preferences updated successfully",
+  "updated_at": "2025-12-12T10:35:00Z"
+}
+```
+
+### 5. Get Personalization Statistics
+```
+GET /stats/{user_id}
+```
+
+#### Description
+Get statistics about user's personalization usage and learning progress
+
+#### Request
+Path parameter: user_id
+
+#### Response
+```json
+{
+  "user_id": "UUID",
+  "total_time_spent": 45.5,  // hours
+  "completed_modules": 1,
+  "completed_chapters": 5,
+  "preferred_difficulty_trend": "beginner -> intermediate",
+  "personalization_usage": {
+    "content_adjusted": 25,
+    "paths_recommended": 10,
+    "feedback_submitted": 8
+  },
+  "learning_efficiency": 0.85
+}
+```
+
+### 6. Submit Difficulty Feedback
+```
+POST /difficulty-feedback
+```
+
+#### Description
+Submit feedback about the difficulty level of content
+
+#### Request
+```json
+{
+  "user_id": "UUID",
+  "content_id": "UUID",
+  "perceived_difficulty": "too_hard",  // too_easy, appropriate, too_hard
+  "time_spent": 45,  // minutes
+  "completion_status": "completed",  // started, partially_completed, completed
+  "comments": "The math concepts were challenging but the explanations helped"
+}
+```
+
+#### Response
+```json
+{
+  "message": "Feedback recorded",
+  "content_id": "UUID",
+  "updated_difficulty_estimate": "intermediate"
+}
+```

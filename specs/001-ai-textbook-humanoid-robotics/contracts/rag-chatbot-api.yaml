@@ -1,0 +1,162 @@
+# API Contract: RAG Chatbot Service
+
+## Overview
+The RAG (Retrieval-Augmented Generation) Chatbot Service provides AI-powered question-answering capabilities based on the textbook content. It integrates with OpenAI's API and uses vector storage to retrieve relevant textbook content for generating context-aware responses.
+
+## Base URL
+`/api/chat`
+
+## Authentication
+Bearer token required for all endpoints (except health check)
+
+## Endpoints
+
+### 1. Health Check
+```
+GET /health
+```
+
+#### Description
+Check if the RAG service is running
+
+#### Request
+No request body required
+
+#### Response
+```json
+{
+  "status": "healthy",
+  "timestamp": "2025-12-12T10:30:00Z"
+}
+```
+
+### 2. Generate Response to Question
+```
+POST /query
+```
+
+#### Description
+Submit a question and receive an AI-generated response based on textbook content
+
+#### Request
+```json
+{
+  "query": "What is the difference between ROS 1 and ROS 2?",
+  "context": {
+    "module": 1,
+    "chapter": 1,
+    "selected_text": "Optional text that the user highlighted"
+  },
+  "user_id": "UUID"
+}
+```
+
+#### Response
+```json
+{
+  "response_id": "UUID",
+  "query": "What is the difference between ROS 1 and ROS 2?",
+  "answer": "ROS 2 is the next generation of the Robot Operating System, designed to address limitations of ROS 1 including...",
+  "sources": [
+    {
+      "module": 1,
+      "chapter": 1,
+      "section": "Introduction",
+      "page_reference": "p.15"
+    }
+  ],
+  "timestamp": "2025-12-12T10:30:00Z",
+  "model_used": "gpt-4o"
+}
+```
+
+### 3. Get Chat History
+```
+GET /history/{user_id}
+```
+
+#### Description
+Retrieve the chat history for a specific user
+
+#### Request
+Path parameter: user_id
+
+Query parameters (optional):
+- limit: number of entries to return (default 20, max 100)
+- offset: offset for pagination (default 0)
+
+#### Response
+```json
+[
+  {
+    "query": "What is the difference between ROS 1 and ROS 2?",
+    "answer": "ROS 2 is the next generation of the Robot Operating System...",
+    "timestamp": "2025-12-12T10:30:00Z",
+    "sources": [
+      {
+        "module": 1,
+        "chapter": 1,
+        "section": "Introduction"
+      }
+    ]
+  }
+]
+```
+
+### 4. Submit Feedback on Response
+```
+POST /feedback
+```
+
+#### Description
+Submit feedback on the quality of a response
+
+#### Request
+```json
+{
+  "response_id": "UUID",
+  "user_id": "UUID",
+  "rating": 5,
+  "feedback_text": "The answer was comprehensive and accurate"
+}
+```
+
+#### Response
+```json
+{
+  "status": "feedback recorded",
+  "response_id": "UUID"
+}
+```
+
+### 5. Get Relevant Content Snippets
+```
+POST /search
+```
+
+#### Description
+Search for relevant textbook content snippets based on a query
+
+#### Request
+```json
+{
+  "query": "ROS 2 architecture",
+  "top_k": 5
+}
+```
+
+#### Response
+```json
+{
+  "results": [
+    {
+      "content_id": "UUID",
+      "module": 1,
+      "chapter": 2,
+      "section": "Nodes, Topics, and Services",
+      "text_snippet": "In ROS 2, nodes are...",
+      "relevance_score": 0.92
+    }
+  ]
+}
+```

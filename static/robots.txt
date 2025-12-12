@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ai-robotics-textbook.example.com/sitemap.xml

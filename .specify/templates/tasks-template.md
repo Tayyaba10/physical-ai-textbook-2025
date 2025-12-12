@@ -62,12 +62,12 @@ description: "Task list template for feature implementation"
 
 Examples of foundational tasks (adjust based on your project):
 
-- [ ] T004 Setup database schema and migrations framework
-- [ ] T005 [P] Implement authentication/authorization framework
-- [ ] T006 [P] Setup API routing and middleware structure
-- [ ] T007 Create base models/entities that all stories depend on
-- [ ] T008 Configure error handling and logging infrastructure
-- [ ] T009 Setup environment configuration management
+- [ ] T004 Verify all technical claims with reputable sources (academic or vendor docs)
+- [ ] T005 [P] Ensure content clarity for target audience (Flesch-Kincaid Grade 8-12)
+- [ ] T006 [P] Implement engineering-focused explanations with practical workflows
+- [ ] T007 Create reproducible examples and code that can be executed as described
+- [ ] T008 Configure content validation against industry standards in robotics and AI
+- [ ] T009 Setup environment for content delivery using Docusaurus and GitHub Pages
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -150,11 +150,11 @@ Examples of foundational tasks (adjust based on your project):
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] TXXX [P] Documentation updates in docs/
-- [ ] TXXX Code cleanup and refactoring
-- [ ] TXXX Performance optimization across all stories
-- [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
-- [ ] TXXX Security hardening
+- [ ] TXXX [P] Content accuracy validation against official documentation
+- [ ] TXXX Content accessibility review for target audience level
+- [ ] TXXX Practical workflow verification across all chapters
+- [ ] TXXX [P] Code example execution and verification in multiple environments
+- [ ] TXXX Compliance check with industry standards in robotics and AI
 - [ ] TXXX Run quickstart.md validation
 
 ---
