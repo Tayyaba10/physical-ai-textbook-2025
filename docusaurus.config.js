@@ -2,7 +2,7 @@ module.exports = {
   title: 'AI-Native Robotics Textbook',
   tagline: 'From ROS 2 Foundation to Vision-Language-Action Integration',
   url: 'https://Tayyaba10.github.io',  // Replace with your actual domain
-  baseUrl: '/',
+  baseUrl: '/physical-ai-textbook-2025/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
