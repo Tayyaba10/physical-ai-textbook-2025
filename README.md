@@ -1,5 +1,7 @@
 # AI-Native Robotics Textbook: Physical AI & Humanoid Robotics
 
+![GitHub Pages Deployment](https://github.com/Tayyaba10/physical-ai-textbook-2025/actions/workflows/deploy.yml/badge.svg)
+
 ## 🤖 Complete Educational Resource for Modern Robotics
 
 This repository contains the complete AI-Native Robotics textbook covering the full spectrum from ROS 2 foundations to advanced vision-language-action integration for humanoid robotics.
@@ -42,6 +44,29 @@ npm run build
 # Serve locally for development
 npm start
 ```
+
+### 🌐 **GitHub Pages Deployment**
+
+This project is configured for deployment to GitHub Pages using GitHub Actions.
+
+#### Automatic Deployment
+- Push changes to the `main` branch to trigger an automatic build and deployment
+- The GitHub Actions workflow (`.github/workflows/deploy.yml`) will:
+  1. Build the Docusaurus site
+  2. Deploy it to the `gh-pages` branch
+  3. GitHub Pages will automatically serve the site from the `gh-pages` branch
+
+#### Manual Deployment
+If you need to deploy manually:
+```bash
+# Build the site
+npm run build
+
+# Deploy to GitHub Pages
+npx docusaurus deploy
+```
+
+> **Note**: The site will be deployed to `https://<your-username>.github.io/physical-ai-textbook-2025/`
 
 ### 🏗 **Project Structure**
 ```

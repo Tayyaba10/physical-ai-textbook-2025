@@ -1,5 +1,5 @@
----
-title: Ch4 - URDF & Xacro for Humanoid Modeling
+-----
+title: Ch4  URDF & Xacro for Humanoid Modeling
 module: 1
 chapter: 4
 sidebar_label: Ch4: URDF & Xacro for Humanoid Modeling
@@ -7,19 +7,19 @@ description: Creating humanoid robot models using URDF and Xacro in ROS 2
 tags: [ros2, urdf, xacro, modeling, humanoid, robot]
 difficulty: intermediate
 estimated_duration: 90
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
 # URDF & Xacro for Humanoid Modeling
 
 ## Learning Outcomes
-- Understand the Unified Robot Description Format (URDF) for robot modeling
-- Create complex humanoid robot models using URDF
-- Utilize Xacro macros to simplify and parameterize robot models
-- Implement joint constraints and physical properties for realistic simulation
-- Validate robot models using ROS 2 tools
-- Integrate robot models with ROS 2 simulation environments
+ Understand the Unified Robot Description Format (URDF) for robot modeling
+ Create complex humanoid robot models using URDF
+ Utilize Xacro macros to simplify and parameterize robot models
+ Implement joint constraints and physical properties for realistic simulation
+ Validate robot models using ROS 2 tools
+ Integrate robot models with ROS 2 simulation environments
 
 ## Theory
 
@@ -28,19 +28,19 @@ import MermaidDiagram from '@site/src/components/MermaidDiagram';
 URDF is an XML format used to describe robots in ROS. It defines the robot's physical structure including links (rigid bodies), joints (connections between links), and other properties like visual appearance and collision properties.
 
 Key components of a URDF:
-- **Links**: Rigid bodies that represent parts of the robot
-- **Joints**: Connections between links that define how they move relative to each other
-- **Visual**: How the robot appears in simulation and visualization tools
-- **Collision**: How the robot interacts physically with the environment
-- **Inertial**: Mass and inertia properties for physics simulation
+ **Links**: Rigid bodies that represent parts of the robot
+ **Joints**: Connections between links that define how they move relative to each other
+ **Visual**: How the robot appears in simulation and visualization tools
+ **Collision**: How the robot interacts physically with the environment
+ **Inertial**: Mass and inertia properties for physics simulation
 
 ### Xacro (XML Macros)
 
 Xacro is an XML macro language that simplifies URDF creation by allowing:
-- Parameterization of robot models
-- Reusable components through macros
-- Mathematical expressions
-- File inclusion
+ Parameterization of robot models
+ Reusable components through macros
+ Mathematical expressions
+ File inclusion
 
 Xacro files have the `.xacro` extension and are preprocessed to generate URDF.
 
@@ -48,27 +48,27 @@ Xacro files have the `.xacro` extension and are preprocessed to generate URDF.
 
 <MermaidDiagram chart={`
 graph TD;
-    A[Torso] --> B[Head];
-    A --> C[Left Arm];
-    A --> D[Right Arm];
-    A --> E[Left Leg];
-    A --> F[Right Leg];
+    A[Torso] > B[Head];
+    A > C[Left Arm];
+    A > D[Right Arm];
+    A > E[Left Leg];
+    A > F[Right Leg];
     
-    C --> G[Left Shoulder];
-    G --> H[Left Elbow];
-    H --> I[Left Hand];
+    C > G[Left Shoulder];
+    G > H[Left Elbow];
+    H > I[Left Hand];
     
-    D --> J[Right Shoulder];
-    J --> K[Right Elbow];
-    K --> L[Right Hand];
+    D > J[Right Shoulder];
+    J > K[Right Elbow];
+    K > L[Right Hand];
     
-    E --> M[Left Hip];
-    M --> N[Left Knee];
-    N --> O[Left Foot];
+    E > M[Left Hip];
+    M > N[Left Knee];
+    N > O[Left Foot];
     
-    F --> P[Right Hip];
-    P --> Q[Right Knee];
-    Q --> R[Right Foot];
+    F > P[Right Hip];
+    P > Q[Right Knee];
+    Q > R[Right Foot];
     
     style A fill:#4CAF50,stroke:#388E3C,color:#fff;
     style B fill:#2196F3,stroke:#0D47A1,color:#fff;
@@ -80,14 +80,14 @@ graph TD;
 
 Humanoid robots have a complex kinematic structure that mimics human anatomy, requiring careful modeling of multiple degrees of freedom in limbs.
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
 ### Lab 1: Creating a Simple URDF Model
 
 1. **Create a robot description package**:
    ```bash
    cd ~/ros2_ws/src
-   ros2 pkg create --build-type ament_cmake robot_description
+   ros2 pkg create buildtype ament_cmake robot_description
    cd robot_description
    ```
 
@@ -95,7 +95,7 @@ Humanoid robots have a complex kinematic structure that mimics human anatomy, re
    ```xml
    <?xml version="1.0"?>
    <robot name="simple_humanoid">
-     <!-- Base Link -->
+     <! Base Link >
      <link name="base_link">
        <visual>
          <geometry>
@@ -116,7 +116,7 @@ Humanoid robots have a complex kinematic structure that mimics human anatomy, re
        </inertial>
      </link>
      
-     <!-- Head -->
+     <! Head >
      <link name="head">
        <visual>
          <geometry>
@@ -137,16 +137,16 @@ Humanoid robots have a complex kinematic structure that mimics human anatomy, re
        </inertial>
      </link>
      
-     <!-- Joint connecting head to torso -->
+     <! Joint connecting head to torso >
      <joint name="neck_joint" type="revolute">
        <parent link="base_link"/>
        <child link="head"/>
        <origin xyz="0 0 0.2" rpy="0 0 0"/>
        <axis xyz="0 1 0"/>
-       <limit lower="-1.0" upper="1.0" effort="100" velocity="1"/>
+       <limit lower="1.0" upper="1.0" effort="100" velocity="1"/>
      </joint>
      
-     <!-- Left Arm -->
+     <! Left Arm >
      <link name="left_upper_arm">
        <visual>
          <geometry>
@@ -172,7 +172,7 @@ Humanoid robots have a complex kinematic structure that mimics human anatomy, re
        <child link="left_upper_arm"/>
        <origin xyz="0.15 0 0.1" rpy="0 0 0"/>
        <axis xyz="0 1 0"/>
-       <limit lower="-1.57" upper="1.57" effort="100" velocity="1"/>
+       <limit lower="1.57" upper="1.57" effort="100" velocity="1"/>
      </joint>
    </robot>
    ```
@@ -197,14 +197,14 @@ Humanoid robots have a complex kinematic structure that mimics human anatomy, re
    ```xml
    <?xml version="1.0"?>
    <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="humanoid">
-     <!-- Define properties -->
+     <! Define properties >
      <xacro:property name="M_PI" value="3.1415926535897931"/>
      <xacro:property name="base_mass" value="10.0"/>
      <xacro:property name="head_mass" value="2.0"/>
      <xacro:property name="arm_mass" value="1.0"/>
      <xacro:property name="leg_mass" value="3.0"/>
      
-     <!-- Base Link -->
+     <! Base Link >
      <link name="base_link">
        <visual>
          <geometry>
@@ -225,14 +225,14 @@ Humanoid robots have a complex kinematic structure that mimics human anatomy, re
        </inertial>
      </link>
      
-     <!-- Head Macro -->
+     <! Head Macro >
      <xacro:macro name="head" params="parent xyz rpy">
        <joint name="neck_joint" type="revolute">
          <parent link="${parent}"/>
          <child link="head"/>
          <origin xyz="${xyz}" rpy="${rpy}"/>
          <axis xyz="0 1 0"/>
-         <limit lower="-1.0" upper="1.0" effort="100" velocity="1"/>
+         <limit lower="1.0" upper="1.0" effort="100" velocity="1"/>
        </joint>
        
        <link name="head">
@@ -256,14 +256,14 @@ Humanoid robots have a complex kinematic structure that mimics human anatomy, re
        </link>
      </xacro:macro>
      
-     <!-- Arm Macro -->
+     <! Arm Macro >
      <xacro:macro name="arm" params="side parent xyz rpy">
        <joint name="${side}_shoulder_joint" type="revolute">
          <parent link="${parent}"/>
          <child link="${side}_upper_arm"/>
          <origin xyz="${xyz}" rpy="${rpy}"/>
          <axis xyz="0 1 0"/>
-         <limit lower="-1.57" upper="1.57" effort="100" velocity="1"/>
+         <limit lower="1.57" upper="1.57" effort="100" velocity="1"/>
        </joint>
        
        <link name="${side}_upper_arm">
@@ -289,9 +289,9 @@ Humanoid robots have a complex kinematic structure that mimics human anatomy, re
        <joint name="${side}_elbow_joint" type="revolute">
          <parent link="${side}_upper_arm"/>
          <child link="${side}_lower_arm"/>
-         <origin xyz="0 0 -0.3" rpy="0 0 0"/>
+         <origin xyz="0 0 0.3" rpy="0 0 0"/>
          <axis xyz="1 0 0"/>
-         <limit lower="-1.57" upper="1.57" effort="100" velocity="1"/>
+         <limit lower="1.57" upper="1.57" effort="100" velocity="1"/>
        </joint>
        
        <link name="${side}_lower_arm">
@@ -315,14 +315,14 @@ Humanoid robots have a complex kinematic structure that mimics human anatomy, re
        </link>
      </xacro:macro>
      
-     <!-- Leg Macro -->
+     <! Leg Macro >
      <xacro:macro name="leg" params="side parent xyz rpy">
        <joint name="${side}_hip_joint" type="revolute">
          <parent link="${parent}"/>
          <child link="${side}_upper_leg"/>
          <origin xyz="${xyz}" rpy="${rpy}"/>
          <axis xyz="0 1 0"/>
-         <limit lower="-1.0" upper="1.0" effort="200" velocity="1"/>
+         <limit lower="1.0" upper="1.0" effort="200" velocity="1"/>
        </joint>
        
        <link name="${side}_upper_leg">
@@ -348,7 +348,7 @@ Humanoid robots have a complex kinematic structure that mimics human anatomy, re
        <joint name="${side}_knee_joint" type="revolute">
          <parent link="${side}_upper_leg"/>
          <child link="${side}_lower_leg"/>
-         <origin xyz="0 0 -0.4" rpy="0 0 0"/>
+         <origin xyz="0 0 0.4" rpy="0 0 0"/>
          <axis xyz="1 0 0"/>
          <limit lower="0.0" upper="1.57" effort="200" velocity="1"/>
        </joint>
@@ -376,9 +376,9 @@ Humanoid robots have a complex kinematic structure that mimics human anatomy, re
        <joint name="${side}_ankle_joint" type="revolute">
          <parent link="${side}_lower_leg"/>
          <child link="${side}_foot"/>
-         <origin xyz="0 0 -0.35" rpy="0 0 0"/>
+         <origin xyz="0 0 0.35" rpy="0 0 0"/>
          <axis xyz="0 1 0"/>
-         <limit lower="-0.5" upper="0.5" effort="100" velocity="1"/>
+         <limit lower="0.5" upper="0.5" effort="100" velocity="1"/>
        </joint>
        
        <link name="${side}_foot">
@@ -402,12 +402,12 @@ Humanoid robots have a complex kinematic structure that mimics human anatomy, re
        </link>
      </xacro:macro>
      
-     <!-- Use the macros to build the robot -->
+     <! Use the macros to build the robot >
      <xacro:head parent="base_link" xyz="0 0 0.2" rpy="0 0 0"/>
      <xacro:arm side="left" parent="base_link" xyz="0.15 0 0.1" rpy="0 0 0"/>
-     <xacro:arm side="right" parent="base_link" xyz="-0.15 0 0.1" rpy="0 0 0"/>
-     <xacro:leg side="left" parent="base_link" xyz="0.07 0 -0.2" rpy="0 0 0"/>
-     <xacro:leg side="right" parent="base_link" xyz="-0.07 0 -0.2" rpy="0 0 0"/>
+     <xacro:arm side="right" parent="base_link" xyz="0.15 0 0.1" rpy="0 0 0"/>
+     <xacro:leg side="left" parent="base_link" xyz="0.07 0 0.2" rpy="0 0 0"/>
+     <xacro:leg side="right" parent="base_link" xyz="0.07 0 0.2" rpy="0 0 0"/>
    </robot>
    ```
 
@@ -416,7 +416,7 @@ Humanoid robots have a complex kinematic structure that mimics human anatomy, re
 1. **Check the URDF** with xacro:
    ```bash
    # Convert xacro to URDF
-   ros2 run xacro xacro --inorder urdf/humanoid.xacro > temp.urdf
+   ros2 run xacro xacro inorder urdf/humanoid.xacro > temp.urdf
    
    # Check for errors
    check_urdf temp.urdf
@@ -425,7 +425,7 @@ Humanoid robots have a complex kinematic structure that mimics human anatomy, re
 2. **Visualize the robot** using RViz:
    ```bash
    # Launch RViz with robot model
-   ros2 run rviz2 rviz2 -d `ros2 pkg prefix robot_description`/share/robot_description/rviz/humanoid.rviz
+   ros2 run rviz2 rviz2 d `ros2 pkg prefix robot_description`/share/robot_description/rviz/humanoid.rviz
    ```
 
 3. **Create a launch file** (`launch/display.launch.py`):
@@ -477,7 +477,7 @@ Humanoid robots have a complex kinematic structure that mimics human anatomy, re
            name='rviz2',
            output='screen',
            parameters=[{'use_sim_time': use_sim_time}],
-           arguments=['-d', os.path.join(pkg_share, 'rviz/humanoid.rviz')])
+           arguments=['d', os.path.join(pkg_share, 'rviz/humanoid.rviz')])
        
        # Create nodes and launch description
        ld = LaunchDescription()
@@ -500,17 +500,17 @@ Here's a complete Xacro file for a more sophisticated humanoid model with gaze s
 ```xml
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="advanced_humanoid">
-  <!-- Define properties -->
+  <! Define properties >
   <xacro:property name="M_PI" value="3.1415926535897931"/>
   <xacro:property name="base_mass" value="10.0"/>
   <xacro:property name="head_mass" value="2.0"/>
   <xacro:property name="arm_mass" value="1.0"/>
   <xacro:property name="leg_mass" value="3.0"/>
 
-  <!-- Include gazebo plugins -->
+  <! Include gazebo plugins >
   <xacro:include filename="$(find gazebo_plugins)/urdf/camera.gazebo.xacro"/>
   
-  <!-- Materials -->
+  <! Materials >
   <material name="blue">
     <color rgba="0 0 1 1"/>
   </material>
@@ -527,7 +527,7 @@ Here's a complete Xacro file for a more sophisticated humanoid model with gaze s
     <color rgba="0 0 0 1"/>
   </material>
 
-  <!-- Base Link -->
+  <! Base Link >
   <link name="base_link">
     <visual>
       <geometry>
@@ -546,7 +546,7 @@ Here's a complete Xacro file for a more sophisticated humanoid model with gaze s
     </inertial>
   </link>
 
-  <!-- Gazebo plugin for robot -->
+  <! Gazebo plugin for robot >
   <gazebo>
     <plugin name="ground_truth" filename="libgazebo_ros_p3d.so">
       <alwaysOn>true</alwaysOn>
@@ -558,14 +558,14 @@ Here's a complete Xacro file for a more sophisticated humanoid model with gaze s
     </plugin>
   </gazebo>
 
-  <!-- Head Macro with sensor -->
+  <! Head Macro with sensor >
   <xacro:macro name="head_with_sensor" params="parent xyz rpy">
     <joint name="neck_joint" type="revolute">
       <parent link="${parent}"/>
       <child link="head"/>
       <origin xyz="${xyz}" rpy="${rpy}"/>
       <axis xyz="0 1 0"/>
-      <limit lower="-1.0" upper="1.0" effort="100" velocity="1"/>
+      <limit lower="1.0" upper="1.0" effort="100" velocity="1"/>
     </joint>
 
     <link name="head">
@@ -586,7 +586,7 @@ Here's a complete Xacro file for a more sophisticated humanoid model with gaze s
       </inertial>
     </link>
 
-    <!-- Camera sensor in head -->
+    <! Camera sensor in head >
     <joint name="camera_joint" type="fixed">
       <parent link="head"/>
       <child link="camera_link"/>
@@ -607,11 +607,11 @@ Here's a complete Xacro file for a more sophisticated humanoid model with gaze s
       </collision>
       <inertial>
         <mass value="0.1"/>
-        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+        <inertia ixx="1e6" ixy="0" ixz="0" iyy="1e6" iyz="0" izz="1e6"/>
       </inertial>
     </link>
 
-    <!-- Gazebo camera sensor -->
+    <! Gazebo camera sensor >
     <gazebo reference="camera_link">
       <sensor type="camera" name="camera1">
         <update_rate>30.0</update_rate>
@@ -636,14 +636,14 @@ Here's a complete Xacro file for a more sophisticated humanoid model with gaze s
     </gazebo>
   </xacro:macro>
 
-  <!-- Arm Macro -->
+  <! Arm Macro >
   <xacro:macro name="arm" params="side parent xyz rpy">
     <joint name="${side}_shoulder_joint" type="revolute">
       <parent link="${parent}"/>
       <child link="${side}_upper_arm"/>
       <origin xyz="${xyz}" rpy="${rpy}"/>
       <axis xyz="0 1 0"/>
-      <limit lower="-1.57" upper="1.57" effort="100" velocity="1"/>
+      <limit lower="1.57" upper="1.57" effort="100" velocity="1"/>
     </joint>
 
     <link name="${side}_upper_arm">
@@ -667,9 +667,9 @@ Here's a complete Xacro file for a more sophisticated humanoid model with gaze s
     <joint name="${side}_elbow_joint" type="revolute">
       <parent link="${side}_upper_arm"/>
       <child link="${side}_lower_arm"/>
-      <origin xyz="0 0 -0.3" rpy="0 0 0"/>
+      <origin xyz="0 0 0.3" rpy="0 0 0"/>
       <axis xyz="1 0 0"/>
-      <limit lower="-1.57" upper="1.57" effort="100" velocity="1"/>
+      <limit lower="1.57" upper="1.57" effort="100" velocity="1"/>
     </joint>
 
     <link name="${side}_lower_arm">
@@ -691,14 +691,14 @@ Here's a complete Xacro file for a more sophisticated humanoid model with gaze s
     </link>
   </xacro:macro>
 
-  <!-- Leg Macro -->
+  <! Leg Macro >
   <xacro:macro name="leg" params="side parent xyz rpy">
     <joint name="${side}_hip_joint" type="revolute">
       <parent link="${parent}"/>
       <child link="${side}_upper_leg"/>
       <origin xyz="${xyz}" rpy="${rpy}"/>
       <axis xyz="0 1 0"/>
-      <limit lower="-1.57" upper="1.57" effort="200" velocity="1"/>
+      <limit lower="1.57" upper="1.57" effort="200" velocity="1"/>
     </joint>
 
     <link name="${side}_upper_leg">
@@ -722,7 +722,7 @@ Here's a complete Xacro file for a more sophisticated humanoid model with gaze s
     <joint name="${side}_knee_joint" type="revolute">
       <parent link="${side}_upper_leg"/>
       <child link="${side}_lower_leg"/>
-      <origin xyz="0 0 -0.4" rpy="0 0 0"/>
+      <origin xyz="0 0 0.4" rpy="0 0 0"/>
       <axis xyz="1 0 0"/>
       <limit lower="0.0" upper="1.57" effort="200" velocity="1"/>
     </joint>
@@ -748,9 +748,9 @@ Here's a complete Xacro file for a more sophisticated humanoid model with gaze s
     <joint name="${side}_ankle_joint" type="revolute">
       <parent link="${side}_lower_leg"/>
       <child link="${side}_foot"/>
-      <origin xyz="0 0 -0.35" rpy="0 0 0"/>
+      <origin xyz="0 0 0.35" rpy="0 0 0"/>
       <axis xyz="0 1 0"/>
-      <limit lower="-0.5" upper="0.5" effort="100" velocity="1"/>
+      <limit lower="0.5" upper="0.5" effort="100" velocity="1"/>
     </joint>
 
     <link name="${side}_foot">
@@ -772,14 +772,14 @@ Here's a complete Xacro file for a more sophisticated humanoid model with gaze s
     </link>
   </xacro:macro>
 
-  <!-- Use the macros to build the robot -->
+  <! Use the macros to build the robot >
   <xacro:head_with_sensor parent="base_link" xyz="0 0 0.2" rpy="0 0 0"/>
   <xacro:arm side="left" parent="base_link" xyz="0.15 0 0.1" rpy="0 0 0"/>
-  <xacro:arm side="right" parent="base_link" xyz="-0.15 0 0.1" rpy="0 0 0"/>
-  <xacro:leg side="left" parent="base_link" xyz="0.07 0 -0.2" rpy="0 0 0"/>
-  <xacro:leg side="right" parent="base_link" xyz="-0.07 0 -0.2" rpy="0 0 0"/>
+  <xacro:arm side="right" parent="base_link" xyz="0.15 0 0.1" rpy="0 0 0"/>
+  <xacro:leg side="left" parent="base_link" xyz="0.07 0 0.2" rpy="0 0 0"/>
+  <xacro:leg side="right" parent="base_link" xyz="0.07 0 0.2" rpy="0 0 0"/>
   
-  <!-- Gazebo environment settings -->
+  <! Gazebo environment settings >
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
       <robotNamespace>/humanoid</robotNamespace>
@@ -852,7 +852,7 @@ def generate_launch_description():
     return ld
 ```
 
-## Mini-project
+## Miniproject
 
 Create a complete humanoid robot model with the following requirements:
 
@@ -870,10 +870,10 @@ Validate your model by checking for errors and visualizing it in RViz before sub
 
 This chapter covered the creation of humanoid robot models using URDF and Xacro in ROS 2:
 
-- URDF is the standard XML format for describing robot models
-- Xacro enhances URDF with macros, parameters, and mathematical expressions
-- Humanoid robots require complex kinematic structures with multiple degrees of freedom
-- Proper inertial properties are essential for realistic simulation
-- Sensors and plugins can be included to enhance the robot model functionality
+ URDF is the standard XML format for describing robot models
+ Xacro enhances URDF with macros, parameters, and mathematical expressions
+ Humanoid robots require complex kinematic structures with multiple degrees of freedom
+ Proper inertial properties are essential for realistic simulation
+ Sensors and plugins can be included to enhance the robot model functionality
 
 Creating accurate robot models is fundamental to successful robotics simulation and development, allowing developers to test algorithms before deployment on real hardware.

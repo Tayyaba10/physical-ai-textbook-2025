@@ -1,5 +1,5 @@
----
-title: Ch11 - NVIDIA Isaac Platform Overview
+-----
+title: Ch11  NVIDIA Isaac Platform Overview
 module: 3
 chapter: 11
 sidebar_label: Ch11: NVIDIA Isaac Platform Overview
@@ -7,20 +7,20 @@ description: Introduction to the NVIDIA Isaac robotics platform and its ecosyste
 tags: [nvidia, isaac, robotics, platform, ecosystem, gpu, cuda]
 difficulty: intermediate
 estimated_duration: 60
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
 # NVIDIA Isaac Platform Overview
 
 ## Learning Outcomes
-- Understand the NVIDIA Isaac platform architecture and components
-- Identify the key benefits of using NVIDIA Isaac for robotics applications
-- Navigate the Isaac ecosystem including Isaac Sim, Isaac ROS, and Isaac Apps
-- Recognize the hardware requirements and compatibility considerations
-- Evaluate when to use Isaac components for specific robotics tasks
-- Set up the Isaac development environment
-- Understand Isaac's role in the broader robotics software stack
+ Understand the NVIDIA Isaac platform architecture and components
+ Identify the key benefits of using NVIDIA Isaac for robotics applications
+ Navigate the Isaac ecosystem including Isaac Sim, Isaac ROS, and Isaac Apps
+ Recognize the hardware requirements and compatibility considerations
+ Evaluate when to use Isaac components for specific robotics tasks
+ Set up the Isaac development environment
+ Understand Isaac's role in the broader robotics software stack
 
 ## Theory
 
@@ -30,26 +30,26 @@ The NVIDIA Isaac platform is a comprehensive robotics development ecosystem that
 
 <MermaidDiagram chart={`
 graph TB;
-    A[NVIDIA Isaac Platform] --> B[Isaac Sim];
-    A --> C[Isaac ROS];
-    A --> D[Isaac Apps];
-    A --> E[Isaac Core];
+    A[NVIDIA Isaac Platform] > B[Isaac Sim];
+    A > C[Isaac ROS];
+    A > D[Isaac Apps];
+    A > E[Isaac Core];
     
-    B --> F[Photorealistic Simulation];
-    B --> G[Synthetic Data Generation];
-    B --> H[AI Training Environments];
+    B > F[Photorealistic Simulation];
+    B > G[Synthetic Data Generation];
+    B > H[AI Training Environments];
     
-    C --> I[Hardware Accelerated Perception];
-    C --> J[Navigation and Manipulation];
-    C --> K[GPU Optimized Algorithms];
+    C > I[Hardware Accelerated Perception];
+    C > J[Navigation and Manipulation];
+    C > K[GPU Optimized Algorithms];
     
-    D --> L[Reference Applications];
-    D --> M[Robot Blueprints];
-    D --> N[Sample Code];
+    D > L[Reference Applications];
+    D > M[Robot Blueprints];
+    D > N[Sample Code];
     
-    E --> O[Foundation Libraries];
-    E --> P[Development Tools];
-    E --> Q[Deployment Framework];
+    E > O[Foundation Libraries];
+    E > P[Development Tools];
+    E > Q[Deployment Framework];
     
     style A fill:#4CAF50,stroke:#388E3C,color:#fff;
     style B fill:#2196F3,stroke:#0D47A1,color:#fff;
@@ -59,90 +59,90 @@ graph TB;
 ### Core Components
 
 **Isaac Sim**: A robotics simulation application built on NVIDIA's Omniverse platform. It provides:
-- Physically accurate simulation with NVIDIA PhysX
-- Photorealistic rendering using RTX technology
-- Synthetic data generation for AI training
-- Physics simulation for ground truth data
-- Integration with Omniverse for multi-app workflows
+ Physically accurate simulation with NVIDIA PhysX
+ Photorealistic rendering using RTX technology
+ Synthetic data generation for AI training
+ Physics simulation for ground truth data
+ Integration with Omniverse for multiapp workflows
 
-**Isaac ROS**: A collection of GPU-accelerated perception and navigation packages:
-- Hardware-accelerated computer vision algorithms
-- Optimized SLAM implementations
-- Point cloud processing
-- Image rectification and stereo processing
-- GPU-accelerated neural network inference
+**Isaac ROS**: A collection of GPUaccelerated perception and navigation packages:
+ Hardwareaccelerated computer vision algorithms
+ Optimized SLAM implementations
+ Point cloud processing
+ Image rectification and stereo processing
+ GPUaccelerated neural network inference
 
 **Isaac Apps**: Reference applications and robot blueprints:
-- Complete robot applications with source code
-- Pre-built robot configurations
-- Example implementations of robotics algorithms
-- Best practices for Isaac platform usage
+ Complete robot applications with source code
+ Prebuilt robot configurations
+ Example implementations of robotics algorithms
+ Best practices for Isaac platform usage
 
 **Isaac Core**: Foundation libraries and tools:
-- Robotics-specific math libraries
-- Sensor interfaces and drivers
-- Communication protocols and middleware
-- Development tools and utilities
+ Roboticsspecific math libraries
+ Sensor interfaces and drivers
+ Communication protocols and middleware
+ Development tools and utilities
 
 ### GPU Acceleration in Robotics
 
 NVIDIA Isaac leverages GPU computing to accelerate computationally intensive robotics tasks:
 
-- **Perception**: Real-time processing of camera, LiDAR, and other sensor data
-- **Planning**: Path planning and trajectory optimization
-- **Control**: Model Predictive Control (MPC) and other advanced control algorithms
-- **Learning**: Reinforcement learning and neural network training
-- **Simulation**: Physics simulation and rendering
+ **Perception**: Realtime processing of camera, LiDAR, and other sensor data
+ **Planning**: Path planning and trajectory optimization
+ **Control**: Model Predictive Control (MPC) and other advanced control algorithms
+ **Learning**: Reinforcement learning and neural network training
+ **Simulation**: Physics simulation and rendering
 
 ### Isaac Sim Architecture
 
 Isaac Sim is built on NVIDIA's Omniverse platform and includes:
 
-- **Omniverse Kit**: Modularity and extensibility framework
-- **PhysX**: NVIDIA's physics simulation engine
-- **RTX Rendering**: Physically-based rendering for photorealistic simulation
-- **USD (Universal Scene Description)**: Scalable scene representation
-- **Connectors**: Integration with external tools and simulators
+ **Omniverse Kit**: Modularity and extensibility framework
+ **PhysX**: NVIDIA's physics simulation engine
+ **RTX Rendering**: Physicallybased rendering for photorealistic simulation
+ **USD (Universal Scene Description)**: Scalable scene representation
+ **Connectors**: Integration with external tools and simulators
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
 ### Lab 1: Setting up Isaac Development Environment
 
 1. **Verify Hardware Requirements**:
-   - NVIDIA GPU with Compute Capability 6.0 or higher (Pascal architecture or newer)
-   - Recommended: RTX series for best simulation performance
-   - Driver: NVIDIA driver 470 or later
-   - CUDA: CUDA 11.0 or later
+    NVIDIA GPU with Compute Capability 6.0 or higher (Pascal architecture or newer)
+    Recommended: RTX series for best simulation performance
+    Driver: NVIDIA driver 470 or later
+    CUDA: CUDA 11.0 or later
 
 2. **Install Isaac Sim**:
    ```bash
    # Method 1: Using Isaac Sim Docker container (recommended)
-   docker pull nvcr.io/nvidia/isaac-sim:4.0.0
+   docker pull nvcr.io/nvidia/isaacsim:4.0.0
    
    # Run Isaac Sim container
    xhost +local:docker
-   docker run --gpus all -it --rm \
-     --network=host \
-     --env="DISPLAY" \
-     --env="QT_X11_NO_MITSHM=1" \
-     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-     --volume="/home/$USER/isaac-sim-workspace:/isaac-sim-workspace" \
-     --privileged \
-     --expose=5000 \
-     --expose=3000 \
-     --expose=7500 \
-     nvcr.io/nvidia/isaac-sim:4.0.0
+   docker run gpus all it rm \
+     network=host \
+     env="DISPLAY" \
+     env="QT_X11_NO_MITSHM=1" \
+     volume="/tmp/.X11unix:/tmp/.X11unix:rw" \
+     volume="/home/$USER/isaacsimworkspace:/isaacsimworkspace" \
+     privileged \
+     expose=5000 \
+     expose=3000 \
+     expose=7500 \
+     nvcr.io/nvidia/isaacsim:4.0.0
    ```
 
 3. **Alternative: Native Installation**:
-   - Download Isaac Sim from NVIDIA Developer website
-   - Extract and run the installation script
-   - Follow the installation wizard
+    Download Isaac Sim from NVIDIA Developer website
+    Extract and run the installation script
+    Follow the installation wizard
 
 4. **Verify Installation**:
    ```bash
    # Check Isaac Sim version
-   python -c "import omni; print('Isaac Sim properly installed')"
+   python c "import omni; print('Isaac Sim properly installed')"
    ```
 
 ### Lab 2: Exploring Isaac ROS Components
@@ -162,7 +162,7 @@ Isaac Sim is built on NVIDIA's Omniverse platform and includes:
 3. **Verify GPU Acceleration**:
    ```bash
    # Check if GPU is being used
-   nvidia-smi
+   nvidiasmi
    # Should show Isaac ROS processes using GPU
    ```
 
@@ -170,7 +170,7 @@ Isaac Sim is built on NVIDIA's Omniverse platform and includes:
 
 1. **Create Workspace Structure**:
    ```bash
-   mkdir -p ~/isaac_ws/src
+   mkdir p ~/isaac_ws/src
    cd ~/isaac_ws
    colcon build
    source install/setup.bash
@@ -180,17 +180,17 @@ Isaac Sim is built on NVIDIA's Omniverse platform and includes:
    ```bash
    # Add to ~/.bashrc for persistence
    export ISAAC_ROS_WS=~/isaac_ws
-   export ISAACSIM_PYTHON_PATH=/isaac-sim/python.sh
+   export ISAACSIM_PYTHON_PATH=/isaacsim/python.sh
    ```
 
 3. **Install Isaac ROS Packages**:
    ```bash
    cd ~/isaac_ws/src
-   git clone https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_common.git
-   git clone https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam.git
-   git clone https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_point_cloud_processing.git
+   git clone https://github.com/NVIDIAISAACROS/isaac_ros_common.git
+   git clone https://github.com/NVIDIAISAACROS/isaac_ros_visual_slam.git
+   git clone https://github.com/NVIDIAISAACROS/isaac_ros_point_cloud_processing.git
    cd ~/isaac_ws
-   colcon build --packages-select isaac_ros_common
+   colcon build packagesselect isaac_ros_common
    ```
 
 ### Lab 4: Running Your First Isaac Sim Scene
@@ -198,22 +198,22 @@ Isaac Sim is built on NVIDIA's Omniverse platform and includes:
 1. **Launch Isaac Sim**:
    ```bash
    # If using Docker (recommended)
-   ./isaac-sim-docker.sh
+   ./isaacsimdocker.sh
    
    # Or if installed natively
-   ./isaac-sim-native.sh
+   ./isaacsimnative.sh
    ```
 
 2. **Load Sample Scene**:
-   - Open Isaac Sim
-   - Go to Window → Isaac Examples → Carter → Carter Pick and Place
-   - This loads a complete robot simulation with perception and manipulation
+    Open Isaac Sim
+    Go to Window → Isaac Examples → Carter → Carter Pick and Place
+    This loads a complete robot simulation with perception and manipulation
 
 3. **Explore Isaac Sim Interface**:
-   - Stage View: Shows the 3D scene
-   - Property Panel: Shows properties of selected objects
-   - Content Browser: Access to assets and resources
-   - Hierarchy: Scene object structure
+    Stage View: Shows the 3D scene
+    Property Panel: Shows properties of selected objects
+    Content Browser: Access to assets and resources
+    Hierarchy: Scene object structure
 
 ## Runnable Code Example
 
@@ -259,7 +259,7 @@ class RobotCreator:
         create_prim(
             left_wheel_path,
             "Cylinder",
-            position=(-0.15, -0.2, 0),
+            position=(0.15, 0.2, 0),
             attributes={"radius": 0.1, "height": 0.05}
         )
         
@@ -268,12 +268,12 @@ class RobotCreator:
         create_prim(
             right_wheel_path,
             "Cylinder",
-            position=(-0.15, 0.2, 0),
+            position=(0.15, 0.2, 0),
             attributes={"radius": 0.1, "height": 0.05}
         )
         
         # Add joints to connect wheels to chassis
-        self.create_wheel_joint(f"{chassis_path}/LeftWheelJoint", chassis_path, left_wheel_path, (0, -0.2, 0))
+        self.create_wheel_joint(f"{chassis_path}/LeftWheelJoint", chassis_path, left_wheel_path, (0, 0.2, 0))
         self.create_wheel_joint(f"{chassis_path}/RightWheelJoint", chassis_path, right_wheel_path, (0, 0.2, 0))
         
         # Add a simple camera to the robot
@@ -373,7 +373,7 @@ class IsaacImageProcessor(Node):
     
     def process_image(self, image):
         """Perform image processing using GPU acceleration"""
-        # Simulate GPU-accelerated processing
+        # Simulate GPUaccelerated processing
         # In a real Isaac ROS implementation, this would use CUDA kernels
         
         # Example: Apply Gaussian blur
@@ -383,7 +383,7 @@ class IsaacImageProcessor(Node):
         gray = cv2.cvtColor(blurred, cv2.COLOR_BGR2GRAY)
         edges = cv2.Canny(gray, 50, 150)
         
-        # Convert edges back to 3-channel image to match original
+        # Convert edges back to 3channel image to match original
         edge_image = cv2.cvtColor(edges, cv2.COLOR_GRAY2BGR)
         
         # Combine original with edges
@@ -410,7 +410,7 @@ if __name__ == '__main__':
 ### Isaac ROS Launch File Example
 
 ```xml
-<!-- isaac_image_processing_pipeline.launch.py -->
+<! isaac_image_processing_pipeline.launch.py >
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
@@ -449,32 +449,32 @@ def generate_launch_description():
     return ld
 ```
 
-## Mini-project
+## Miniproject
 
-Create a complete Isaac-based perception pipeline that:
+Create a complete Isaacbased perception pipeline that:
 
 1. Sets up Isaac Sim with a robot in a realistic environment
 2. Configures Isaac ROS perception nodes for a specific task (e.g., object detection)
-3. Implements a GPU-accelerated processing pipeline
+3. Implements a GPUaccelerated processing pipeline
 4. Validates the pipeline with synthetic data from Isaac Sim
 5. Documents the performance gains achieved with GPU acceleration
 6. Creates a launch file to start the complete pipeline
 
 Your project should include:
-- Isaac Sim scene with appropriate lighting and objects
-- ROS 2 launch file for the perception pipeline
-- Custom perception node leveraging Isaac ROS
-- Performance benchmark comparing GPU vs CPU processing
-- Documentation of the setup and results
+ Isaac Sim scene with appropriate lighting and objects
+ ROS 2 launch file for the perception pipeline
+ Custom perception node leveraging Isaac ROS
+ Performance benchmark comparing GPU vs CPU processing
+ Documentation of the setup and results
 
 ## Summary
 
 This chapter introduced the NVIDIA Isaac platform and its ecosystem:
 
-- **Platform Overview**: Understanding the main components (Isaac Sim, Isaac ROS, Isaac Apps, Isaac Core)
-- **GPU Acceleration**: Benefits of leveraging NVIDIA GPUs for robotics applications
-- **Development Environment**: Setting up Isaac for development and simulation
-- **Architecture**: How Isaac components work together in the robotics stack
-- **Practical Setup**: Step-by-step configuration of Isaac tools
+ **Platform Overview**: Understanding the main components (Isaac Sim, Isaac ROS, Isaac Apps, Isaac Core)
+ **GPU Acceleration**: Benefits of leveraging NVIDIA GPUs for robotics applications
+ **Development Environment**: Setting up Isaac for development and simulation
+ **Architecture**: How Isaac components work together in the robotics stack
+ **Practical Setup**: Stepbystep configuration of Isaac tools
 
 The NVIDIA Isaac platform provides a comprehensive solution for developing, simulating, and deploying robotics applications with the benefit of GPU acceleration for computationally intensive tasks.

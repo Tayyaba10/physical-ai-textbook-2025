@@ -1,5 +1,5 @@
----
-title: Ch2 - Nodes, Topics, Services & Actions
+-----
+title: Ch2  Nodes, Topics, Services & Actions
 module: 1
 chapter: 2
 sidebar_label: Ch2: Nodes, Topics, Services & Actions
@@ -7,19 +7,19 @@ description: Understanding the fundamental communication patterns in ROS 2
 tags: [ros2, nodes, topics, services, actions, communication]
 difficulty: beginner
 estimated_duration: 60
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
 # Nodes, Topics, Services & Actions
 
 ## Learning Outcomes
-- Understand the fundamental communication patterns in ROS 2
-- Distinguish between topics, services, and actions
-- Implement publishers and subscribers for topic-based communication
-- Implement clients and servers for service-based communication
-- Implement action clients and servers for goal-oriented communication
-- Choose the appropriate communication pattern for different use cases
+ Understand the fundamental communication patterns in ROS 2
+ Distinguish between topics, services, and actions
+ Implement publishers and subscribers for topicbased communication
+ Implement clients and servers for servicebased communication
+ Implement action clients and servers for goaloriented communication
+ Choose the appropriate communication pattern for different use cases
 
 ## Theory
 
@@ -28,82 +28,82 @@ import MermaidDiagram from '@site/src/components/MermaidDiagram';
 In ROS 2, a **node** is an executable process that participates in the ROS computation. Nodes are the fundamental building blocks of ROS 2 applications. Each node typically performs a specific task and communicates with other nodes through topics, services, or actions.
 
 Key characteristics of nodes:
-- Each node has a unique name
-- Nodes can be written in different programming languages (C++, Python, etc.)
-- Nodes can be run independently
-- Nodes contain publishers, subscribers, clients, and services
+ Each node has a unique name
+ Nodes can be written in different programming languages (C++, Python, etc.)
+ Nodes can be run independently
+ Nodes contain publishers, subscribers, clients, and services
 
-### Topic-Based Communication
+### TopicBased Communication
 
 <MermaidDiagram chart={`
 graph LR;
-    A[Publisher Node] --> B[Topic];
-    C[Subscriber Node] --> B;
-    D[Subscriber Node] --> B;
-    B --> E[Message];
+    A[Publisher Node] > B[Topic];
+    C[Subscriber Node] > B;
+    D[Subscriber Node] > B;
+    B > E[Message];
     style A fill:#4CAF50,stroke:#388E3C,color:#fff;
     style C fill:#2196F3,stroke:#0D47A1,color:#fff;
     style D fill:#2196F3,stroke:#0D47A1,color:#fff;
 `} />
 
-**Topics** enable asynchronous, decoupled communication between nodes. The communication is many-to-many - multiple publishers can send messages to a topic, and multiple subscribers can receive messages from the same topic.
+**Topics** enable asynchronous, decoupled communication between nodes. The communication is manytomany  multiple publishers can send messages to a topic, and multiple subscribers can receive messages from the same topic.
 
 Characteristics:
-- **Asynchronous**: Publishers and subscribers don't need to be active at the same time
-- **Fire-and-forget**: Publishers send messages without expecting responses
-- **Broadcast**: One message can be received by multiple subscribers
-- **Unidirectional**: Data flows in one direction (publisher → topic → subscribers)
+ **Asynchronous**: Publishers and subscribers don't need to be active at the same time
+ **Fireandforget**: Publishers send messages without expecting responses
+ **Broadcast**: One message can be received by multiple subscribers
+ **Unidirectional**: Data flows in one direction (publisher → topic → subscribers)
 
-### Service-Based Communication
+### ServiceBased Communication
 
 <MermaidDiagram chart={`
 graph LR;
-    A[Client] --> B[Request];
-    B --> C[Service Server];
-    C --> D[Response];
-    D --> A;
+    A[Client] > B[Request];
+    B > C[Service Server];
+    C > D[Response];
+    D > A;
     style A fill:#FF9800,stroke:#E65100,color:#fff;
     style C fill:#9C27B0,stroke:#4A148C,color:#fff;
 `} />
 
-**Services** enable synchronous request-response communication between nodes. When a client sends a request to a service, it waits for a response before continuing.
+**Services** enable synchronous requestresponse communication between nodes. When a client sends a request to a service, it waits for a response before continuing.
 
 Characteristics:
-- **Synchronous**: Client waits for response
-- **Request-response pattern**: One request gets one response
-- **Stateless**: Each request is independent
-- **Suitable for**: Tasks that have clear start and end points
+ **Synchronous**: Client waits for response
+ **Requestresponse pattern**: One request gets one response
+ **Stateless**: Each request is independent
+ **Suitable for**: Tasks that have clear start and end points
 
-### Action-Based Communication
+### ActionBased Communication
 
 <MermaidDiagram chart={`
 graph TD;
-    A[Action Client] --> B[Send Goal];
-    B --> C[Action Server];
-    C --> D[Feedback];
-    D --> A;
-    C --> E[Result];
-    E --> A;
+    A[Action Client] > B[Send Goal];
+    B > C[Action Server];
+    C > D[Feedback];
+    D > A;
+    C > E[Result];
+    E > A;
     style A fill:#00BCD4,stroke:#006064,color:#fff;
     style C fill:#E91E63,stroke:#880E4F,color:#fff;
 `} />
 
-**Actions** are used for long-running tasks that provide feedback during execution and ultimately return a result. They're ideal for tasks like navigation, where you want to track progress.
+**Actions** are used for longrunning tasks that provide feedback during execution and ultimately return a result. They're ideal for tasks like navigation, where you want to track progress.
 
 Characteristics:
-- **Long-running**: Suitable for operations that take significant time
-- **Feedback**: Provides ongoing feedback during execution
-- **Goal-oriented**: Supports canceling, pausing, and preemption
-- **Two-way**: Combines request-response with continuous feedback
+ **Longrunning**: Suitable for operations that take significant time
+ **Feedback**: Provides ongoing feedback during execution
+ **Goaloriented**: Supports canceling, pausing, and preemption
+ **Twoway**: Combines requestresponse with continuous feedback
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
 ### Lab 1: Creating a Publisher and Subscriber
 
 1. **Create a new package** for your communication examples:
    ```bash
    cd ~/ros2_ws/src
-   ros2 pkg create --build-type ament_cmake cpp_pubsub
+   ros2 pkg create buildtype ament_cmake cpp_pubsub
    cd cpp_pubsub
    ```
 
@@ -125,8 +125,8 @@ Characteristics:
      MinimalPublisher()
      : Node("minimal_publisher"), count_(0)
      {
-       publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
-       timer_ = this->create_wall_timer(
+       publisher_ = this>create_publisher<std_msgs::msg::String>("topic", 10);
+       timer_ = this>create_wall_timer(
          500ms, std::bind(&MinimalPublisher::timer_callback, this));
      }
    
@@ -135,8 +135,8 @@ Characteristics:
      {
        auto message = std_msgs::msg::String();
        message.data = "Hello, world! " + std::to_string(count_++);
-       RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
-       publisher_->publish(message);
+       RCLCPP_INFO(this>get_logger(), "Publishing: '%s'", message.data.c_str());
+       publisher_>publish(message);
      }
      rclcpp::TimerBase::SharedPtr timer_;
      rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
@@ -165,14 +165,14 @@ Characteristics:
      MinimalSubscriber()
      : Node("minimal_subscriber")
      {
-       subscription_ = this->create_subscription<std_msgs::msg::String>(
+       subscription_ = this>create_subscription<std_msgs::msg::String>(
          "topic", 10, std::bind(&MinimalSubscriber::topic_callback, this, std::placeholders::_1));
      }
    
    private:
      void topic_callback(const std_msgs::msg::String::SharedPtr msg) const
      {
-       RCLCPP_INFO(this->get_logger(), "I heard: '%s'", msg->data.c_str());
+       RCLCPP_INFO(this>get_logger(), "I heard: '%s'", msg>data.c_str());
      }
      rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscription_;
    };
@@ -192,7 +192,7 @@ Characteristics:
    project(cpp_pubsub)
    
    if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-     add_compile_options(-Wall -Wextra -Wpedantic)
+     add_compile_options(Wall Wextra Wpedantic)
    endif()
    
    find_package(ament_cmake REQUIRED)
@@ -219,7 +219,7 @@ Characteristics:
    ```srv
    int64 a
    int64 b
-   ---
+ - - -------
    int64 sum
    ```
 
@@ -234,7 +234,7 @@ Characteristics:
      MinimalService()
      : Node("minimal_service")
      {
-       service_ = this->create_service<example_interfaces::srv::AddTwoInts>(
+       service_ = this>create_service<example_interfaces::srv::AddTwoInts>(
          "add_two_ints",
          std::bind(&MinimalService::add, this, std::placeholders::_1, std::placeholders::_2));
      }
@@ -243,9 +243,9 @@ Characteristics:
      void add(const example_interfaces::srv::AddTwoInts::Request::SharedPtr request,
              const example_interfaces::srv::AddTwoInts::Response::SharedPtr response)
      {
-       response->sum = request->a + request->b;
+       response>sum = request>a + request>b;
        RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "%ld + %ld = %ld",
-                   request->a, request->b, response->sum);
+                   request>a, request>b, response>sum);
      }
      rclcpp::Service<example_interfaces::srv::AddTwoInts>::SharedPtr service_;
    };
@@ -281,9 +281,9 @@ Characteristics:
    
      std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("add_two_ints_client");
      rclcpp::Client<example_interfaces::srv::AddTwoInts>::SharedPtr client =
-       node->create_client<example_interfaces::srv::AddTwoInts>("add_two_ints");
+       node>create_client<example_interfaces::srv::AddTwoInts>("add_two_ints");
    
-     while (!client->wait_for_service(1s)) {
+     while (!client>wait_for_service(1s)) {
        if (!rclcpp::ok()) {
          RCLCPP_ERROR(rclcpp::get_logger("rclcpp"), "Interrupted while waiting for the service. Exiting.");
          return 0;
@@ -292,15 +292,15 @@ Characteristics:
      }
    
      auto request = std::make_shared<example_interfaces::srv::AddTwoInts::Request>();
-     request->a = atoll(argv[1]);
-     request->b = atoll(argv[2]);
+     request>a = atoll(argv[1]);
+     request>b = atoll(argv[2]);
    
-     auto result = client->async_send_request(request);
+     auto result = client>async_send_request(request);
      if (rclcpp::spin_until_future_complete(node, result) ==
        rclcpp::FutureReturnCode::SUCCESS)
      {
        RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "%ld + %ld = %ld",
-                   request->a, request->b, result.get()->sum);
+                   request>a, request>b, result.get()>sum);
      } else {
        RCLCPP_ERROR(rclcpp::get_logger("rclcpp"), "Failed to call service add_two_ints");
      }
@@ -345,7 +345,7 @@ Characteristics:
        const rclcpp_action::GoalUUID & uuid,
        std::shared_ptr<const Fibonacci::Goal> goal)
      {
-       RCLCPP_INFO(this->get_logger(), "Received goal request with order %d", goal->order);
+       RCLCPP_INFO(this>get_logger(), "Received goal request with order %d", goal>order);
        (void)uuid;
        return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
      }
@@ -353,7 +353,7 @@ Characteristics:
      rclcpp_action::CancelResponse handle_cancel(
        const std::shared_ptr<GoalHandleFibonacci> goal_handle)
      {
-       RCLCPP_INFO(this->get_logger(), "Received request to cancel goal");
+       RCLCPP_INFO(this>get_logger(), "Received request to cancel goal");
        (void)goal_handle;
        return rclcpp_action::CancelResponse::ACCEPT;
      }
@@ -369,38 +369,38 @@ Characteristics:
    
      void execute(const std::shared_ptr<GoalHandleFibonacci> goal_handle)
      {
-       RCLCPP_INFO(this->get_logger(), "Executing goal");
+       RCLCPP_INFO(this>get_logger(), "Executing goal");
    
        rclcpp::Rate loop_rate(1);
-       const auto goal = goal_handle->get_goal();
+       const auto goal = goal_handle>get_goal();
        auto feedback = std::make_shared<Fibonacci::Feedback>();
        auto result = std::make_shared<Fibonacci::Result>();
    
        std::vector<int> sequence = {0, 1};
-       feedback->sequence = sequence;
-       result->sequence = sequence;
+       feedback>sequence = sequence;
+       result>sequence = sequence;
    
-       for (int i = 1; (i < goal->order) && rclcpp::ok(); ++i) {
-         if (goal_handle->is_canceling()) {
-           RCLCPP_INFO(this->get_logger(), "Goal canceled");
-           result->sequence = sequence;
-           goal_handle->canceled(result);
-           RCLCPP_INFO(this->get_logger(), "Sending canceled state");
+       for (int i = 1; (i < goal>order) && rclcpp::ok(); ++i) {
+         if (goal_handle>is_canceling()) {
+           RCLCPP_INFO(this>get_logger(), "Goal canceled");
+           result>sequence = sequence;
+           goal_handle>canceled(result);
+           RCLCPP_INFO(this>get_logger(), "Sending canceled state");
            return;
          }
    
-         sequence.push_back(sequence[i] + sequence[i - 1]);
-         feedback->sequence = sequence;
-         goal_handle->publish_feedback(feedback);
-         RCLCPP_INFO(this->get_logger(), "Publishing feedback");
+         sequence.push_back(sequence[i] + sequence[i  1]);
+         feedback>sequence = sequence;
+         goal_handle>publish_feedback(feedback);
+         RCLCPP_INFO(this>get_logger(), "Publishing feedback");
    
          loop_rate.sleep();
        }
    
        if (rclcpp::ok()) {
-         result->sequence = sequence;
-         goal_handle->succeed(result);
-         RCLCPP_INFO(this->get_logger(), "Goal succeeded");
+         result>sequence = sequence;
+         goal_handle>succeed(result);
+         RCLCPP_INFO(this>get_logger(), "Goal succeeded");
        }
      }
    };
@@ -533,7 +533,7 @@ if __name__ == '__main__':
     main()
 ```
 
-## Mini-project
+## Miniproject
 
 Create a ROS 2 package that demonstrates all three communication patterns:
 
@@ -542,22 +542,22 @@ Create a ROS 2 package that demonstrates all three communication patterns:
 3. An action server that simulates a complex task like "moving_to_location" with feedback on progress
 
 Create a node that:
-- Publishes sensor data to the topic
-- Calls the service to check if readings are normal
-- Sends a goal to an action server to simulate robot movement
-- Subscribes to a topic to receive status updates
+ Publishes sensor data to the topic
+ Calls the service to check if readings are normal
+ Sends a goal to an action server to simulate robot movement
+ Subscribes to a topic to receive status updates
 
 ## Summary
 
 This chapter covered the three fundamental communication patterns in ROS 2:
 
-- **Topics**: For asynchronous, decoupled communication using publisher-subscriber model
-- **Services**: For synchronous request-response communication
-- **Actions**: For long-running tasks with feedback and goals
+ **Topics**: For asynchronous, decoupled communication using publishersubscriber model
+ **Services**: For synchronous requestresponse communication
+ **Actions**: For longrunning tasks with feedback and goals
 
 Each communication pattern has its use cases:
-- Use topics for streaming data or broadcasting information
-- Use services for tasks with clear inputs and outputs
-- Use actions for long-running tasks that provide feedback during execution
+ Use topics for streaming data or broadcasting information
+ Use services for tasks with clear inputs and outputs
+ Use actions for longrunning tasks that provide feedback during execution
 
-Understanding these patterns is crucial for designing well-architected ROS 2 systems.
+Understanding these patterns is crucial for designing wellarchitected ROS 2 systems.

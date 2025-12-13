@@ -1,28 +1,28 @@
----
-title: Ch18 - Voice-to-Action with OpenAI Whisper
+-----
+title: Ch18  VoicetoAction with OpenAI Whisper
 module: 4
 chapter: 18
-sidebar_label: Ch18: Voice-to-Action with OpenAI Whisper
+sidebar_label: Ch18: VoicetoAction with OpenAI Whisper
 description: Implementing speech recognition and voice command processing for robotics using OpenAI Whisper
-tags: [whisper, speech-recognition, voice-control, robotics, natural-language, audio-processing]
+tags: [whisper, speechrecognition, voicecontrol, robotics, naturallanguage, audioprocessing]
 difficulty: advanced
 estimated_duration: 120
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
-# Voice-to-Action with OpenAI Whisper
+# VoicetoAction with OpenAI Whisper
 
 ## Learning Outcomes
-- Understand speech recognition systems and OpenAI Whisper architecture
-- Implement voice command processing for robotic systems
-- Process real-time audio for continuous robot interaction
-- Design voice command grammars for robotic tasks
-- Integrate speech recognition with robot control systems
-- Handle voice command ambiguities and context
-- Create multimodal feedback systems for voice interactions
-- Implement safety checks and validation for voice commands
-- Evaluate speech recognition performance in robotic contexts
+ Understand speech recognition systems and OpenAI Whisper architecture
+ Implement voice command processing for robotic systems
+ Process realtime audio for continuous robot interaction
+ Design voice command grammars for robotic tasks
+ Integrate speech recognition with robot control systems
+ Handle voice command ambiguities and context
+ Create multimodal feedback systems for voice interactions
+ Implement safety checks and validation for voice commands
+ Evaluate speech recognition performance in robotic contexts
 
 ## Theory
 
@@ -32,24 +32,24 @@ OpenAI Whisper is a robust automatic speech recognition (ASR) system that has re
 
 <MermaidDiagram chart={`
 graph TD;
-    A[Audio Input] --> B[Audio Preprocessing];
-    B --> C[Mel Spectrogram];
-    C --> D[Whisper Encoder];
-    D --> E[Whisper Decoder];
-    E --> F[Text Output];
+    A[Audio Input] > B[Audio Preprocessing];
+    B > C[Mel Spectrogram];
+    C > D[Whisper Encoder];
+    D > E[Whisper Decoder];
+    E > F[Text Output];
     
-    G[Robot Control] --> H[Command Parser];
-    H --> I[NLP Processor];
-    I --> J[Action Generator];
-    J --> K[Robot Execution];
+    G[Robot Control] > H[Command Parser];
+    H > I[NLP Processor];
+    I > J[Action Generator];
+    J > K[Robot Execution];
     
-    F --> I;
-    K --> L[Safety Validator];
-    L --> M[Execution Confirmation];
-    M --> K;
+    F > I;
+    K > L[Safety Validator];
+    L > M[Execution Confirmation];
+    M > K;
     
-    N[Voice Command] --> A;
-    O[Robot Action] --> P[Confirmation];
+    N[Voice Command] > A;
+    O[Robot Action] > P[Confirmation];
     
     style A fill:#4CAF50,stroke:#388E3C,color:#fff;
     style D fill:#2196F3,stroke:#0D47A1,color:#fff;
@@ -61,20 +61,20 @@ graph TD;
 
 Automatic Speech Recognition in robotics differs from traditional applications in several key ways:
 
-- **Environmental Noise**: Robots operate in noisy environments with motor noise, fan noise, and other acoustic interference
-- **Real-time Requirements**: Robot systems often require immediate responses to user commands
-- **Limited Vocabulary**: Robot commands typically come from a predefined set of actions
-- **Context Dependency**: Commands often depend on robot state and environment
-- **Safety Considerations**: Voice commands might lead to physical actions that need validation
+ **Environmental Noise**: Robots operate in noisy environments with motor noise, fan noise, and other acoustic interference
+ **Realtime Requirements**: Robot systems often require immediate responses to user commands
+ **Limited Vocabulary**: Robot commands typically come from a predefined set of actions
+ **Context Dependency**: Commands often depend on robot state and environment
+ **Safety Considerations**: Voice commands might lead to physical actions that need validation
 
 ### Audio Preprocessing Pipeline
 
 For robotic applications, audio preprocessing becomes critical due to the challenging acoustic environment:
 
-- **Noise Reduction**: Filtering environmental noise to improve speech clarity
-- **Voice Activity Detection**: Identifying when speech is actually occurring
-- **Audio Enhancement**: Improving signal-to-noise ratio
-- **Echo Cancellation**: Removing self-generated robot sounds from audio input
+ **Noise Reduction**: Filtering environmental noise to improve speech clarity
+ **Voice Activity Detection**: Identifying when speech is actually occurring
+ **Audio Enhancement**: Improving signaltonoise ratio
+ **Echo Cancellation**: Removing selfgenerated robot sounds from audio input
 
 ### Voice Command Understanding
 
@@ -82,18 +82,18 @@ The transformation from speech to robot action involves several processing steps
 
 1. **Speech Recognition**: Converting audio to text
 2. **Natural Language Understanding**: Interpreting the meaning of text
-3. **Command Mapping**: Converting natural language to robot-specific commands
+3. **Command Mapping**: Converting natural language to robotspecific commands
 4. **Context Integration**: Considering robot state and environment
 5. **Safety Validation**: Ensuring commands are safe to execute
 6. **Action Execution**: Sending validated commands to robot
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
 ### Lab 1: Setting up Whisper for Robotics
 
 1. **Install Whisper and dependencies**:
    ```bash
-   pip install openai-whisper
+   pip install openaiwhisper
    pip install torch torchaudio
    pip install pyaudio sounddevice
    pip install SpeechRecognition
@@ -331,7 +331,7 @@ The transformation from speech to robot action involves several processing steps
                rospy.logwarn(f"Unrecognized command: {transcription}")
        
        def _parse_voice_command(self, text):
-           """Simple command parser - in real system, use NLP/LLM"""
+           """Simple command parser  in real system, use NLP/LLM"""
            text_lower = text.lower().strip()
            
            # Navigation commands
@@ -363,11 +363,11 @@ The transformation from speech to robot action involves several processing steps
            if command == "MOVE_FORWARD":
                twist.linear.x = 0.3  # m/s
            elif command == "MOVE_BACKWARD":
-               twist.linear.x = -0.3
+               twist.linear.x = 0.3
            elif command == "TURN_LEFT":
                twist.angular.z = 0.5  # rad/s
            elif command == "TURN_RIGHT":
-               twist.angular.z = -0.5
+               twist.angular.z = 0.5
            elif command == "STOP":
                twist.linear.x = 0.0
                twist.angular.z = 0.0
@@ -506,7 +506,7 @@ The transformation from speech to robot action involves several processing steps
            rospy.loginfo("Advanced Voice Processor initialized")
        
        def laser_callback(self, msg: LaserScan):
-           """Update laser scan data for context-aware processing"""
+           """Update laser scan data for contextaware processing"""
            self.laser_data = msg
        
        def voice_command_callback(self, msg: String):
@@ -686,10 +686,10 @@ The transformation from speech to robot action involves several processing steps
                    return result['text'].strip()
                except Exception as e:
                    rospy.logwarn(f"Transcription attempt {attempt+1} failed: {e}")
-                   if attempt == max_retries - 1:
+                   if attempt == max_retries  1:
                        return ""  # Return empty string after all retries
        
-       def _parse_advanced_command(self, text: str) -> Optional[VoiceCommand]:
+       def _parse_advanced_command(self, text: str) > Optional[VoiceCommand]:
            """Advanced command parsing with context awareness"""
            original_text = text
            
@@ -735,7 +735,7 @@ The transformation from speech to robot action involves several processing steps
            return self._classify_general_command(text, original_text)
        
        def _parse_move_distance(self, match, text):
-           """Parse distance-based movement command"""
+           """Parse distancebased movement command"""
            distance = float(match.group(3))
            return VoiceCommand(
                "move_distance",
@@ -745,7 +745,7 @@ The transformation from speech to robot action involves several processing steps
            )
        
        def _parse_turn_degrees(self, match, text):
-           """Parse degree-based turn command"""
+           """Parse degreebased turn command"""
            direction = match.group(2)
            angle = float(match.group(3))
            return VoiceCommand(
@@ -790,7 +790,7 @@ The transformation from speech to robot action involves several processing steps
            # Use keyword matching for general classification
            text_lower = clean_text.lower()
            
-           # Check for navigation-related keywords
+           # Check for navigationrelated keywords
            if any(keyword in text_lower for keyword in ['move', 'go', 'walk', 'drive', 'navigate', 'forward', 'backward', 'left', 'right']):
                return VoiceCommand("navigate", {}, 0.5, original_text)
            elif any(keyword in text_lower for keyword in ['turn', 'rotate', 'pivot', 'spin', 'around']):
@@ -804,11 +804,11 @@ The transformation from speech to robot action involves several processing steps
            else:
                return None  # Unknown command
        
-       def _validate_command(self, command: VoiceCommand) -> bool:
+       def _validate_command(self, command: VoiceCommand) > bool:
            """Validate command considering current state and environment"""
            # Check if environment is safe for this command
            if command.action == "move_forward" and self.laser_data:
-               # Check for obstacles ahead (simplified - check middle third of scan)
+               # Check for obstacles ahead (simplified  check middle third of scan)
                middle_start = len(self.laser_data.ranges) // 3
                middle_end = 2 * len(self.laser_data.ranges) // 3
                middle_ranges = self.laser_data.ranges[middle_start:middle_end]
@@ -821,9 +821,9 @@ The transformation from speech to robot action involves several processing steps
                    return False
            
            # Additional validation checks could go here
-           # - Check robot state (battery level, joint limits, etc.)
-           # - Check environmental constraints
-           # - Check safety zones
+           #  Check robot state (battery level, joint limits, etc.)
+           #  Check environmental constraints
+           #  Check safety zones
            
            return True
        
@@ -858,7 +858,7 @@ The transformation from speech to robot action involves several processing steps
            rate = rospy.Rate(10)  # 10 Hz
            start_time = rospy.Time.now()
            
-           while (rospy.Time.now() - start_time).to_sec() < duration and not rospy.is_shutdown():
+           while (rospy.Time.now()  start_time).to_sec() < duration and not rospy.is_shutdown():
                self.cmd_vel_pub.publish(twist)
                rate.sleep()
            
@@ -876,12 +876,12 @@ The transformation from speech to robot action involves several processing steps
            duration = np.radians(angle) / angular_vel
            
            # Set rotation direction
-           twist.angular.z = angular_vel if direction == "left" else -angular_vel
+           twist.angular.z = angular_vel if direction == "left" else angular_vel
            
            rate = rospy.Rate(10)
            start_time = rospy.Time.now()
            
-           while (rospy.Time.now() - start_time).to_sec() < duration and not rospy.is_shutdown():
+           while (rospy.Time.now()  start_time).to_sec() < duration and not rospy.is_shutdown():
                self.cmd_vel_pub.publish(twist)
                rate.sleep()
            
@@ -951,7 +951,7 @@ The transformation from speech to robot action involves several processing steps
 
 ### Lab 3: Creating a Voice Control Safety System
 
-1. **Create a safety-aware voice control system** (`voice_control_safety.py`):
+1. **Create a safetyaware voice control system** (`voice_control_safety.py`):
    ```python
    #!/usr/bin/env python3
 
@@ -1059,7 +1059,7 @@ The transformation from speech to robot action involves several processing steps
                    rospy.logwarn(f"Unsafe simple command blocked: {command_str}")
                    self.publish_feedback("Command blocked for safety reasons", "warning")
        
-       def is_command_safe(self, command_type: str, parameters: dict) -> bool:
+       def is_command_safe(self, command_type: str, parameters: dict) > bool:
            """Validate if command is safe to execute"""
            # Check for emergency stop keywords
            if any(keyword in command_type.lower() for keyword in ['emergency', 'stop', 'halt', 'danger']):
@@ -1080,7 +1080,7 @@ The transformation from speech to robot action involves several processing steps
            
            return True  # Default to safe for other commands
        
-       def is_simple_command_safe(self, command_str: str) -> bool:
+       def is_simple_command_safe(self, command_str: str) > bool:
            """Validate simple string command for safety"""
            command_lower = command_str.lower()
            
@@ -1109,7 +1109,7 @@ The transformation from speech to robot action involves several processing steps
            
            return True
        
-       def is_movement_safe(self, params: dict) -> bool:
+       def is_movement_safe(self, params: dict) > bool:
            """Check if movement command is safe"""
            if not self.laser_data:
                rospy.logwarn("No laser data available, assuming unsafe for movement")
@@ -1119,7 +1119,7 @@ The transformation from speech to robot action involves several processing steps
            if params.get('direction') == 'forward' or params.get('action') == 'move_forward':
                # Check front sector (±30 degrees)
                front_sector = self.laser_data.ranges[
-                   len(self.laser_data.ranges)//2 - 30 :
+                   len(self.laser_data.ranges)//2  30 :
                    len(self.laser_data.ranges)//2 + 30
                ]
                
@@ -1135,14 +1135,14 @@ The transformation from speech to robot action involves several processing steps
            # Check for other directions based on command
            return True
        
-       def is_manipulation_safe(self, params: dict) -> bool:
+       def is_manipulation_safe(self, params: dict) > bool:
            """Check if manipulation command is safe"""
            # For manipulation, we'd need to check joint limits, collisions, etc.
-           # This is a simplified check - in practice, would use MoveIt! collision checking
+           # This is a simplified check  in practice, would use MoveIt! collision checking
            return True
        
        def process_command_queue(self):
-           """Process commands from the safety-validated queue"""
+           """Process commands from the safetyvalidated queue"""
            rate = rospy.Rate(10)  # 10 Hz
            
            while not rospy.is_shutdown():
@@ -1159,7 +1159,7 @@ The transformation from speech to robot action involves several processing steps
                    
                    # Perform periodic safety checks
                    current_time = rospy.Time.now().to_sec()
-                   if (current_time - self.last_safe_check) > self.safe_check_interval:
+                   if (current_time  self.last_safe_check) > self.safe_check_interval:
                        self.perform_periodic_safety_check()
                        self.last_safe_check = current_time
                    
@@ -1170,7 +1170,7 @@ The transformation from speech to robot action involves several processing steps
                    break
        
        def execute_validated_command(self, cmd: dict):
-           """Execute a safety-validated command"""
+           """Execute a safetyvalidated command"""
            command_type = cmd['type']
            
            # Create Twist message based on command type
@@ -1179,18 +1179,18 @@ The transformation from speech to robot action involves several processing steps
            if command_type == "move_forward":
                twist_cmd.linear.x = min(self.max_linear_speed, cmd['params'].get('speed', 0.3))
            elif command_type == "move_backward":
-               twist_cmd.linear.x = -min(self.max_linear_speed, cmd['params'].get('speed', 0.3))
+               twist_cmd.linear.x = min(self.max_linear_speed, cmd['params'].get('speed', 0.3))
            elif command_type == "turn_left":
                twist_cmd.angular.z = min(self.max_angular_speed, cmd['params'].get('speed', 0.5))
            elif command_type == "turn_right":
-               twist_cmd.angular.z = -min(self.max_angular_speed, cmd['params'].get('speed', 0.5))
+               twist_cmd.angular.z = min(self.max_angular_speed, cmd['params'].get('speed', 0.5))
            elif command_type == "stop":
                twist_cmd.linear.x = 0.0
                twist_cmd.angular.z = 0.0
            
            # Apply safety limits
-           twist_cmd.linear.x = max(-self.max_linear_speed, min(self.max_linear_speed, twist_cmd.linear.x))
-           twist_cmd.angular.z = max(-self.max_angular_speed, min(self.max_angular_speed, twist_cmd.angular.z))
+           twist_cmd.linear.x = max(self.max_linear_speed, min(self.max_linear_speed, twist_cmd.linear.x))
+           twist_cmd.angular.z = max(self.max_angular_speed, min(self.max_angular_speed, twist_cmd.angular.z))
            
            # Publish the command
            self.safed_cmd_pub.publish(twist_cmd)
@@ -1208,10 +1208,10 @@ The transformation from speech to robot action involves several processing steps
                self.trigger_emergency_stop()
            elif self.emergency_stop_active:
                # Check if it's time to reset emergency stop
-               if rospy.Time.now().to_sec() - self.last_emergency_time > self.emergency_reset_time:
+               if rospy.Time.now().to_sec()  self.last_emergency_time > self.emergency_reset_time:
                    self.reset_emergency_stop()
        
-       def check_for_emergency_conditions(self) -> bool:
+       def check_for_emergency_conditions(self) > bool:
            """Check if emergency conditions exist"""
            if not self.laser_data:
                return False
@@ -1301,7 +1301,7 @@ The transformation from speech to robot action involves several processing steps
 
 ## Runnable Code Example
 
-Here's a complete working example of the voice-to-action system with safety validation:
+Here's a complete working example of the voicetoaction system with safety validation:
 
 ```python
 #!/usr/bin/env python3
@@ -1448,7 +1448,7 @@ class CompleteVoiceControlSystem:
                         voice_active_count += 1
                         if voice_active_count >= min_voice_frames:
                             recording = True
-                            frames = [data] * min_voice_frames  # Include pre-roll
+                            frames = [data] * min_voice_frames  # Include preroll
                             voice_active_count = 0
                             silence_count = 0
                             rospy.loginfo("Voice activity confirmed, recording started")
@@ -1573,7 +1573,7 @@ class CompleteVoiceControlSystem:
             except Exception as e:
                 rospy.logerr(f"Error in safety monitoring: {e}")
     
-    def _transcribe_audio(self, audio_file_path) -> str:
+    def _transcribe_audio(self, audio_file_path) > str:
         """Transcribe audio using Whisper"""
         try:
             result = self.whisper_model.transcribe(audio_file_path, language="english")
@@ -1582,7 +1582,7 @@ class CompleteVoiceControlSystem:
             rospy.logerr(f"Transcription error: {e}")
             return ""
     
-    def _parse_and_validate_command(self, transcription: str) -> Optional[Dict]:
+    def _parse_and_validate_command(self, transcription: str) > Optional[Dict]:
         """Parse transcription into command with context"""
         if not transcription:
             return None
@@ -1597,7 +1597,7 @@ class CompleteVoiceControlSystem:
             # Use basic parsing
             return self._parse_basic_command(transcription)
     
-    def _get_environmental_context(self) -> Dict:
+    def _get_environmental_context(self) > Dict:
         """Get environmental context for command validation"""
         context = {
             "robot_state": {
@@ -1606,11 +1606,11 @@ class CompleteVoiceControlSystem:
             }
         }
         
-        # Add laser-based context if available
+        # Add laserbased context if available
         if self.laser_data:
             # Check front, left, right sectors
             n_ranges = len(self.laser_data.ranges)
-            front_ranges = self.laser_data.ranges[n_ranges//2 - 30:n_ranges//2 + 30]
+            front_ranges = self.laser_data.ranges[n_ranges//2  30:n_ranges//2 + 30]
             left_ranges = self.laser_data.ranges[:n_ranges//4]
             right_ranges = self.laser_data.ranges[3*n_ranges//4:]
             
@@ -1627,7 +1627,7 @@ class CompleteVoiceControlSystem:
         
         return context
     
-    def _parse_with_openai(self, transcription: str, context: Dict) -> Optional[Dict]:
+    def _parse_with_openai(self, transcription: str, context: Dict) > Optional[Dict]:
         """Use OpenAI to parse command with context"""
         try:
             prompt = f"""
@@ -1656,7 +1656,7 @@ class CompleteVoiceControlSystem:
             """
             
             response = self.openai_client.chat.completions.create(
-                model="gpt-4o",
+                model="gpt4o",
                 messages=[
                     {
                         "role": "system", 
@@ -1677,7 +1677,7 @@ class CompleteVoiceControlSystem:
             if response_text.startswith('```'):
                 start_idx = response_text.find('{')
                 end_idx = response_text.rfind('}') + 1
-                if start_idx != -1 and end_idx != -1:
+                if start_idx != 1 and end_idx != 1:
                     response_text = response_text[start_idx:end_idx]
             
             command_data = json.loads(response_text)
@@ -1688,8 +1688,8 @@ class CompleteVoiceControlSystem:
             # Fall back to basic parsing
             return self._parse_basic_command(transcription)
     
-    def _parse_basic_command(self, transcription: str) -> Optional[Dict]:
-        """Basic regular-expression-based command parsing"""
+    def _parse_basic_command(self, transcription: str) > Optional[Dict]:
+        """Basic regularexpressionbased command parsing"""
         text_lower = transcription.lower()
         
         # Navigation commands
@@ -1742,7 +1742,7 @@ class CompleteVoiceControlSystem:
                 "reasoning": "Unknown command"
             }
     
-    def _is_command_safe(self, command: Dict) -> bool:
+    def _is_command_safe(self, command: Dict) > bool:
         """Validate if command is safe to execute in current environment"""
         if not self.laser_data:
             # If no sensor data, be conservative
@@ -1757,7 +1757,7 @@ class CompleteVoiceControlSystem:
         if action in ['move_forward', 'move_distance'] and command.get('parameters', {}).get('linear_speed', 0) > 0:
             # Check front for obstacles
             n_ranges = len(self.laser_data.ranges)
-            front_sector = self.laser_data.ranges[n_ranges//2 - 30 : n_ranges//2 + 30]
+            front_sector = self.laser_data.ranges[n_ranges//2  30 : n_ranges//2 + 30]
             valid_ranges = [r for r in front_sector if not (np.isinf(r) or np.isnan(r))]
             
             if valid_ranges and min(valid_ranges) < self.safety_distance:
@@ -1765,9 +1765,9 @@ class CompleteVoiceControlSystem:
                 return False
         
         elif action == 'move_backward' and command.get('parameters', {}).get('linear_speed', 0) < 0:
-            # Check rear for obstacles (simplified - check back 30 degrees)
+            # Check rear for obstacles (simplified  check back 30 degrees)
             n_ranges = len(self.laser_data.ranges)
-            back_sector = self.laser_data.ranges[3*n_ranges//4 - 15 : n_ranges] + self.laser_data.ranges[0 : n_ranges//4 + 15]
+            back_sector = self.laser_data.ranges[3*n_ranges//4  15 : n_ranges] + self.laser_data.ranges[0 : n_ranges//4 + 15]
             valid_ranges = [r for r in back_sector if not (np.isinf(r) or np.isnan(r))]
             
             if valid_ranges and min(valid_ranges) < self.safety_distance:
@@ -1792,13 +1792,13 @@ class CompleteVoiceControlSystem:
             twist_cmd.linear.x = min(linear_speed, self.max_linear_speed)
         elif action == 'move_backward':
             linear_speed = params.get('linear_speed', 0.3)
-            twist_cmd.linear.x = -min(linear_speed, self.max_linear_speed)
+            twist_cmd.linear.x = min(linear_speed, self.max_linear_speed)
         elif action == 'turn_left':
             angular_speed = params.get('angular_speed', 0.5)
             twist_cmd.angular.z = min(angular_speed, self.max_angular_speed)
         elif action == 'turn_right':
             angular_speed = params.get('angular_speed', 0.5)
-            twist_cmd.angular.z = -min(angular_speed, self.max_angular_speed)
+            twist_cmd.angular.z = min(angular_speed, self.max_angular_speed)
         elif action == 'stop':
             # Twist is already zeroed
             pass
@@ -1807,8 +1807,8 @@ class CompleteVoiceControlSystem:
             pass
         
         # Apply safety limits
-        twist_cmd.linear.x = max(-self.max_linear_speed, min(self.max_linear_speed, twist_cmd.linear.x))
-        twist_cmd.angular.z = max(-self.max_angular_speed, min(self.max_angular_speed, twist_cmd.angular.z))
+        twist_cmd.linear.x = max(self.max_linear_speed, min(self.max_linear_speed, twist_cmd.linear.x))
+        twist_cmd.angular.z = max(self.max_angular_speed, min(self.max_angular_speed, twist_cmd.angular.z))
         
         # Publish command
         self.cmd_vel_pub.publish(twist_cmd)
@@ -1860,7 +1860,7 @@ if __name__ == '__main__':
 
 ```xml
 <launch>
-  <!-- Complete Voice Control System -->
+  <! Complete Voice Control System >
   <node name="complete_voice_control_system" pkg="robot_voice_control" type="complete_voice_control_system.py" output="screen">
     <param name="openai_api_key" value="" />
     <param name="safety_distance" value="0.5" />
@@ -1868,11 +1868,11 @@ if __name__ == '__main__':
     <param name="max_angular_speed" value="0.6" />
   </node>
   
-  <!-- Example sensor nodes (needed for safety validation) -->
+  <! Example sensor nodes (needed for safety validation) >
   <node name="fake_laser_scan" pkg="topic_tools" type="relay" args="/scan /fake_scan" />
   <node name="fake_imu" pkg="topic_tools" type="relay" args="/imu/data /fake_imu" />
   
-  <!-- TF broadcasters for coordinate systems -->
+  <! TF broadcasters for coordinate systems >
   <node name="static_transform_publisher" pkg="tf2_ros" type="static_transform_publisher" 
         args="0 0 0 0 0 0 1 base_link laser_frame" />
   <node name="static_transform_publisher" pkg="tf2_ros" type="static_transform_publisher" 
@@ -1880,38 +1880,38 @@ if __name__ == '__main__':
 </launch>
 ```
 
-## Mini-project
+## Miniproject
 
-Create a complete voice-activated robot system that:
+Create a complete voiceactivated robot system that:
 
-1. Implements Whisper-based speech recognition for robot commands
-2. Integrates with ROS navigation stack for voice-guided navigation
+1. Implements Whisperbased speech recognition for robot commands
+2. Integrates with ROS navigation stack for voiceguided navigation
 3. Creates a natural language interface for robot manipulation tasks
 4. Implements safety validation for all voice commands
-5. Develops context-aware command interpretation using LLMs
+5. Develops contextaware command interpretation using LLMs
 6. Creates multimodal feedback system (voice + visual)
 7. Evaluates system performance with various speakers and accents
 8. Implements fallback mechanisms for misunderstood commands
 
 Your project should include:
-- Complete Whisper integration with audio preprocessing
-- Natural language command parsing and validation
-- Safety system to prevent dangerous robot movements
-- Context-aware interpretation using environmental sensors
-- Voice and visual feedback mechanisms
-- Performance evaluation metrics
-- Demo scenarios with various natural language commands
+ Complete Whisper integration with audio preprocessing
+ Natural language command parsing and validation
+ Safety system to prevent dangerous robot movements
+ Contextaware interpretation using environmental sensors
+ Voice and visual feedback mechanisms
+ Performance evaluation metrics
+ Demo scenarios with various natural language commands
 
 ## Summary
 
-This chapter covered voice-to-action systems using OpenAI Whisper for robotics:
+This chapter covered voicetoaction systems using OpenAI Whisper for robotics:
 
-- **Whisper Integration**: Using OpenAI's Whisper model for speech recognition in robotics
-- **Audio Processing**: Techniques for real-time audio processing and voice activity detection  
-- **Command Parsing**: Converting natural language to robot commands
-- **Safety Validation**: Ensuring voice commands are safe before execution
-- **Environmental Context**: Using sensor data to validate command appropriateness
-- **Multi-modal Integration**: Combining voice with other sensory inputs for robust operation
-- **Real-time Processing**: Optimizing for real-time robotic interaction
+ **Whisper Integration**: Using OpenAI's Whisper model for speech recognition in robotics
+ **Audio Processing**: Techniques for realtime audio processing and voice activity detection  
+ **Command Parsing**: Converting natural language to robot commands
+ **Safety Validation**: Ensuring voice commands are safe before execution
+ **Environmental Context**: Using sensor data to validate command appropriateness
+ **Multimodal Integration**: Combining voice with other sensory inputs for robust operation
+ **Realtime Processing**: Optimizing for realtime robotic interaction
 
-Voice command systems enable more natural human-robot interaction, allowing users to command robots using everyday language rather than specialized interfaces. However, special attention must be paid to safety, validation, and environmental context to ensure reliable operation in dynamic environments.
+Voice command systems enable more natural humanrobot interaction, allowing users to command robots using everyday language rather than specialized interfaces. However, special attention must be paid to safety, validation, and environmental context to ensure reliable operation in dynamic environments.

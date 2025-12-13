@@ -1,5 +1,5 @@
----
-title: Ch8 - Simulating LiDAR, Depth Cameras & IMUs
+-----
+title: Ch8  Simulating LiDAR, Depth Cameras & IMUs
 module: 2
 chapter: 8
 sidebar_label: Ch8: Simulating LiDAR, Depth Cameras & IMUs
@@ -7,20 +7,20 @@ description: Setting up and using sensor simulation in Gazebo for robotics appli
 tags: [lidar, camera, imus, sensors, simulation, perception, robotics]
 difficulty: intermediate
 estimated_duration: 90
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
 # Simulating LiDAR, Depth Cameras & IMUs
 
 ## Learning Outcomes
-- Understand the principles behind LiDAR, depth camera, and IMU sensors
-- Configure and implement these sensors in Gazebo simulation
-- Integrate sensor data with ROS 2 for robotics applications
-- Process and interpret sensor data for perception tasks
-- Calibrate sensor models to match real-world performance
-- Implement sensor fusion techniques for enhanced perception
-- Troubleshoot common issues in sensor simulation
+ Understand the principles behind LiDAR, depth camera, and IMU sensors
+ Configure and implement these sensors in Gazebo simulation
+ Integrate sensor data with ROS 2 for robotics applications
+ Process and interpret sensor data for perception tasks
+ Calibrate sensor models to match realworld performance
+ Implement sensor fusion techniques for enhanced perception
+ Troubleshoot common issues in sensor simulation
 
 ## Theory
 
@@ -30,16 +30,16 @@ LiDAR (Light Detection and Ranging) sensors emit laser pulses and measure the ti
 
 <MermaidDiagram chart={`
 graph TD;
-    A[LiDAR Sensor] --> B[Ray Casting];
-    B --> C[Range Measurement];
-    C --> D[Point Cloud];
-    D --> E[Object Detection];
-    E --> F[Mapping];
+    A[LiDAR Sensor] > B[Ray Casting];
+    B > C[Range Measurement];
+    C > D[Point Cloud];
+    D > E[Object Detection];
+    E > F[Mapping];
     
-    G[LiDAR Parameters] --> H[Sample Count];
-    G --> I[Field of View];
-    G --> J[Range Min/Max];
-    G --> K[Update Rate];
+    G[LiDAR Parameters] > H[Sample Count];
+    G > I[Field of View];
+    G > J[Range Min/Max];
+    G > K[Update Rate];
     
     style A fill:#4CAF50,stroke:#388E3C,color:#fff;
     style D fill:#2196F3,stroke:#0D47A1,color:#fff;
@@ -47,16 +47,16 @@ graph TD;
 
 ### Depth Cameras in Simulation
 
-Depth cameras, such as RGB-D sensors, provide both color images and depth information. In simulation, these are typically implemented using stereo vision principles or structured light methods. The depth information is calculated by measuring the distance to objects in the scene.
+Depth cameras, such as RGBD sensors, provide both color images and depth information. In simulation, these are typically implemented using stereo vision principles or structured light methods. The depth information is calculated by measuring the distance to objects in the scene.
 
 ### IMU Sensors in Simulation
 
 Inertial Measurement Units (IMUs) measure linear acceleration and angular velocity. In simulation, IMUs are typically modeled using:
-- Noise models to simulate real-world sensor inaccuracies
-- Bias terms that drift over time
-- Sampling rate to match real hardware
+ Noise models to simulate realworld sensor inaccuracies
+ Bias terms that drift over time
+ Sampling rate to match real hardware
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
 ### Lab 1: Configuring LiDAR Sensors in Gazebo
 
@@ -95,7 +95,7 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
          </visual>
        </link>
 
-       <!-- LiDAR sensor -->
+       <! LiDAR sensor >
        <link name="lidar_link">
          <pose>0.1 0 0.2 0 0 0</pose>
          <inertial>
@@ -134,7 +134,7 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
          <pose>0.1 0 0.2 0 0 0</pose>
        </joint>
 
-       <!-- 2D LiDAR sensor -->
+       <! 2D LiDAR sensor >
        <sensor name="lidar_2d" type="ray">
          <pose>0 0 0 0 0 0</pose>
          <ray>
@@ -142,7 +142,7 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
              <horizontal>
                <samples>360</samples>
                <resolution>1</resolution>
-               <min_angle>-3.14159</min_angle>
+               <min_angle>3.14159</min_angle>
                <max_angle>3.14159</max_angle>
              </horizontal>
            </scan>
@@ -171,16 +171,16 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
          <real_time_update_rate>1000.0</real_time_update_rate>
        </physics>
 
-       <!-- Lighting -->
+       <! Lighting >
        <light name="sun" type="directional">
          <cast_shadows>true</cast_shadows>
          <pose>0 0 10 0 0 0</pose>
          <diffuse>0.8 0.8 0.8 1</diffuse>
          <specular>0.2 0.2 0.2 1</specular>
-         <direction>-0.3 0.3 -1</direction>
+         <direction>0.3 0.3 1</direction>
        </light>
 
-       <!-- Ground plane -->
+       <! Ground plane >
        <model name="ground_plane">
          <static>true</static>
          <link name="link">
@@ -207,7 +207,7 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
          </link>
        </model>
 
-       <!-- Obstacles for LiDAR testing -->
+       <! Obstacles for LiDAR testing >
        <model name="wall_1">
          <pose>5 0 1 0 0 0</pose>
          <static>true</static>
@@ -261,7 +261,7 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
        </model>
 
        <model name="obstacle_2">
-         <pose>-3 -1 0.3 0 0 0</pose>
+         <pose>3 1 0.3 0 0 0</pose>
          <static>true</static>
          <link name="link">
            <collision name="collision">
@@ -285,7 +285,7 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
          </link>
        </model>
 
-       <!-- Include the robot -->
+       <! Include the robot >
        <include>
          <uri>model://lidar_robot</uri>
          <pose>0 0 0 0 0 0</pose>
@@ -296,7 +296,7 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
 
 ### Lab 2: Configuring Depth Cameras in Gazebo
 
-1. **Create a robot model with RGB-D camera** (`rgbd_camera_robot.sdf`):
+1. **Create a robot model with RGBD camera** (`rgbd_camera_robot.sdf`):
    ```xml
    <?xml version="1.0" ?>
    <sdf version="1.7">
@@ -331,7 +331,7 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
          </visual>
        </link>
 
-       <!-- RGB-D camera -->
+       <! RGBD camera >
        <link name="camera_link">
          <pose>0.15 0 0.2 0 0 0</pose>
          <inertial>
@@ -368,11 +368,11 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
          <pose>0.15 0 0.2 0 0 0</pose>
        </joint>
 
-       <!-- RGB-D camera sensor -->
+       <! RGBD camera sensor >
        <sensor name="rgbd_camera" type="rgbd_camera">
          <pose>0 0 0 0 0 0</pose>
          <camera>
-           <horizontal_fov>1.047</horizontal_fov> <!-- 60 degrees -->
+           <horizontal_fov>1.047</horizontal_fov> <! 60 degrees >
            <image>
              <width>640</width>
              <height>480</height>
@@ -428,7 +428,7 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
          </visual>
        </link>
 
-       <!-- IMU sensor -->
+       <! IMU sensor >
        <sensor name="imu_sensor" type="imu">
          <pose>0 0 0 0 0 0</pose>
          <topic>imu</topic>
@@ -439,19 +439,19 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
              <x>
                <noise type="gaussian">
                  <mean>0.0</mean>
-                 <stddev>2e-4</stddev>
+                 <stddev>2e4</stddev>
                </noise>
              </x>
              <y>
                <noise type="gaussian">
                  <mean>0.0</mean>
-                 <stddev>2e-4</stddev>
+                 <stddev>2e4</stddev>
                </noise>
              </y>
              <z>
                <noise type="gaussian">
                  <mean>0.0</mean>
-                 <stddev>2e-4</stddev>
+                 <stddev>2e4</stddev>
                </noise>
              </z>
            </angular_velocity>
@@ -459,19 +459,19 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
              <x>
                <noise type="gaussian">
                  <mean>0.0</mean>
-                 <stddev>1.7e-2</stddev>
+                 <stddev>1.7e2</stddev>
                </noise>
              </x>
              <y>
                <noise type="gaussian">
                  <mean>0.0</mean>
-                 <stddev>1.7e-2</stddev>
+                 <stddev>1.7e2</stddev>
                </noise>
              </y>
              <z>
                <noise type="gaussian">
                  <mean>0.0</mean>
-                 <stddev>1.7e-2</stddev>
+                 <stddev>1.7e2</stddev>
                </noise>
              </z>
            </linear_acceleration>
@@ -492,16 +492,16 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
          <real_time_update_rate>1000.0</real_time_update_rate>
        </physics>
 
-       <!-- Lighting -->
+       <! Lighting >
        <light name="sun" type="directional">
          <cast_shadows>true</cast_shadows>
          <pose>0 0 10 0 0 0</pose>
          <diffuse>0.8 0.8 0.8 1</diffuse>
          <specular>0.2 0.2 0.2 1</specular>
-         <direction>-0.3 0.3 -1</direction>
+         <direction>0.3 0.3 1</direction>
        </light>
 
-       <!-- Ground plane -->
+       <! Ground plane >
        <model name="ground_plane">
          <static>true</static>
          <link name="link">
@@ -528,7 +528,7 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
          </link>
        </model>
 
-       <!-- A ramp to test IMU on slopes -->
+       <! A ramp to test IMU on slopes >
        <model name="ramp">
          <pose>3 0 0.5 0 0 0</pose>
          <static>true</static>
@@ -556,7 +556,7 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
          </link>
        </model>
 
-       <!-- Include the robot -->
+       <! Include the robot >
        <include>
          <uri>model://imu_robot</uri>
          <pose>0 0 0.1 0 0 0</pose>
@@ -598,11 +598,11 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
                os.path.join(gazebo_ros_share, 'launch', 'gz_sim.launch.py')
            ),
            launch_arguments={
-               'gz_args': ['-r ', LaunchConfiguration('world')]
+               'gz_args': ['r ', LaunchConfiguration('world')]
            }.items()
        )
        
-       # ROS-Gazebo bridge for sensors
+       # ROSGazebo bridge for sensors
        bridge = Node(
            package='ros_gz_bridge',
            executable='parameter_bridge',
@@ -628,27 +628,27 @@ Inertial Measurement Units (IMUs) measure linear acceleration and angular veloci
 2. **Create bridge configuration** (`config/sensors_bridge.yaml`):
    ```yaml
    # Bridge configuration for sensors
-   - ros_topic_name: "/scan"
+    ros_topic_name: "/scan"
      gz_topic_name: "/lidar_2d/scan"
      ros_type_name: "sensor_msgs/msg/LaserScan"
      gz_type_name: "gz.msgs.LaserScan"
    
-   - ros_topic_name: "/rgb_camera/image_raw"
+    ros_topic_name: "/rgb_camera/image_raw"
      gz_topic_name: "/rgbd_camera/image"
      ros_type_name: "sensor_msgs/msg/Image"
      gz_type_name: "gz.msgs.Image"
    
-   - ros_topic_name: "/rgb_camera/camera_info"
+    ros_topic_name: "/rgb_camera/camera_info"
      gz_topic_name: "/rgbd_camera/camera_info"
      ros_type_name: "sensor_msgs/msg/CameraInfo"
      gz_type_name: "gz.msgs.CameraInfo"
    
-   - ros_topic_name: "/depth_camera/image_raw"
+    ros_topic_name: "/depth_camera/image_raw"
      gz_topic_name: "/rgbd_camera/depth_image"
      ros_type_name: "sensor_msgs/msg/Image"
      gz_type_name: "gz.msgs.Image"
    
-   - ros_topic_name: "/imu"
+    ros_topic_name: "/imu"
      gz_topic_name: "/imu_sensor/imu"
      ros_type_name: "sensor_msgs/msg/Imu"
      gz_type_name: "gz.msgs.IMU"
@@ -699,7 +699,7 @@ class MultiSensorRobot(Node):
         self.linear_vel = 0.3
         self.angular_vel = 0.5
         
-        self.get_logger().info('Multi-sensor robot node started')
+        self.get_logger().info('Multisensor robot node started')
     
     def lidar_callback(self, msg):
         self.scan_data = msg
@@ -765,9 +765,9 @@ class MultiSensorRobot(Node):
         
         # Process LiDAR data for obstacle avoidance
         if self.scan_data is not None:
-            # Get front-facing ranges (±30 degrees)
+            # Get frontfacing ranges (±30 degrees)
             front_ranges = self.scan_data.ranges[
-                len(self.scan_data.ranges)//2 - 30 : 
+                len(self.scan_data.ranges)//2  30 : 
                 len(self.scan_data.ranges)//2 + 30]
             
             # Filter out invalid values
@@ -795,7 +795,7 @@ class MultiSensorRobot(Node):
                             image_center = self.image_data.shape[1] / 2
                             
                             if center_x < image_center:
-                                cmd.angular.z = -0.3  # Turn right
+                                cmd.angular.z = 0.3  # Turn right
                             else:
                                 cmd.angular.z = 0.3   # Turn left
                             
@@ -874,7 +874,7 @@ class LidarMapper(Node):
         self.map_height_cells = int(self.map_height / self.map_resolution)
         
         # Initialize occupancy grid
-        self.occupancy_map = np.full((self.map_height_cells, self.map_width_cells), -1, dtype=np.int8)  # -1 = unknown
+        self.occupancy_map = np.full((self.map_height_cells, self.map_width_cells), 1, dtype=np.int8)  # 1 = unknown
         
         # Subscribers and publishers
         self.scan_sub = self.create_subscription(
@@ -920,11 +920,11 @@ class LidarMapper(Node):
     def trace_ray(self, start_x, start_y, end_x, end_y):
         """Ray tracing algorithm to mark free space"""
         # Bresenham's line algorithm
-        dx = abs(end_x - start_x)
-        dy = abs(end_y - start_y)
-        sx = 1 if start_x < end_x else -1
-        sy = 1 if start_y < end_y else -1
-        err = dx - dy
+        dx = abs(end_x  start_x)
+        dy = abs(end_y  start_y)
+        sx = 1 if start_x < end_x else 1
+        sy = 1 if start_y < end_y else 1
+        err = dx  dy
         
         x, y = start_x, start_y
         
@@ -941,8 +941,8 @@ class LidarMapper(Node):
                 break
                 
             e2 = 2 * err
-            if e2 > -dy:
-                err -= dy
+            if e2 > dy:
+                err = dy
                 x += sx
             if e2 < dx:
                 err += dx
@@ -962,8 +962,8 @@ class LidarMapper(Node):
         msg.info.height = self.map_height_cells
         
         # Set origin (assuming map center is at (0,0,0))
-        msg.info.origin.position.x = -self.map_width / 2.0
-        msg.info.origin.position.y = -self.map_height / 2.0
+        msg.info.origin.position.x = self.map_width / 2.0
+        msg.info.origin.position.y = self.map_height / 2.0
         msg.info.origin.position.z = 0.0
         msg.info.origin.orientation.w = 1.0
         
@@ -992,11 +992,11 @@ if __name__ == '__main__':
     main()
 ```
 
-## Mini-project
+## Miniproject
 
 Create a complete sensor fusion system that:
 
-1. Simulates a robot with LiDAR, RGB-D camera, and IMU sensors
+1. Simulates a robot with LiDAR, RGBD camera, and IMU sensors
 2. Processes data from all sensors simultaneously
 3. Implements sensor fusion for improved perception
 4. Creates a map of the environment using LiDAR data
@@ -1006,21 +1006,21 @@ Create a complete sensor fusion system that:
 8. Provides visualization of the fused sensor information
 
 Your system should include:
-- Complete Gazebo world with features for sensor testing
-- Robot model with all three sensor types
-- ROS 2 nodes for sensor processing and fusion
-- Launch file to start the complete system
-- Performance metrics and logging
+ Complete Gazebo world with features for sensor testing
+ Robot model with all three sensor types
+ ROS 2 nodes for sensor processing and fusion
+ Launch file to start the complete system
+ Performance metrics and logging
 
 ## Summary
 
 This chapter covered the simulation, integration, and processing of key robotic sensors:
 
-- **LiDAR Simulation**: Configuring 2D and 3D laser scanners in Gazebo with proper parameters
-- **Depth Camera Simulation**: Setting up RGB-D cameras with realistic image and depth data
-- **IMU Simulation**: Creating inertial measurement units with noise models matching real sensors
-- **ROS 2 Integration**: Connecting simulated sensors to the ROS 2 ecosystem
-- **Sensor Processing**: Techniques for processing and interpreting sensor data
-- **Sensor Fusion**: Combining data from multiple sensors for enhanced perception
+ **LiDAR Simulation**: Configuring 2D and 3D laser scanners in Gazebo with proper parameters
+ **Depth Camera Simulation**: Setting up RGBD cameras with realistic image and depth data
+ **IMU Simulation**: Creating inertial measurement units with noise models matching real sensors
+ **ROS 2 Integration**: Connecting simulated sensors to the ROS 2 ecosystem
+ **Sensor Processing**: Techniques for processing and interpreting sensor data
+ **Sensor Fusion**: Combining data from multiple sensors for enhanced perception
 
 These sensors form the foundation of robot perception systems, and their simulation is crucial for developing and testing robotics algorithms in safe, controlled environments before deployment on real hardware.

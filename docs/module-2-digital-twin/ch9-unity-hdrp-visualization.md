@@ -1,69 +1,69 @@
----
-title: Ch9 - Unity HDRP Visualization & HRI
+-----
+title: Ch9  Unity HDRP Visualization & HRI
 module: 2
 chapter: 9
 sidebar_label: Ch9: Unity HDRP Visualization & HRI
-description: Creating high-fidelity visualizations with Unity HDRP and implementing Human-Robot Interaction
-tags: [unity, hdrp, visualization, hri, human-robot-interaction, graphics, simulation]
+description: Creating highfidelity visualizations with Unity HDRP and implementing HumanRobot Interaction
+tags: [unity, hdrp, visualization, hri, humanrobotinteraction, graphics, simulation]
 difficulty: advanced
 estimated_duration: 120
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
 # Unity HDRP Visualization & HRI
 
 ## Learning Outcomes
-- Understand Unity HDRP (High Definition Render Pipeline) for photorealistic visualization
-- Create high-fidelity robotic simulation environments in Unity
-- Implement Human-Robot Interaction (HRI) interfaces
-- Integrate Unity with ROS 2 for bidirectional communication
-- Design intuitive user interfaces for robot control and monitoring
-- Optimize Unity scenes for real-time performance with complex robotics scenarios
-- Implement VR/AR interfaces for enhanced Human-Robot Interaction
+ Understand Unity HDRP (High Definition Render Pipeline) for photorealistic visualization
+ Create highfidelity robotic simulation environments in Unity
+ Implement HumanRobot Interaction (HRI) interfaces
+ Integrate Unity with ROS 2 for bidirectional communication
+ Design intuitive user interfaces for robot control and monitoring
+ Optimize Unity scenes for realtime performance with complex robotics scenarios
+ Implement VR/AR interfaces for enhanced HumanRobot Interaction
 
 ## Theory
 
 ### Unity HDRP Overview
 
-The High Definition Render Pipeline (HDRP) is Unity's modern rendering pipeline designed for high-fidelity graphics. It offers advanced features like:
+The High Definition Render Pipeline (HDRP) is Unity's modern rendering pipeline designed for highfidelity graphics. It offers advanced features like:
 
 <MermaidDiagram chart={`
 graph TD;
-    A[Unity HDRP] --> B[Photorealistic Rendering];
-    A --> C[Global Illumination];
-    A --> D[Advanced Lighting];
-    A --> E[Post-Processing];
+    A[Unity HDRP] > B[Photorealistic Rendering];
+    A > C[Global Illumination];
+    A > D[Advanced Lighting];
+    A > E[PostProcessing];
     
-    B --> F[Realistic Materials];
-    B --> G[Accurate Reflections];
-    C --> H[Volumetric Lighting];
-    C --> I[Light Transport];
-    D --> J[Physical Cameras];
-    D --> K[Real-time Shadows];
-    E --> L[Color Grading];
-    E --> M[Anti-Aliasing];
+    B > F[Realistic Materials];
+    B > G[Accurate Reflections];
+    C > H[Volumetric Lighting];
+    C > I[Light Transport];
+    D > J[Physical Cameras];
+    D > K[Realtime Shadows];
+    E > L[Color Grading];
+    E > M[AntiAliasing];
     
     style A fill:#4CAF50,stroke:#388E3C,color:#fff;
     style B fill:#2196F3,stroke:#0D47A1,color:#fff;
 `} />
 
-- **Physically-Based Shading (PBS)**: Materials that respond realistically to lighting conditions
-- **Global Illumination**: Realistic light scattering and bounce lighting
-- **Volumetric Lighting**: Realistic light rays and atmospheric effects
-- **Real-time Ray Tracing**: Accurate reflections and shadows
-- **Advanced Post-Processing Effects**: Color grading, depth of field, motion blur
+ **PhysicallyBased Shading (PBS)**: Materials that respond realistically to lighting conditions
+ **Global Illumination**: Realistic light scattering and bounce lighting
+ **Volumetric Lighting**: Realistic light rays and atmospheric effects
+ **Realtime Ray Tracing**: Accurate reflections and shadows
+ **Advanced PostProcessing Effects**: Color grading, depth of field, motion blur
 
-### Human-Robot Interaction (HRI) Principles
+### HumanRobot Interaction (HRI) Principles
 
 HRI in Unity simulation environments involves creating intuitive interfaces that allow humans to interact with robots in realistic scenarios:
 
-- **Visual Feedback**: Clear representation of robot state, intentions, and status
-- **Intuitive Controls**: Natural and responsive interfaces for commanding robots
-- **Situation Awareness**: Providing users with necessary environmental and robot information
-- **Safety Considerations**: Interfaces that promote safe human-robot collaboration
+ **Visual Feedback**: Clear representation of robot state, intentions, and status
+ **Intuitive Controls**: Natural and responsive interfaces for commanding robots
+ **Situation Awareness**: Providing users with necessary environmental and robot information
+ **Safety Considerations**: Interfaces that promote safe humanrobot collaboration
 
-### Unity-ROS Integration
+### UnityROS Integration
 
 Unity can communicate with ROS 2 through various approaches:
 
@@ -72,19 +72,19 @@ Unity can communicate with ROS 2 through various approaches:
 3. **TCP/UDP Bridge**: Direct socket communication
 4. **ROS Bridge Package**: Using the official ROS Bridge package
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
 ### Lab 1: Setting up Unity HDRP Project
 
 1. **Create a new Unity HDRP project**:
-   - Open Unity Hub
-   - Create new project
-   - Select "3D (High Definition Render Pipeline)" template
-   - Or create a 3D project and convert to HDRP later
+    Open Unity Hub
+    Create new project
+    Select "3D (High Definition Render Pipeline)" template
+    Or create a 3D project and convert to HDRP later
 
 2. **Configure the HDRP asset**:
-   - Create an HDRP asset in your Assets folder
-   - Configure settings like lighting, post-processing, and performance parameters
+    Create an HDRP asset in your Assets folder
+    Configure settings like lighting, postprocessing, and performance parameters
 
 3. **Basic HDRP setup script** (`HDRPSetup.cs`):
    ```csharp
@@ -98,7 +98,7 @@ Unity can communicate with ROS 2 through various approaches:
        public float globalLightIntensity = 3.14f;
        public Color globalLightColor = Color.white;
        
-       [Header("Post-Processing Settings")]
+       [Header("PostProcessing Settings")]
        public bool useBloom = true;
        public float bloomIntensity = 0.5f;
        public bool useDepthOfField = true;
@@ -146,11 +146,11 @@ Unity can communicate with ROS 2 through various approaches:
        
        void SetupPostProcessing()
        {
-           // Apply post-processing settings
+           // Apply postprocessing settings
            if (useBloom)
            {
                // Bloom settings would be configured here
-               // This is a simplified example - actual implementation would use Volume components
+               // This is a simplified example  actual implementation would use Volume components
            }
        }
    }
@@ -159,8 +159,8 @@ Unity can communicate with ROS 2 through various approaches:
 ### Lab 2: Creating a Robot Visualization
 
 1. **Create a basic robot model** in Unity:
-   - Use primitives (cylinders, cubes, spheres) to create a simple robot
-   - Or import a 3D model of a robot
+    Use primitives (cylinders, cubes, spheres) to create a simple robot
+    Or import a 3D model of a robot
 
 2. **Create robot controller script** (`RobotController.cs`):
    ```csharp
@@ -170,7 +170,7 @@ Unity can communicate with ROS 2 through various approaches:
    public class JointConfig
    {
        public string jointName;
-       public float minAngle = -90f;
+       public float minAngle = 90f;
        public float maxAngle = 90f;
        public float currentAngle = 0f;
    }
@@ -228,7 +228,7 @@ Unity can communicate with ROS 2 through various approaches:
                {
                    // Apply rotation based on joint configuration
                    Vector3 rotation = jointTransform.localEulerAngles;
-                   // This is a simplification - real implementation would need to know which axis to rotate
+                   // This is a simplification  real implementation would need to know which axis to rotate
                    jointTransform.localEulerAngles = new Vector3(rotation.x, rotation.y, joints[i].currentAngle);
                }
            }
@@ -304,7 +304,7 @@ Unity can communicate with ROS 2 through various approaches:
    }
    ```
 
-### Lab 3: Implementing Human-Robot Interaction Interface
+### Lab 3: Implementing HumanRobot Interaction Interface
 
 1. **Create HRI UI controller** (`HRIController.cs`):
    ```csharp
@@ -394,7 +394,7 @@ Unity can communicate with ROS 2 through various approaches:
            if (robot != null && robot.GetComponent<Rigidbody>() != null)
            {
                Rigidbody rb = robot.GetComponent<Rigidbody>();
-               rb.AddForce(-robot.transform.forward * linearSpeed, ForceMode.VelocityChange);
+               rb.AddForce(robot.transform.forward * linearSpeed, ForceMode.VelocityChange);
                UpdateStatus("Moving backward");
            }
        }
@@ -403,7 +403,7 @@ Unity can communicate with ROS 2 through various approaches:
        {
            if (robot != null)
            {
-               robot.transform.Rotate(Vector3.up, -angularSpeed * Time.deltaTime, Space.World);
+               robot.transform.Rotate(Vector3.up, angularSpeed * Time.deltaTime, Space.World);
                UpdateStatus("Turning left");
            }
        }
@@ -467,7 +467,7 @@ While Unity doesn't have native ROS support, here's a conceptual implementation 
    using System.Threading.Tasks;
    using System.Text;
    
-   // This is a simplified example - a real implementation would require more sophisticated networking
+   // This is a simplified example  a real implementation would require more sophisticated networking
    public class ROSCommunicationManager : MonoBehaviour
    {
        [Header("ROS Connection Settings")]
@@ -536,7 +536,7 @@ While Unity doesn't have native ROS support, here's a conceptual implementation 
                foreach (var joint in robotController.joints)
                {
                    // Add small random changes to simulate real robot movement
-                   joint.currentAngle += Random.Range(-2f, 2f);
+                   joint.currentAngle += Random.Range(2f, 2f);
                    joint.currentAngle = Mathf.Clamp(joint.currentAngle, joint.minAngle, joint.maxAngle);
                }
            }
@@ -568,7 +568,7 @@ While Unity doesn't have native ROS support, here's a conceptual implementation 
 
 ## Runnable Code Example
 
-Here's a complete example of a Unity-based visualization system for a robotic arm:
+Here's a complete example of a Unitybased visualization system for a robotic arm:
 
 ```csharp
 using UnityEngine;
@@ -577,7 +577,7 @@ using System.Collections.Generic;
 
 // Main class to manage the robotic arm visualization
 public class RoboticArmVisualizer : MonoBehaviour
-{
+{-
     [Header("Arm Configuration")]
     public Transform baseJoint;      // Base of the arm
     public Transform[] joints;       // All joints of the arm
@@ -701,14 +701,14 @@ public class RoboticArmVisualizer : MonoBehaviour
         if (useIK)
         {
             // Simple inverse kinematics for reaching target
-            // This is a simplified implementation - real IK would be more complex
-            Vector3 directionToTarget = (targetObject.position - baseJoint.position).normalized;
+            // This is a simplified implementation  real IK would be more complex
+            Vector3 directionToTarget = (targetObject.position  baseJoint.position).normalized;
             
             // Set the first joint to point toward the target
             if (joints.Length > 0 && joints[0] != null)
             {
                 joints[0].transform.LookAt(targetObject);
-                joints[0].transform.Rotate(-90, 0, 0); // Adjust for joint orientation
+                joints[0].transform.Rotate(90, 0, 0); // Adjust for joint orientation
             }
             
             // Additional IK calculations would go here for more complex arms
@@ -716,13 +716,13 @@ public class RoboticArmVisualizer : MonoBehaviour
         else
         {
             // Move arm closer to target position (simplified)
-            Vector3 directionToTarget = (targetObject.position - endEffector.position).normalized;
+            Vector3 directionToTarget = (targetObject.position  endEffector.position).normalized;
             float distance = Vector3.Distance(endEffector.position, targetObject.position);
             
             if (distance > 0.1f) // Threshold for reaching the target
             {
                 // Adjust joint angles to move closer to target
-                // This is a simplified approach - real implementation would use proper IK algorithms
+                // This is a simplified approach  real implementation would use proper IK algorithms
                 for (int i = 0; i < joints.Length; i++)
                 {
                     if (joints[i] != null)
@@ -811,7 +811,7 @@ public class RoboticArmVisualizer : MonoBehaviour
                     Gizmos.DrawSphere(joints[i].position, 0.05f);
                     
                     // Draw line to next joint
-                    if (i < joints.Length - 1 && joints[i+1] != null)
+                    if (i < joints.Length  1 && joints[i+1] != null)
                     {
                         Gizmos.color = Color.cyan;
                         Gizmos.DrawLine(joints[i].position, joints[i+1].position);
@@ -835,7 +835,7 @@ public class RoboticArmVisualizer : MonoBehaviour
             }
         }
     }
-}
+}-
 ```
 
 ### Unity Scene Setup for Robotics Visualization
@@ -846,7 +846,7 @@ The scene setup would include:
 2. **Robot Model**: Import or create robot models with proper physical properties
 3. **Camera System**: Set up cameras for different viewing perspectives
 4. **Lighting**: Configure HDRP lighting for realistic appearance
-5. **Post-Processing**: Apply post-processing effects for enhanced visual quality
+5. **PostProcessing**: Apply postprocessing effects for enhanced visual quality
 
 ### HRI Dashboard Example (`HRIDashboard.cs`)
 
@@ -857,7 +857,7 @@ using TMPro;
 using System.Collections.Generic;
 
 public class HRIDashboard : MonoBehaviour
-{
+{-
     [Header("Dashboard Elements")]
     public TextMeshProUGUI robotNameText;
     public TextMeshProUGUI statusText;
@@ -1026,7 +1026,7 @@ public class HRIDashboard : MonoBehaviour
     public void ShowSensorData(string sensorName, float value, float minRange, float maxRange)
     {
         // In a real system, this would visualize sensor data on the dashboard
-        Debug.Log($"Sensor {sensorName}: {value:F2} (Range: {minRange} - {maxRange})");
+        Debug.Log($"Sensor {sensorName}: {value:F2} (Range: {minRange}  {maxRange})");
     }
     
     public void ShowSensorData(string sensorName, Vector3 position)
@@ -1040,45 +1040,45 @@ public class HRIDashboard : MonoBehaviour
         // Simulate battery drain over time
         if (currentStatus == "Working")
         {
-            UpdateBatteryLevel(batteryLevel - 0.01f); // Drain 0.01% per frame when working
+            UpdateBatteryLevel(batteryLevel  0.01f); // Drain 0.01% per frame when working
             
             // Simulate task progress
             UpdateTaskProgress(taskProgress + 0.001f);
         }
     }
-}
+}-
 ```
 
-## Mini-project
+## Miniproject
 
-Create a complete Unity-based visualization system for a mobile robot that includes:
+Create a complete Unitybased visualization system for a mobile robot that includes:
 
 1. A photorealistic environment using HDRP
 2. A robot model with accurate kinematics and dynamics
 3. An HRI interface with status monitoring and control
 4. Integration with sensor data visualization (LiDAR, camera, IMU)
 5. VR/AR support for immersive interaction
-6. Real-time performance metrics display
+6. Realtime performance metrics display
 7. Emergency stop and safety interlocks
 8. Recording and playback functionality
 
 Your system should include:
-- Complete Unity scene with HDRP lighting
-- Robot controller with realistic movement
-- HRI dashboard showing robot status and controls
-- Sensor data visualization
-- Performance optimization techniques
-- Safety features implementation
+ Complete Unity scene with HDRP lighting
+ Robot controller with realistic movement
+ HRI dashboard showing robot status and controls
+ Sensor data visualization
+ Performance optimization techniques
+ Safety features implementation
 
 ## Summary
 
-This chapter covered Unity HDRP for high-fidelity visualization and Human-Robot Interaction:
+This chapter covered Unity HDRP for highfidelity visualization and HumanRobot Interaction:
 
-- **HDRP Setup**: Configuring Unity's High Definition Render Pipeline for photorealistic rendering
-- **Robot Visualization**: Creating detailed 3D robot models with accurate kinematics
-- **HRI Interfaces**: Designing intuitive user interfaces for robot control and monitoring
-- **Unity-ROS Integration**: Connecting Unity with ROS 2 for bidirectional communication
-- **Performance Optimization**: Techniques for maintaining real-time performance with complex scenes
-- **Safety Considerations**: Implementing emergency stops and safety interlocks in HRI systems
+ **HDRP Setup**: Configuring Unity's High Definition Render Pipeline for photorealistic rendering
+ **Robot Visualization**: Creating detailed 3D robot models with accurate kinematics
+ **HRI Interfaces**: Designing intuitive user interfaces for robot control and monitoring
+ **UnityROS Integration**: Connecting Unity with ROS 2 for bidirectional communication
+ **Performance Optimization**: Techniques for maintaining realtime performance with complex scenes
+ **Safety Considerations**: Implementing emergency stops and safety interlocks in HRI systems
 
 Unity HDRP provides powerful tools for creating visually impressive simulation environments that can significantly enhance the development and testing of robotic systems.

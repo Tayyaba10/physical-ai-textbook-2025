@@ -1,26 +1,26 @@
----
-title: Ch15 - Reinforcement Learning & Sim-to-Real
+-----
+title: Ch15  Reinforcement Learning & SimtoReal
 module: 3
 chapter: 15
-sidebar_label: Ch15: Reinforcement Learning & Sim-to-Real
+sidebar_label: Ch15: Reinforcement Learning & SimtoReal
 description: Implementing reinforcement learning algorithms for robotics and transferring policies from simulation to reality
-tags: [reinforcement-learning, rl, sim-to-real, transfer-learning, robotics, Isaac-gym, Isaac-orbit, domain-randomization]
+tags: [reinforcementlearning, rl, simtoreal, transferlearning, robotics, Isaacgym, Isaacorbit, domainrandomization]
 difficulty: advanced
 estimated_duration: 150
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
-# Reinforcement Learning & Sim-to-Real
+# Reinforcement Learning & SimtoReal
 
 ## Learning Outcomes
-- Understand reinforcement learning applications in robotics
-- Implement RL algorithms for continuous control tasks
-- Apply domain randomization techniques for sim-to-real transfer
-- Evaluate policy robustness across simulation-to-reality gap
-- Implement system identification and dynamics randomization
-- Create robust control policies for physical systems
-- Assess the effectiveness of sim-to-real transfer methods
+ Understand reinforcement learning applications in robotics
+ Implement RL algorithms for continuous control tasks
+ Apply domain randomization techniques for simtoreal transfer
+ Evaluate policy robustness across simulationtoreality gap
+ Implement system identification and dynamics randomization
+ Create robust control policies for physical systems
+ Assess the effectiveness of simtoreal transfer methods
 
 ## Theory
 
@@ -30,27 +30,27 @@ Reinforcement Learning (RL) is particularly applicable to robotics because robot
 
 <MermaidDiagram chart={`
 graph TD;
-    A[Robot RL Agent] --> B[Observation Space];
-    A --> C[Action Space];
-    A --> D[Reward Function];
+    A[Robot RL Agent] > B[Observation Space];
+    A > C[Action Space];
+    A > D[Reward Function];
     
-    B --> E[Camera Images];
-    B --> F[Joint States];
-    B --> G[IMU Readings];
-    B --> H[Force Sensors];
+    B > E[Camera Images];
+    B > F[Joint States];
+    B > G[IMU Readings];
+    B > H[Force Sensors];
     
-    C --> I[Joint Efforts];
-    C --> J[Motor Commands];
-    C --> K[End-effector Poses];
+    C > I[Joint Efforts];
+    C > J[Motor Commands];
+    C > K[Endeffector Poses];
     
-    D --> L[Task Completion];
-    D --> M[Efficiency];
-    D --> N[Safety];
-    D --> O[Stability];
+    D > L[Task Completion];
+    D > M[Efficiency];
+    D > N[Safety];
+    D > O[Stability];
     
-    P[Environment] --> Q[Physics Simulation];
-    P --> R[Real World];
-    P --> S[Domain Randomization];
+    P[Environment] > Q[Physics Simulation];
+    P > R[Real World];
+    P > S[Domain Randomization];
     
     style A fill:#4CAF50,stroke:#388E3C,color:#fff;
     style P fill:#2196F3,stroke:#0D47A1,color:#fff;
@@ -58,32 +58,32 @@ graph TD;
 
 ### Types of RL Algorithms for Robotics
 
-**Deep Deterministic Policy Gradient (DDPG)**: Actor-critic method for continuous action spaces.
+**Deep Deterministic Policy Gradient (DDPG)**: Actorcritic method for continuous action spaces.
 
-**Soft Actor-Critic (SAC)**: Maximum entropy RL algorithm that balances exploration and exploitation.
+**Soft ActorCritic (SAC)**: Maximum entropy RL algorithm that balances exploration and exploitation.
 
 **Proximal Policy Optimization (PPO)**: Policy gradient method that clips gradients to prevent large policy updates.
 
 **Twin Delayed DDPG (TD3)**: Improved version of DDPG that addresses overestimation bias.
 
-### Sim-to-Real Transfer Challenges
+### SimtoReal Transfer Challenges
 
 The "reality gap" refers to differences between simulation and the real world that can prevent policies trained in simulation from working on real robots:
 
-- **Dynamics Mismatch**: Differences in friction, motor delays, actuator responses
-- **Sensor Noise**: Real sensors have different noise characteristics
-- **Model Imperfections**: Uncertainty in robot and environment models
-- **Environmental Factors**: Lighting, texture, and physical properties
+ **Dynamics Mismatch**: Differences in friction, motor delays, actuator responses
+ **Sensor Noise**: Real sensors have different noise characteristics
+ **Model Imperfections**: Uncertainty in robot and environment models
+ **Environmental Factors**: Lighting, texture, and physical properties
 
 ### Domain Randomization
 
 Techniques to make policies robust to simulation imperfections:
 
-- **Dynamics Randomization**: Varying physical parameters randomly
-- **Visual Domain Randomization**: Changing textures, colors, lighting
-- **Control Randomization**: Adding delays, noise to control signals
+ **Dynamics Randomization**: Varying physical parameters randomly
+ **Visual Domain Randomization**: Changing textures, colors, lighting
+ **Control Randomization**: Adding delays, noise to control signals
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
 ### Lab 1: Setting up Isaac Gym for RL Training
 
@@ -93,12 +93,12 @@ Techniques to make policies robust to simulation imperfections:
    # For this example, we'll assume Isaac Orbit or similar environment
    
    # Create virtual environment
-   python -m venv ~/isaac_rl_env
+   python m venv ~/isaac_rl_env
    source ~/isaac_rl_env/bin/activate
    pip install torch torchvision
    pip install gymnasium
-   pip install stable-baselines3[extra]
-   pip install sb3-contrib
+   pip install stablebaselines3[extra]
+   pip install sb3contrib
    ```
 
 2. **Create a basic RL environment using Isaac Sim as physics backend**:
@@ -121,12 +121,12 @@ Techniques to make policies robust to simulation imperfections:
            # Define action and observation space
            # Continuous action space for joint torques
            self.action_space = spaces.Box(
-               low=-1.0, high=1.0, shape=(6,), dtype=np.float32  # 6 joints
+               low=1.0, high=1.0, shape=(6,), dtype=np.float32  # 6 joints
            )
            
            # Observation space: joint positions, velocities, and IMU readings
            self.observation_space = spaces.Box(
-               low=-np.inf, high=np.inf, shape=(18,), dtype=np.float32  # 6 pos + 6 vel + 6 IMU
+               low=np.inf, high=np.inf, shape=(18,), dtype=np.float32  # 6 pos + 6 vel + 6 IMU
            )
            
            # Environment parameters
@@ -181,7 +181,7 @@ Techniques to make policies robust to simulation imperfections:
            
            # Additional info
            info = {
-               'distance_to_target': np.linalg.norm(self.robot_pos - self.target_pos)
+               'distance_to_target': np.linalg.norm(self.robot_pos  self.target_pos)
            }
            
            return obs, reward, terminated, truncated, info
@@ -220,17 +220,17 @@ Techniques to make policies robust to simulation imperfections:
        def _calculate_reward(self):
            """Calculate reward for current state"""
            # Distance to target
-           dist_to_target = np.linalg.norm(self.robot_pos - self.target_pos)
+           dist_to_target = np.linalg.norm(self.robot_pos  self.target_pos)
            
            # Reward based on getting closer to target
-           reward = -dist_to_target  # Negative distance (closer = higher reward)
+           reward = dist_to_target  # Negative distance (closer = higher reward)
            
            # Add bonus for reaching target
            if dist_to_target < 0.1:
                reward += 100  # Large bonus for reaching target
            
            # Penalty for taking too much action (energy efficiency)
-           action_penalty = -0.01 * np.sum(np.abs(self.joint_velocities))
+           action_penalty = 0.01 * np.sum(np.abs(self.joint_velocities))
            reward += action_penalty
            
            return reward
@@ -238,11 +238,11 @@ Techniques to make policies robust to simulation imperfections:
        def _check_termination(self):
            """Check if episode should terminate"""
            # Terminate if robot reaches target
-           dist_to_target = np.linalg.norm(self.robot_pos - self.target_pos)
+           dist_to_target = np.linalg.norm(self.robot_pos  self.target_pos)
            if dist_to_target < 0.1:
                return True
            
-           # Don't terminate normally - let truncated handle max steps
+           # Don't terminate normally  let truncated handle max steps
            return False
        
        def close(self):
@@ -253,7 +253,7 @@ Techniques to make policies robust to simulation imperfections:
 
 ### Lab 2: Implementing SAC Algorithm for Robot Control
 
-1. **Create a Soft Actor-Critic implementation** (`sac_robot_controller.py`):
+1. **Create a Soft ActorCritic implementation** (`sac_robot_controller.py`):
    ```python
    #!/usr/bin/env python3
 
@@ -341,7 +341,7 @@ Techniques to make policies robust to simulation imperfections:
            return q1, q2
 
    class GaussianPolicy(nn.Module):
-       def __init__(self, state_dim, action_dim, hidden_dim=256, log_std_min=-20, log_std_max=2):
+       def __init__(self, state_dim, action_dim, hidden_dim=256, log_std_min=20, log_std_max=2):
            super(GaussianPolicy, self).__init__()
            
            self.log_std_min = log_std_min
@@ -375,18 +375,18 @@ Techniques to make policies robust to simulation imperfections:
            
            normal = Normal(mean, std)
            x_t = normal.rsample()  # Reparameterization trick
-           action = torch.tanh(x_t)  # Squash to [-1, 1]
+           action = torch.tanh(x_t)  # Squash to [1, 1]
            log_prob = normal.log_prob(x_t)
            
            # Compute log probability of squashed Gaussian (corrected for tanh)
-           log_prob -= torch.log(1 - action.pow(2) + 1e-6)
+           log_prob = torch.log(1  action.pow(2) + 1e6)
            log_prob = log_prob.sum(1, keepdim=True)
            
            return action, log_prob
 
-   # Soft Actor-Critic Agent
+   # Soft ActorCritic Agent
    class SACAgent:
-       def __init__(self, state_dim, action_dim, hidden_dim=256, lr=3e-4, gamma=0.99, tau=5e-3,
+       def __init__(self, state_dim, action_dim, hidden_dim=256, lr=3e4, gamma=0.99, tau=5e3,
                     alpha=0.2, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
            
            self.device = device
@@ -411,7 +411,7 @@ Techniques to make policies robust to simulation imperfections:
            self.gamma = gamma
            self.tau = tau
            self.alpha = alpha
-           self.target_entropy = -torch.prod(torch.Tensor(action_dim).to(device)).item()
+           self.target_entropy = torch.prod(torch.Tensor(action_dim).to(device)).item()
            self.log_alpha = torch.zeros(1, requires_grad=True, device=device)
            self.alpha_optimizer = optim.Adam([self.log_alpha], lr=lr)
        
@@ -446,7 +446,7 @@ Techniques to make policies robust to simulation imperfections:
            with torch.no_grad():
                next_action, next_log_prob = self.actor.sample(next_state_batch)
                next_q_values = self.critic_target(next_state_batch, next_action)
-               next_q_value = torch.min(*next_q_values) - self.alpha * next_log_prob
+               next_q_value = torch.min(*next_q_values)  self.alpha * next_log_prob
                expected_q_value = reward_batch + (self.gamma * next_q_value * ~done_mask)
            
            # Get current Q values
@@ -463,7 +463,7 @@ Techniques to make policies robust to simulation imperfections:
            predicted_action, predicted_log_prob = self.actor.sample(state_batch)
            predicted_q_value = self.critic(state_batch, predicted_action)
            predicted_q_value = torch.min(*predicted_q_value)
-           actor_loss = (self.alpha * predicted_log_prob - predicted_q_value).mean()
+           actor_loss = (self.alpha * predicted_log_prob  predicted_q_value).mean()
            
            # Optimize Actor
            self.actor_optimizer.zero_grad()
@@ -471,7 +471,7 @@ Techniques to make policies robust to simulation imperfections:
            self.actor_optimizer.step()
            
            # Temperature parameter update
-           alpha_loss = -(self.log_alpha * (predicted_log_prob + self.target_entropy).detach()).mean()
+           alpha_loss = (self.log_alpha * (predicted_log_prob + self.target_entropy).detach()).mean()
            self.alpha_optimizer.zero_grad()
            alpha_loss.backward()
            self.alpha_optimizer.step()
@@ -479,7 +479,7 @@ Techniques to make policies robust to simulation imperfections:
            
            # Soft update target networks
            for target_param, param in zip(self.critic_target.parameters(), self.critic.parameters()):
-               target_param.data.copy_(target_param.data * (1.0 - self.tau) + param.data * self.tau)
+               target_param.data.copy_(target_param.data * (1.0  self.tau) + param.data * self.tau)
            
            return critic_loss.item(), actor_loss.item()
        
@@ -561,17 +561,17 @@ Techniques to make policies robust to simulation imperfections:
            
            # Calculate average score over last 100 episodes
            if len(scores) >= 100:
-               avg_score = np.mean(scores[-100:])
+               avg_score = np.mean(scores[100:])
                avg_scores.append(avg_score)
            else:
                avg_scores.append(np.mean(scores))
            
            # Log progress
            if episode % 10 == 0:
-               print(f'Episode {episode}, Average Score: {avg_scores[-1]:.2f}')
+               print(f'Episode {episode}, Average Score: {avg_scores[1]:.2f}')
            
            # Stop if solved
-           if avg_scores[-1] >= 90 and len(avg_scores) > 10:  # Adjustable threshold
+           if avg_scores[1] >= 90 and len(avg_scores) > 10:  # Adjustable threshold
                print(f'Solved in {episode} episodes!')
                break
        
@@ -619,7 +619,7 @@ Techniques to make policies robust to simulation imperfections:
        main()
    ```
 
-### Lab 3: Domain Randomization for Sim-to-Real Transfer
+### Lab 3: Domain Randomization for SimtoReal Transfer
 
 1. **Create a domain randomization wrapper** (`domain_randomization_wrapper.py`):
    ```python
@@ -641,11 +641,11 @@ Techniques to make policies robust to simulation imperfections:
                self.randomization_params = {
                    'friction_range': (0.1, 1.0),           # Range for friction coefficient
                    'mass_range': (0.8, 1.2),              # Range for link masses
-                   'com_range': (-0.02, 0.02),            # Range for center of mass offsets
+                   'com_range': (0.02, 0.02),            # Range for center of mass offsets
                    'motor_delay_range': (0.0, 0.02),       # Motor delay in seconds
                    'sensor_noise_std': 0.01,              # Standard deviation for sensor noise
                    'control_delay_range': (0.0, 0.01),     # Control delay in seconds
-                   'gravity_range': (-1, 1),              # Range for gravity variation (m/s²)
+                   'gravity_range': (1, 1),              # Range for gravity variation (m/s²)
                    'visual_randomization': True            # Enable visual domain randomization
                }
            else:
@@ -736,19 +736,19 @@ Techniques to make policies robust to simulation imperfections:
            return obs + noise
        
        def modify_reward_for_realism(self, reward):
-           """Modify reward to account for sim-to-real considerations"""
-           # In sim-to-real transfer, we might want to penalize behaviors that don't
+           """Modify reward to account for simtoreal considerations"""
+           # In simtoreal transfer, we might want to penalize behaviors that don't
            # translate well to the real world (e.g., overly aggressive motions)
            return reward
        
        def apply_randomization_to_simulation(self):
            """Apply randomization to the underlying simulation environment"""
            # In a real implementation, this would interface with Isaac Sim to modify:
-           # - Friction parameters
-           # - Link masses and inertias
-           # - Center of mass offsets
-           # - Joint damping
-           # - Actuator properties
+           #  Friction parameters
+           #  Link masses and inertias
+           #  Center of mass offsets
+           #  Joint damping
+           #  Actuator properties
            # etc.
            pass
        
@@ -774,7 +774,7 @@ Techniques to make policies robust to simulation imperfections:
 
    # Enhanced robot environment with domain randomization
    class RandomizedRobotRLEnv(DomainRandomizationWrapper):
-       """Robot environment with domain randomization for sim-to-real transfer"""
+       """Robot environment with domain randomization for simtoreal transfer"""
        
        def __init__(self, headless=True, randomization_params=None):
            # Create base environment
@@ -801,11 +801,11 @@ Techniques to make policies robust to simulation imperfections:
        randomization_params = {
            'friction_range': (0.1, 1.5),
            'mass_range': (0.7, 1.3),
-           'com_range': (-0.03, 0.03),
+           'com_range': (0.03, 0.03),
            'motor_delay_range': (0.0, 0.03),
            'sensor_noise_std': 0.015,
            'control_delay_range': (0.0, 0.015),
-           'gravity_range': (-1.5, 1.5),
+           'gravity_range': (1.5, 1.5),
            'visual_randomization': True
        }
        
@@ -815,7 +815,7 @@ Techniques to make policies robust to simulation imperfections:
        print("Environment with domain randomization created.")
        print(f"Randomization info: {env.get_randomization_info()}")
        
-       # Proceed with training - the same SAC training code can now work with
+       # Proceed with training  the same SAC training code can now work with
        # the randomized environment
        
        # Example: Get randomization info during training
@@ -838,7 +838,7 @@ Techniques to make policies robust to simulation imperfections:
        train_with_domain_randomization()
    ```
 
-### Lab 4: Evaluating Sim-to-Real Transfer
+### Lab 4: Evaluating SimtoReal Transfer
 
 1. **Create a transfer evaluation system** (`transfer_evaluation.py`):
    ```python
@@ -854,7 +854,7 @@ Techniques to make policies robust to simulation imperfections:
    import pandas as pd
 
    class TransferEvaluator:
-       """Evaluate sim-to-real transfer effectiveness"""
+       """Evaluate simtoreal transfer effectiveness"""
        
        def __init__(self):
            self.simulation_episodes = []
@@ -919,7 +919,7 @@ Techniques to make policies robust to simulation imperfections:
                step_count = 0
                while True:
                    # For real evaluation, you might use a different control strategy
-                   # or human demonstration - this is a placeholder
+                   # or human demonstration  this is a placeholder
                    action = real_env.action_space.sample()  # Random action in this example
                    next_obs, reward, terminated, truncated, info = real_env.step(action)
                    done = terminated or truncated
@@ -1011,10 +1011,10 @@ Techniques to make policies robust to simulation imperfections:
            real_stds = np.std(real_states, axis=0)
            
            differences = {
-               'mean_diff': np.abs(sim_means - real_means),
-               'std_diff': np.abs(sim_stds - real_stds),
-               'relative_mean_diff': np.abs(sim_means - real_means) / np.abs(sim_means + 1e-8),
-               'relative_std_diff': np.abs(sim_stds - real_stds) / np.abs(sim_stds + 1e-8)
+               'mean_diff': np.abs(sim_means  real_means),
+               'std_diff': np.abs(sim_stds  real_stds),
+               'relative_mean_diff': np.abs(sim_means  real_means) / np.abs(sim_means + 1e8),
+               'relative_std_diff': np.abs(sim_stds  real_stds) / np.abs(sim_stds + 1e8)
            }
            
            print("\nDynamics Difference Analysis:")
@@ -1092,13 +1092,13 @@ Techniques to make policies robust to simulation imperfections:
            real_states = np.concatenate([ep['states'] for ep in self.real_world_episodes])
            
            # Compute MMD (Maximum Mean Discrepancy) approximation
-           # This is a simplified version - in practice, use kernel methods
+           # This is a simplified version  in practice, use kernel methods
            sample_size = min(len(sim_states), len(real_states), 1000)
            sim_subsample = sim_states[np.random.choice(len(sim_states), sample_size, replace=False)]
            real_subsample = real_states[np.random.choice(len(real_states), sample_size, replace=False)]
            
            # Euclidean distance between samples
-           distances = np.linalg.norm(sim_subsample[:, np.newaxis, :] - real_subsample[np.newaxis, :, :], axis=2)
+           distances = np.linalg.norm(sim_subsample[:, np.newaxis, :]  real_subsample[np.newaxis, :, :], axis=2)
            mmd_approx = np.mean(distances)  # Simplified MMD approximation
            
            # Store metrics
@@ -1112,7 +1112,7 @@ Techniques to make policies robust to simulation imperfections:
            
            print(f"\nDivergence Metrics:")
            print(f"  MMD Approximation: {mmd_approx:.4f}")
-           print(f"  Mean state difference: {np.mean(np.abs(self.divergence_metrics['sim_mean'] - self.divergence_metrics['real_mean'])):.4f}")
+           print(f"  Mean state difference: {np.mean(np.abs(self.divergence_metrics['sim_mean']  self.divergence_metrics['real_mean'])):.4f}")
            
            return self.divergence_metrics
 
@@ -1120,7 +1120,7 @@ Techniques to make policies robust to simulation imperfections:
        """Full transfer evaluation pipeline"""
        evaluator = TransferEvaluator()
        
-       print("=== Sim-to-Real Transfer Evaluation ===")
+       print("=== SimtoReal Transfer Evaluation ===")
        
        # Optionally collect fresh data (in practice, you'd already have this)
        # evaluator.collect_simulation_data(agent, sim_env)
@@ -1171,18 +1171,18 @@ def create_environments_with_randomization():
     base_params = {
         'friction_range': (0.1, 1.0),
         'mass_range': (0.8, 1.2),
-        'com_range': (-0.02, 0.02),
+        'com_range': (0.02, 0.02),
         'sensor_noise_std': 0.01,
-        'gravity_range': (-1, 1)
+        'gravity_range': (1, 1)
     }
     
     # High randomization environment (for training)
     high_random_params = {
         'friction_range': (0.05, 1.5),
         'mass_range': (0.6, 1.4),
-        'com_range': (-0.05, 0.05),
+        'com_range': (0.05, 0.05),
         'sensor_noise_std': 0.03,
-        'gravity_range': (-2, 2),
+        'gravity_range': (2, 2),
         'motor_delay_range': (0.0, 0.03),
         'control_delay_range': (0.0, 0.02)
     }
@@ -1191,9 +1191,9 @@ def create_environments_with_randomization():
     low_random_params = {
         'friction_range': (0.7, 1.1),
         'mass_range': (0.9, 1.1),
-        'com_range': (-0.01, 0.01),
+        'com_range': (0.01, 0.01),
         'sensor_noise_std': 0.005,
-        'gravity_range': (-0.5, 0.5)
+        'gravity_range': (0.5, 0.5)
     }
     
     # Create environments
@@ -1204,7 +1204,7 @@ def create_environments_with_randomization():
     return base_env, high_random_env, low_random_env
 
 def train_with_domain_randomization():
-    """Train agent with domain randomization for better sim-to-real transfer"""
+    """Train agent with domain randomization for better simtoreal transfer"""
     print("=== Training with Domain Randomization ===")
     
     # Create randomized environment
@@ -1241,7 +1241,7 @@ def train_with_domain_randomization():
             next_state, reward, terminated, truncated, info = high_random_env.step(action)
             done = terminated or truncated
             
-            # Store transition (simplified - in real impl, add to replay buffer)
+            # Store transition (simplified  in real impl, add to replay buffer)
             # replay_buffer.push(state, action, next_state, reward, done)
             
             state = next_state
@@ -1259,17 +1259,17 @@ def train_with_domain_randomization():
         
         # Log progress
         if episode % 20 == 0:
-            avg_score = np.mean(scores[-20:]) if len(scores) >= 20 else np.mean(scores)
+            avg_score = np.mean(scores[20:]) if len(scores) >= 20 else np.mean(scores)
             print(f'Episode {episode}, Average Score: {avg_score:.2f}')
             print(f'  Current randomization: {high_random_env.get_current_randomization()}')
     
-    print(f"Training completed. Final average score: {np.mean(scores[-50:]):.2f}")
+    print(f"Training completed. Final average score: {np.mean(scores[50:]):.2f}")
     
     return agent, high_random_env, scores
 
 def run_complete_transfer_pipeline():
     """Run complete pipeline: train, evaluate transfer"""
-    print("=== Complete RL Sim-to-Real Pipeline ===")
+    print("=== Complete RL SimtoReal Pipeline ===")
     
     # Step 1: Train with domain randomization
     agent, train_env, training_scores = train_with_domain_randomization()
@@ -1280,33 +1280,33 @@ def run_complete_transfer_pipeline():
     # Step 3: Evaluate transfer performance
     evaluator = evaluate_transfer(agent, train_env, low_random_env, num_eval_episodes=5)
     
-    # Step 4: Fine-tune if needed (transfer learning)
+    # Step 4: Finetune if needed (transfer learning)
     print("\n=== Transfer Learning Adjustment ===")
     print("If transfer score is low, consider:")
-    print("- Increasing domain randomization range")
-    print("- Adding more realistic sensor noise models")
-    print("- Implementing system identification for dynamics")
-    print("- Using domain adaptation techniques")
-    print("- Applying domain randomization curriculum")
+    print(" Increasing domain randomization range")
+    print(" Adding more realistic sensor noise models")
+    print(" Implementing system identification for dynamics")
+    print(" Using domain adaptation techniques")
+    print(" Applying domain randomization curriculum")
     
     # Step 5: Final evaluation
     print("\n=== Final Results ===")
     print(f"Training completed with {len(training_scores)} episodes")
-    print(f"Final training score: {training_scores[-1]:.2f}")
+    print(f"Final training score: {training_scores[1]:.2f}")
     print("Transfer evaluation completed successfully")
     
     # Calculate improvement metrics
     if len(training_scores) > 100:
         early_perf = np.mean(training_scores[:100])
-        late_perf = np.mean(training_scores[-100:])
-        improvement = (late_perf - early_perf) / (early_perf + 1e-8) * 100
+        late_perf = np.mean(training_scores[100:])
+        improvement = (late_perf  early_perf) / (early_perf + 1e8) * 100
         print(f"Learning improvement: {improvement:.2f}%")
     
     return agent, evaluator
 
 def main():
     """Main function to run complete RL pipeline"""
-    print("Starting Complete Reinforcement Learning & Sim-to-Real Pipeline")
+    print("Starting Complete Reinforcement Learning & SimtoReal Pipeline")
     
     try:
         agent, evaluator = run_complete_transfer_pipeline()
@@ -1328,35 +1328,35 @@ if __name__ == "__main__":
     main()
 ```
 
-## Mini-project
+## Miniproject
 
 Create a complete reinforcement learning system for a specific robotic task (e.g., hopper locomotion, manipulator reaching) that:
 
-1. Implements domain randomization techniques to improve sim-to-real transfer
+1. Implements domain randomization techniques to improve simtoreal transfer
 2. Trains multiple RL algorithms (PPO, SAC, DDPG) and compares their performance
-3. Evaluates the sim-to-real transfer gap using multiple metrics
+3. Evaluates the simtoreal transfer gap using multiple metrics
 4. Implements system identification to characterize the real robot's dynamics
 5. Applies domain adaptation techniques to improve transfer
 6. Tests the policy on a physical robot or realistic simulation
 7. Documents the transfer performance and identifies key factors affecting success
 
 Your project should include:
-- Complete RL training pipeline with domain randomization
-- Multiple RL algorithm implementations
-- Transfer evaluation system with metrics
-- Dynamics characterization and adaptation
-- Performance comparison across algorithms
-- Recommendations for improving sim-to-real transfer
+ Complete RL training pipeline with domain randomization
+ Multiple RL algorithm implementations
+ Transfer evaluation system with metrics
+ Dynamics characterization and adaptation
+ Performance comparison across algorithms
+ Recommendations for improving simtoreal transfer
 
 ## Summary
 
-This chapter covered reinforcement learning and sim-to-real transfer:
+This chapter covered reinforcement learning and simtoreal transfer:
 
-- **RL Algorithms**: Deep reinforcement learning methods suitable for robotics
-- **Domain Randomization**: Techniques to make sim-to-real transfer more robust
-- **Transfer Evaluation**: Methods to assess the effectiveness of sim-to-real policies
-- **Dynamics Modeling**: Approaches to characterize and adapt to reality gaps
-- **System Identification**: Techniques to understand real robot dynamics
-- **Practical Considerations**: Safety and practical constraints for real-world deployment
+ **RL Algorithms**: Deep reinforcement learning methods suitable for robotics
+ **Domain Randomization**: Techniques to make simtoreal transfer more robust
+ **Transfer Evaluation**: Methods to assess the effectiveness of simtoreal policies
+ **Dynamics Modeling**: Approaches to characterize and adapt to reality gaps
+ **System Identification**: Techniques to understand real robot dynamics
+ **Practical Considerations**: Safety and practical constraints for realworld deployment
 
-Successful sim-to-real transfer requires careful attention to the differences between simulation and reality, with domain randomization being one of the most effective techniques to create robust policies that generalize to the real world.
+Successful simtoreal transfer requires careful attention to the differences between simulation and reality, with domain randomization being one of the most effective techniques to create robust policies that generalize to the real world.

@@ -1,17 +1,17 @@
--
+---
 title: Ch1 - Why ROS 2 - Robotic Middleware Evolution
 module: 1
 chapter: 1
-sidebar_label: "Ch1: Why ROS 2"
+sidebar_label: Ch1: Why ROS 2
 description: Understanding the evolution from ROS 1 to ROS 2 and the modern robotic middleware landscape
 tags: [ros2, middleware, introduction, robotics]
 difficulty: beginner
 estimated_duration: 45
--
+---
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
-# Why ROS 2 - Robotic Middleware Evolution
+# Why ROS 2 – Robotic Middleware Evolution
 
 ## Learning Outcomes
 - Understand the fundamental differences between ROS 1 and ROS 2

@@ -1,26 +1,26 @@
----
-title: Ch20 - Capstone – Autonomous Humanoid (Voice → Plan → Navigate → Manipulate)
+-----
+title: Ch20  Capstone  Autonomous Humanoid (Voice → Plan → Navigate → Manipulate)
 module: 4
 chapter: 20
-sidebar_label: Ch20: Capstone – Autonomous Humanoid
-description: Capstone project integrating all modules for voice-controlled autonomous humanoid robot
-tags: [capstone, humanoid, autonomous, voice-control, navigation, manipulation, integration]
+sidebar_label: Ch20: Capstone  Autonomous Humanoid
+description: Capstone project integrating all modules for voicecontrolled autonomous humanoid robot
+tags: [capstone, humanoid, autonomous, voicecontrol, navigation, manipulation, integration]
 difficulty: advanced
 estimated_duration: 180
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
-# Capstone – Autonomous Humanoid (Voice → Plan → Navigate → Manipulate)
+# Capstone  Autonomous Humanoid (Voice → Plan → Navigate → Manipulate)
 
 ## Learning Outcomes
-- Integrate all previous modules (ROS 2, Digital Twins, Isaac Platform, Vision-Language-Action)
-- Implement a complete voice-controlled humanoid robot system
-- Create an end-to-end pipeline from voice input to physical action
-- Demonstrate advanced capabilities: voice recognition, cognitive planning, navigation, and manipulation
-- Integrate perception, planning, and control systems
-- Evaluate the complete autonomous humanoid system
-- Document performance and limitations of the integrated system
+ Integrate all previous modules (ROS 2, Digital Twins, Isaac Platform, VisionLanguageAction)
+ Implement a complete voicecontrolled humanoid robot system
+ Create an endtoend pipeline from voice input to physical action
+ Demonstrate advanced capabilities: voice recognition, cognitive planning, navigation, and manipulation
+ Integrate perception, planning, and control systems
+ Evaluate the complete autonomous humanoid system
+ Document performance and limitations of the integrated system
 
 ## Theory
 
@@ -30,40 +30,40 @@ The autonomous humanoid system integrates all the modules learned throughout the
 
 <MermaidDiagram chart={`
 graph TB;
-    A[Voice Command] --> B[ASR];
-    B --> C[NLP];
-    C --> D[Task Planning];
-    D --> E[Navigation];
-    D --> F[Manipulation];
-    E --> G[Path Planning];
-    E --> H[Local Navigation];
-    F --> I[Grasp Planning];
-    F --> J[Arm Control];
+    A[Voice Command] > B[ASR];
+    B > C[NLP];
+    C > D[Task Planning];
+    D > E[Navigation];
+    D > F[Manipulation];
+    E > G[Path Planning];
+    E > H[Local Navigation];
+    F > I[Grasp Planning];
+    F > J[Arm Control];
     
-    K[Perception System] --> L[Computer Vision];
-    K --> M[LiDAR Processing];
-    K --> N[IMU Integration];
-    K --> O[Sensor Fusion];
+    K[Perception System] > L[Computer Vision];
+    K > M[LiDAR Processing];
+    K > N[IMU Integration];
+    K > O[Sensor Fusion];
     
-    L --> P[Object Detection];
-    M --> Q[Environment Mapping];
-    N --> R[State Estimation];
-    O --> S[Scene Understanding];
+    L > P[Object Detection];
+    M > Q[Environment Mapping];
+    N > R[State Estimation];
+    O > S[Scene Understanding];
     
-    P --> D;
-    Q --> E;
-    R --> E;
-    S --> D;
+    P > D;
+    Q > E;
+    R > E;
+    S > D;
     
-    G --> H;
-    I --> J;
-    H --> T[Humanoid Control];
-    J --> T;
-    T --> U[Humanoid Robot];
+    G > H;
+    I > J;
+    H > T[Humanoid Control];
+    J > T;
+    T > U[Humanoid Robot];
     
-    V[Real World] --> U;
-    U --> W[Sensors];
-    W --> K;
+    V[Real World] > U;
+    U > W[Sensors];
+    W > K;
     
     style A fill:#4CAF50,stroke:#388E3C,color:#fff;
     style D fill:#2196F3,stroke:#0D47A1,color:#fff;
@@ -71,24 +71,24 @@ graph TB;
     style U fill:#E91E63,stroke:#AD1457,color:#fff;
 `} />
 
-### Voice-to-Action Pipeline
+### VoicetoAction Pipeline
 
 The system processes user commands through multiple stages:
 1. **Automatic Speech Recognition**: Converts voice to text
 2. **Natural Language Processing**: Interprets user intent
-3. **Task Planning**: Decomposes high-level goals into actions
+3. **Task Planning**: Decomposes highlevel goals into actions
 4. **Perception Processing**: Understands the environment
 5. **Action Execution**: Controls the physical robot
 
 ### Integration Challenges
 
 Key challenges in integrating all modules:
-- **Timing Coordination**: Ensuring all subsystems operate in harmony
-- **Data Consistency**: Maintaining consistent coordinate frames and time stamps
-- **Error Propagation**: Managing how errors in one module affect others
-- **Resource Management**: Efficiently allocating computational resources across modules
+ **Timing Coordination**: Ensuring all subsystems operate in harmony
+ **Data Consistency**: Maintaining consistent coordinate frames and time stamps
+ **Error Propagation**: Managing how errors in one module affect others
+ **Resource Management**: Efficiently allocating computational resources across modules
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
 ### Lab 1: Setting up the Complete Humanoid System
 
@@ -190,7 +190,7 @@ Key challenges in integrating all modules:
                self.task_queue.put(task)
                rospy.loginfo(f"Queued task: {task['action']}")
        
-       def process_voice_command(self, command: str) -> Optional[Dict]:
+       def process_voice_command(self, command: str) > Optional[Dict]:
            """Process voice command with LLM and create task"""
            if not self.openai_client:
                rospy.logerr("LLM not initialized")
@@ -206,18 +206,18 @@ Key challenges in integrating all modules:
            Environment Context: {json.dumps(context, indent=2)}
            
            Available Actions:
-           - navigate_to(location_name): Move humanoid to named location
-           - approach_object(object_name): Navigate to an object
-           - pick_up_object(object_name, grasp_pose): Grasp an object
-           - place_object(object_name, location): Place object at location
-           - inspect_object(object_name): Examine an object
-           - follow_person(person_name): Follow a person
-           - answer_question(question): Respond to question about environment
-           - open_container(container_name): Open door/drawer
-           - close_container(container_name): Close door/drawer
-           - wave_to(person_name): Wave to a person
-           - take_posture(posture_name): Change body posture
-           - speak_response(text): Speak a response
+            navigate_to(location_name): Move humanoid to named location
+            approach_object(object_name): Navigate to an object
+            pick_up_object(object_name, grasp_pose): Grasp an object
+            place_object(object_name, location): Place object at location
+            inspect_object(object_name): Examine an object
+            follow_person(person_name): Follow a person
+            answer_question(question): Respond to question about environment
+            open_container(container_name): Open door/drawer
+            close_container(container_name): Close door/drawer
+            wave_to(person_name): Wave to a person
+            take_posture(posture_name): Change body posture
+            speak_response(text): Speak a response
            
            Decompose the user command into specific executable tasks.
            Consider the environment context and robot capabilities.
@@ -236,7 +236,7 @@ Key challenges in integrating all modules:
            
            try:
                response = self.openai_client.chat.completions.create(
-                   model="gpt-4o",
+                   model="gpt4o",
                    messages=[
                        {
                            "role": "system",
@@ -266,7 +266,7 @@ Key challenges in integrating all modules:
                rospy.logerr(f"Error processing voice command: {e}")
                return None
        
-       def get_perception_context(self) -> Dict:
+       def get_perception_context(self) > Dict:
            """Get current perception context"""
            return {
                "robot_pose": {
@@ -305,7 +305,7 @@ Key challenges in integrating all modules:
            return {
                "objects": [
                    {"name": "bottle", "position": [1.2, 0.5, 0.0], "class": "container"},
-                   {"name": "chair", "position": [0.0, -1.0, 0.0], "class": "furniture"}
+                   {"name": "chair", "position": [0.0, 1.0, 0.0], "class": "furniture"}
                ],
                "people": [
                    {"name": "person1", "position": [2.0, 1.0, 0.0]}
@@ -356,7 +356,7 @@ Key challenges in integrating all modules:
                rospy.logwarn(f"Unknown action: {action}")
                return False
        
-       def execute_navigation_task(self, params: Dict) -> bool:
+       def execute_navigation_task(self, params: Dict) > bool:
            """Execute navigation task"""
            location = params.get('location_name')
            
@@ -365,8 +365,8 @@ Key challenges in integrating all modules:
            location_coords = {
                'kitchen': (2.0, 1.0),
                'living_room': (0.0, 0.0),
-               'bedroom': (-1.0, 2.0),
-               'office': (1.0, -1.0),
+               'bedroom': (1.0, 2.0),
+               'office': (1.0, 1.0),
                'entrance': (0.0, 2.0)
            }
            
@@ -404,7 +404,7 @@ Key challenges in integrating all modules:
                rospy.logerr(f"Navigation failed with state: {state}")
                return False
        
-       def execute_approach_task(self, params: Dict) -> bool:
+       def execute_approach_task(self, params: Dict) > bool:
            """Execute approach object task"""
            object_name = params.get('object_name')
            
@@ -424,7 +424,7 @@ Key challenges in integrating all modules:
            goal = MoveBaseGoal()
            goal.target_pose.header.frame_id = "map"
            goal.target_pose.header.stamp = rospy.Time.now()
-           goal.target_pose.pose.position.x = obj_pos[0] - 0.5  # 0.5m in front of object
+           goal.target_pose.pose.position.x = obj_pos[0]  0.5  # 0.5m in front of object
            goal.target_pose.pose.position.y = obj_pos[1]
            goal.target_pose.pose.position.z = 0.0
            goal.target_pose.pose.orientation.w = 1.0
@@ -441,7 +441,7 @@ Key challenges in integrating all modules:
            rospy.logerr(f"Failed to approach {object_name}")
            return False
        
-       def execute_pickup_task(self, params: Dict) -> bool:
+       def execute_pickup_task(self, params: Dict) > bool:
            """Execute pickup object task"""
            # In a real implementation, this would involve complex manipulation planning
            # For now, we'll simulate the action
@@ -449,21 +449,21 @@ Key challenges in integrating all modules:
            rospy.loginfo(f"Picked up {object_name}")
            return True
        
-       def execute_place_task(self, params: Dict) -> bool:
+       def execute_place_task(self, params: Dict) > bool:
            """Execute place object task"""
            object_name = params.get('object_name')
            location = params.get('location')
            rospy.loginfo(f"Placed {object_name} at {location}")
            return True
        
-       def execute_speech_task(self, params: Dict) -> bool:
+       def execute_speech_task(self, params: Dict) > bool:
            """Execute speech task"""
            text = params.get('text', '')
            rospy.loginfo(f"Speaking: {text}")
-           # In real implementation, this would use text-to-speech
+           # In real implementation, this would use texttospeech
            return True
        
-       def execute_inspection_task(self, params: Dict) -> bool:
+       def execute_inspection_task(self, params: Dict) > bool:
            """Execute inspection task"""
            object_name = params.get('object_name')
            rospy.loginfo(f"Inspected {object_name}")
@@ -535,7 +535,7 @@ Key challenges in integrating all modules:
        main()
    ```
 
-### Lab 2: Creating the Voice-to-Action Pipeline
+### Lab 2: Creating the VoicetoAction Pipeline
 
 1. **Implement the complete voice processing pipeline** (`voice_to_action_pipeline.py`):
    ```python
@@ -591,7 +591,7 @@ Key challenges in integrating all modules:
            self.context_memory = []
            self.max_context_items = 20
            
-           rospy.loginfo("Voice-to-Action Pipeline initialized")
+           rospy.loginfo("VoicetoAction Pipeline initialized")
        
        def toggle_callback(self, msg: Bool):
            """Toggle voice control on/off"""
@@ -607,7 +607,7 @@ Key challenges in integrating all modules:
                # Simple object detection simulation
                h, w, _ = cv_image.shape
                # Simulate detecting an object at center
-               if np.mean(cv_image[h//2-50:h//2+50, w//2-50:w//2+50]) > 100:  # Simple threshold
+               if np.mean(cv_image[h//250:h//2+50, w//250:w//2+50]) > 100:  # Simple threshold
                    self.perception_data['objects'] = [{'name': 'object', 'position': 'center'}]
            except:
                pass
@@ -629,13 +629,13 @@ Key challenges in integrating all modules:
            self.processing_thread.daemon = True
            self.processing_thread.start()
            
-           rospy.loginfo("Voice-to-Action Pipeline started")
+           rospy.loginfo("VoicetoAction Pipeline started")
            self.status_pub.publish(String(data="Voice pipeline active"))
        
        def stop_listening(self):
            """Stop voice recognition"""
            self.is_listening = False
-           rospy.loginfo("Voice-to-Action Pipeline stopped")
+           rospy.loginfo("VoicetoAction Pipeline stopped")
            self.status_pub.publish(String(data="Voice pipeline inactive"))
        
        def _record_audio_continuously(self):
@@ -774,7 +774,7 @@ Key challenges in integrating all modules:
                except Exception as e:
                    rospy.logerr(f"Error processing command: {e}")
        
-       def _enhance_with_context(self, transcription: str) -> str:
+       def _enhance_with_context(self, transcription: str) > str:
            """Enhance transcription with environmental context"""
            # Get recent context
            recent_context = self._get_recent_context()
@@ -795,7 +795,7 @@ Key challenges in integrating all modules:
            
            try:
                response = self.openai_client.chat.completions.create(
-                   model="gpt-4o",
+                   model="gpt4o",
                    messages=[
                        {
                            "role": "system",
@@ -817,12 +817,12 @@ Key challenges in integrating all modules:
                rospy.logerr(f"Error enhancing command with context: {e}")
                return transcription  # Return original if enhancement fails
        
-       def _get_recent_context(self) -> str:
+       def _get_recent_context(self) > str:
            """Get recent context from memory"""
            if not self.context_memory:
                return "No recent interactions. Environment has common household objects and locations."
            
-           recent_items = self.context_memory[-5:]  # Last 5 interactions
+           recent_items = self.context_memory[5:]  # Last 5 interactions
            context_str = "Recent interactions: "
            context_str += "; ".join([item['original'] for item in recent_items])
            context_str += f". Currently perceived objects: {self.perception_data.get('objects', [])}"
@@ -841,7 +841,7 @@ Key challenges in integrating all modules:
            
            # Keep only recent items
            if len(self.context_memory) > self.max_context_items:
-               self.context_memory = self.context_memory[-self.max_context_items:]
+               self.context_memory = self.context_memory[self.max_context_items:]
 
    def main():
        api_key = input("Enter OpenAI API key: ")
@@ -855,7 +855,7 @@ Key challenges in integrating all modules:
            pipeline.start_listening()
            rospy.spin()
        except KeyboardInterrupt:
-           rospy.loginfo("Shutting down voice-to-action pipeline...")
+           rospy.loginfo("Shutting down voicetoaction pipeline...")
            pipeline.stop_listening()
 
    if __name__ == '__main__':
@@ -956,15 +956,15 @@ Key challenges in integrating all modules:
            except json.JSONDecodeError:
                rospy.logerr(f"Invalid manipulation task data: {msg.data}")
        
-       def move_to_location(self, location_name: str) -> bool:
+       def move_to_location(self, location_name: str) > bool:
            """Move to named location"""
            # In a real implementation, these would be mapped to coordinates
            location_map = {
                'kitchen': (2.0, 1.0, 0.0),
                'living_room': (0.0, 0.0, 0.0),
-               'bedroom': (-1.0, 2.0, 0.0),
-               'office': (1.0, -1.0, 0.0),
-               'dining_room': (2.0, -1.0, 0.0)
+               'bedroom': (1.0, 2.0, 0.0),
+               'office': (1.0, 1.0, 0.0),
+               'dining_room': (2.0, 1.0, 0.0)
            }
            
            if location_name not in location_map:
@@ -990,15 +990,15 @@ Key challenges in integrating all modules:
            
            return self.execute_navigation_goal(goal)
        
-       def approach_object(self, object_name: str) -> bool:
+       def approach_object(self, object_name: str) > bool:
            """Approach a named object"""
            # In a real system, this would get object position from perception
            # For this example, we'll use hardcoded positions
            object_positions = {
                'table': (1.5, 0.5, 0.0),
-               'chair': (0.5, -1.0, 0.0),
+               'chair': (0.5, 1.0, 0.0),
                'bottle': (2.0, 1.0, 0.0),
-               'box': (-0.5, 1.5, 0.0)
+               'box': (0.5, 1.5, 0.0)
            }
            
            if object_name not in object_positions:
@@ -1009,11 +1009,11 @@ Key challenges in integrating all modules:
            
            # Calculate a position 1m in front of the object
            current_x, current_y = self.get_current_position()
-           direction_to_obj = math.atan2(obj_y - current_y, obj_x - current_x)
+           direction_to_obj = math.atan2(obj_y  current_y, obj_x  current_x)
            
            # Position 1m away from object facing it
-           approach_x = obj_x - 1.0 * math.cos(direction_to_obj)
-           approach_y = obj_y - 1.0 * math.sin(direction_to_obj)
+           approach_x = obj_x  1.0 * math.cos(direction_to_obj)
+           approach_y = obj_y  1.0 * math.sin(direction_to_obj)
            
            goal = MoveBaseGoal()
            goal.target_pose.header.frame_id = "map"
@@ -1031,7 +1031,7 @@ Key challenges in integrating all modules:
            
            return self.execute_navigation_goal(goal)
        
-       def execute_navigation_goal(self, goal: MoveBaseGoal) -> bool:
+       def execute_navigation_goal(self, goal: MoveBaseGoal) > bool:
            """Execute navigation goal with monitoring"""
            self.is_navigating = True
            
@@ -1057,7 +1057,7 @@ Key challenges in integrating all modules:
                    return False
                
                # Check timeout
-               if rospy.Time.now() - start_time > timeout_duration:
+               if rospy.Time.now()  start_time > timeout_duration:
                    self.move_base_client.cancel_goal()
                    self.is_navigating = False
                    rospy.logerr("Navigation timeout")
@@ -1065,7 +1065,7 @@ Key challenges in integrating all modules:
                
                rate.sleep()
        
-       def pick_object(self, pose: Dict) -> bool:
+       def pick_object(self, pose: Dict) > bool:
            """Pick up an object at the given pose"""
            self.is_manipulating = True
            
@@ -1098,7 +1098,7 @@ Key challenges in integrating all modules:
                self.is_manipulating = False
                return False
        
-       def place_object(self, pose: Dict) -> bool:
+       def place_object(self, pose: Dict) > bool:
            """Place object at the given pose"""
            self.is_manipulating = True
            
@@ -1131,7 +1131,7 @@ Key challenges in integrating all modules:
                self.is_manipulating = False
                return False
        
-       def get_current_position(self) -> Tuple[float, float]:
+       def get_current_position(self) > Tuple[float, float]:
            """Get robot's current position from TF"""
            try:
                transform = self.tf_buffer.lookup_transform(
@@ -1258,11 +1258,11 @@ class CompleteAutonomousHumanoidSystem:
             orchestrator.setup_llm_integration(self.api_key)
             self.components['orchestrator'] = orchestrator
             
-            # 2. Initialize voice-to-action pipeline
+            # 2. Initialize voicetoaction pipeline
             voice_pipeline = VoiceToActionPipeline(self.api_key)
             self.components['voice_pipeline'] = voice_pipeline
             
-            # 3. Initialize nav-manip controller
+            # 3. Initialize navmanip controller
             nav_manip_controller = NavigationManipulationController()
             self.components['nav_manip_controller'] = nav_manip_controller
             
@@ -1329,7 +1329,7 @@ class CompleteAutonomousHumanoidSystem:
         
         rospy.loginfo("Starting demo scenario...")
         
-        # Example sequence of high-level commands
+        # Example sequence of highlevel commands
         demo_commands = [
             "Navigate to the kitchen",
             "Approach the table",
@@ -1383,34 +1383,34 @@ if __name__ == '__main__':
 
 ```xml
 <launch>
-  <!-- Complete Autonomous Humanoid System -->
+  <! Complete Autonomous Humanoid System >
   <node name="complete_autonomous_humanoid" pkg="humanoid_robot" type="complete_autonomous_humanoid_system.py" output="screen">
   </node>
   
-  <!-- Voice-to-Action Pipeline -->
+  <! VoicetoAction Pipeline >
   <node name="voice_to_action_pipeline" pkg="humanoid_robot" type="voice_to_action_pipeline.py" output="screen">
   </node>
   
-  <!-- Navigation and Manipulation Controller -->
+  <! Navigation and Manipulation Controller >
   <node name="nav_manip_controller" pkg="humanoid_robot" type="nav_manip_controller.py" output="screen">
   </node>
   
-  <!-- Perception System -->
+  <! Perception System >
   <node name="perception_pipeline" pkg="perception" type="perception_pipeline.py" output="screen">
   </node>
   
-  <!-- Robot Hardware Interface -->
+  <! Robot Hardware Interface >
   <node name="hardware_interface" pkg="ros_control" type="robot_hw_interface.py" output="screen">
   </node>
   
-  <!-- MoveIt! Configuration -->
+  <! MoveIt! Configuration >
   <include file="$(find my_robot_moveit_config)/launch/move_group.launch"/>
   <include file="$(find my_robot_moveit_config)/launch/moveit_rviz.launch"/>
 
-  <!-- TF Tree -->
+  <! TF Tree >
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
   
-  <!-- Example sensor drivers -->
+  <! Example sensor drivers >
   <group ns="sensors">
     <node name="camera_driver" pkg="usb_cam" type="usb_cam_node" output="screen">
       <param name="video_device" value="/dev/video0"/>
@@ -1427,7 +1427,7 @@ if __name__ == '__main__':
     <node name="imu_driver" pkg="razor_imu_9dof" type="imu_node" output="screen"/>
   </group>
   
-  <!-- Static transforms for the humanoid -->
+  <! Static transforms for the humanoid >
   <node name="static_transform_publisher" pkg="tf2_ros" type="static_transform_publisher" 
         args="0.0 0.0 0.0 0.0 0.0 0.0 base_link torso" />
   <node name="static_transform_publisher" pkg="tf2_ros" type="static_transform_publisher" 
@@ -1435,53 +1435,53 @@ if __name__ == '__main__':
   <node name="static_transform_publisher" pkg="tf2_ros" type="static_transform_publisher" 
         args="0.3 0.0 0.8 0.0 0.0 0.0 torso left_shoulder" />
   <node name="static_transform_publisher" pkg="tf2_ros" type="static_transform_publisher" 
-        args="-0.3 0.0 0.8 0.0 0.0 0.0 torso right_shoulder" />
+        args="0.3 0.0 0.8 0.0 0.0 0.0 torso right_shoulder" />
   <node name="static_transform_publisher" pkg="tf2_ros" type="static_transform_publisher" 
-        args="0.0 0.1 -0.8 0.0 0.0 0.0 torso pelvis" />
+        args="0.0 0.1 0.8 0.0 0.0 0.0 torso pelvis" />
   <node name="static_transform_publisher" pkg="tf2_ros" type="static_transform_publisher" 
-        args="0.15 -0.1 -1.0 0.0 0.0 0.0 pelvis left_hip" />
+        args="0.15 0.1 1.0 0.0 0.0 0.0 pelvis left_hip" />
   <node name="static_transform_publisher" pkg="tf2_ros" type="static_transform_publisher" 
-        args="-0.15 -0.1 -1.0 0.0 0.0 0.0 pelvis right_hip" />
+        args="0.15 0.1 1.0 0.0 0.0 0.0 pelvis right_hip" />
 </launch>
 ```
 
-## Mini-project
+## Miniproject
 
 Create a complete autonomous humanoid system that:
 
 1. Integrates voice recognition and natural language understanding
-2. Implements cognitive task planning with GPT-4o
+2. Implements cognitive task planning with GPT4o
 3. Executes navigation and manipulation tasks
-4. Incorporates multi-modal perception fusion
+4. Incorporates multimodal perception fusion
 5. Demonstrates complete voice → plan → navigate → manipulate pipeline
 6. Evaluates system performance and robustness
 7. Documents the full integration and its challenges
-8. Creates a user-friendly interface for command input
+8. Creates a userfriendly interface for command input
 
 Your project should include:
-- Complete integration of all four modules
-- Working voice-to-action pipeline
-- Cognitive planning and task execution
-- Navigation and manipulation capabilities
-- Multi-modal perception system
-- Performance evaluation and error handling
-- Demo scenarios showing the complete pipeline
-- Detailed documentation of integration challenges
+ Complete integration of all four modules
+ Working voicetoaction pipeline
+ Cognitive planning and task execution
+ Navigation and manipulation capabilities
+ Multimodal perception system
+ Performance evaluation and error handling
+ Demo scenarios showing the complete pipeline
+ Detailed documentation of integration challenges
 
 ## Summary
 
 This chapter served as the capstone project integrating all modules:
 
-- **Module 1 (ROS 2)**: Used for system architecture and communication between components
-- **Module 2 (Digital Twins)**: Applied for simulation and validation before real-world deployment
-- **Module 3 (Isaac Platform)**: Provided AI-powered perception and control systems
-- **Module 4 (Vision-Language-Action)**: Enabled the voice-to-action pipeline
+ **Module 1 (ROS 2)**: Used for system architecture and communication between components
+ **Module 2 (Digital Twins)**: Applied for simulation and validation before realworld deployment
+ **Module 3 (Isaac Platform)**: Provided AIpowered perception and control systems
+ **Module 4 (VisionLanguageAction)**: Enabled the voicetoaction pipeline
 
 The complete autonomous humanoid system demonstrates:
-- Voice recognition and natural language understanding
-- Cognitive task planning using LLMs
-- Navigation and manipulation capabilities
-- Multi-modal perception fusion
-- End-to-end integration from voice input to physical action
+ Voice recognition and natural language understanding
+ Cognitive task planning using LLMs
+ Navigation and manipulation capabilities
+ Multimodal perception fusion
+ Endtoend integration from voice input to physical action
 
-This capstone project showcases the integration of all technologies learned throughout the course, creating a sophisticated autonomous humanoid robot capable of understanding and executing complex voice commands in real-world environments.
+This capstone project showcases the integration of all technologies learned throughout the course, creating a sophisticated autonomous humanoid robot capable of understanding and executing complex voice commands in realworld environments.

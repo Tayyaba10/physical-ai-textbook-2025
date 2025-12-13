@@ -1,5 +1,5 @@
----
-title: Ch3 - Bridging Python AI Agents with rclpy
+-----
+title: Ch3  Bridging Python AI Agents with rclpy
 module: 1
 chapter: 3
 sidebar_label: Ch3: Bridging Python AI Agents with rclpy
@@ -7,19 +7,19 @@ description: Integrating AI algorithms into ROS 2 using Python
 tags: [ros2, python, rclpy, ai, machine learning, integration]
 difficulty: intermediate
 estimated_duration: 75
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
 # Bridging Python AI Agents with rclpy
 
 ## Learning Outcomes
-- Integrate Python-based AI algorithms into ROS 2 systems
-- Understand the rclpy library and its API for ROS 2 communication
-- Implement data exchange between AI algorithms and ROS 2 nodes
-- Design nodes that process sensor data with AI algorithms
-- Create nodes that execute AI-driven actions
-- Implement proper error handling in AI-ROS integration
+ Integrate Pythonbased AI algorithms into ROS 2 systems
+ Understand the rclpy library and its API for ROS 2 communication
+ Implement data exchange between AI algorithms and ROS 2 nodes
+ Design nodes that process sensor data with AI algorithms
+ Create nodes that execute AIdriven actions
+ Implement proper error handling in AIROS integration
 
 ## Theory
 
@@ -33,20 +33,20 @@ The `rclpy` library provides the Python client library for ROS 2. It implements 
 
 <MermaidDiagram chart={`
 graph TD;
-    A[rclpy] --> B[rclpy.core];
-    A --> C[rclpy.node];
-    A --> D[rclpy.publisher];
-    A --> E[rclpy.subscriber];
-    A --> F[rclpy.service];
-    A --> G[rclpy.client];
-    A --> H[rclpy.action];
+    A[rclpy] > B[rclpy.core];
+    A > C[rclpy.node];
+    A > D[rclpy.publisher];
+    A > E[rclpy.subscriber];
+    A > F[rclpy.service];
+    A > G[rclpy.client];
+    A > H[rclpy.action];
     
-    B --> I[rclpy.typesupport];
-    B --> J[rclpy.utilities];
+    B > I[rclpy.typesupport];
+    B > J[rclpy.utilities];
     
-    C --> K[Node];
-    D --> L[Publisher];
-    E --> M[Subscriber];
+    C > K[Node];
+    D > L[Publisher];
+    E > M[Subscriber];
     
     style A fill:#2196F3,stroke:#0D47A1,color:#fff;
     style K fill:#4CAF50,stroke:#388E3C,color:#fff;
@@ -54,22 +54,22 @@ graph TD;
 
 The `rclpy` library provides a Python interface to the ROS 2 client library (`rcl`), which handles communication with the DDS middleware. This allows Python code to participate in ROS 2 communication patterns seamlessly.
 
-### AI-ROS Integration Patterns
+### AIROS Integration Patterns
 
 Common patterns for integrating AI algorithms with ROS 2 include:
 
 1. **Sensor Processing Nodes**: Nodes that receive sensor data, process it with AI algorithms, and publish results
-2. **Decision-Making Nodes**: Nodes that subscribe to multiple data streams, make AI-driven decisions, and publish commands
-3. **Action Execution Nodes**: Nodes that execute complex AI-driven tasks with feedback mechanisms
+2. **DecisionMaking Nodes**: Nodes that subscribe to multiple data streams, make AIdriven decisions, and publish commands
+3. **Action Execution Nodes**: Nodes that execute complex AIdriven tasks with feedback mechanisms
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
-### Lab 1: Creating Your First AI-ROS Node
+### Lab 1: Creating Your First AIROS Node
 
 1. **Create a new package** for AI integration examples:
    ```bash
    cd ~/ros2_ws/src
-   ros2 pkg create --build-type ament_python py_ai_integration
+   ros2 pkg create buildtype ament_python py_ai_integration
    cd py_ai_integration
    ```
 
@@ -179,7 +179,7 @@ Common patterns for integrating AI algorithms with ROS 2 include:
 
 ### Lab 2: Implementing a Machine Learning Node
 
-1. **Create a new node** for ML-based classification (`py_ai_integration/object_classifier.py`):
+1. **Create a new node** for MLbased classification (`py_ai_integration/object_classifier.py`):
    ```python
    import rclpy
    from rclpy.node import Node
@@ -207,7 +207,7 @@ Common patterns for integrating AI algorithms with ROS 2 include:
                'object_classification',
                10)
            
-           # Initialize ML model (in a real application, you'd load a pre-trained model)
+           # Initialize ML model (in a real application, you'd load a pretrained model)
            self.get_logger().info('Object Classifier Node initialized')
        
        def pointcloud_callback(self, msg):
@@ -225,7 +225,7 @@ Common patterns for integrating AI algorithms with ROS 2 include:
            cluster_labels = clustering.fit_predict(points)
            
            # Count number of clusters (potential objects)
-           n_clusters = len(set(cluster_labels)) - (1 if -1 in cluster_labels else 0)
+           n_clusters = len(set(cluster_labels))  (1 if 1 in cluster_labels else 0)
            
            # Calculate basic statistics about clusters
            if n_clusters > 0:
@@ -266,7 +266,7 @@ Common patterns for integrating AI algorithms with ROS 2 include:
 
 ### Lab 3: Creating an AI Decision Node
 
-1. **Create a decision-making node** (`py_ai_integration/decision_maker.py`):
+1. **Create a decisionmaking node** (`py_ai_integration/decision_maker.py`):
    ```python
    import rclpy
    from rclpy.node import Node
@@ -295,7 +295,7 @@ Common patterns for integrating AI algorithms with ROS 2 include:
            self.safety_distance = 0.8  # meters
            self.forward_speed = 0.5    # m/s
            
-           # Create a timer for decision-making loop
+           # Create a timer for decisionmaking loop
            self.timer = self.create_timer(0.1, self.decision_loop)  # 10 Hz
            
            self.get_logger().info('Decision Maker Node initialized')
@@ -311,11 +311,11 @@ Common patterns for integrating AI algorithms with ROS 2 include:
            self.obstacle_detected = min_distance < self.safety_distance
        
        def decision_loop(self):
-           # AI-based decision making
+           # AIbased decision making
            cmd = Twist()
            
            if self.obstacle_detected:
-               # Obstacle detected - stop and turn
+               # Obstacle detected  stop and turn
                cmd.linear.x = 0.0
                cmd.angular.z = 0.5  # Turn right
                
@@ -326,7 +326,7 @@ Common patterns for integrating AI algorithms with ROS 2 include:
                
                self.get_logger().info('Obstacle detected! Stopping and turning...')
            else:
-               # No obstacle - move forward
+               # No obstacle  move forward
                cmd.linear.x = self.forward_speed
                cmd.angular.z = 0.0
                
@@ -466,18 +466,18 @@ if __name__ == '__main__':
 ### Additional dependencies for the AI node (setup.cfg):
 ```
 [develop]
-script-dir=$base/lib/py_ai_integration
+scriptdir=$base/lib/py_ai_integration
 [install_scripts]
 install_dir=$base/lib/py_ai_integration
 ```
 
-## Mini-project
+## Miniproject
 
-Create a complete AI-ROS integration project that:
+Create a complete AIROS integration project that:
 
 1. Creates a simulated sensor node that publishes mock sensor data (e.g., temperature, humidity, light levels)
 2. Implements an AI node that uses a machine learning algorithm to predict environmental conditions based on sensor data
-3. Creates a decision-making node that takes the AI predictions and sends appropriate commands to simulated actuators
+3. Creates a decisionmaking node that takes the AI predictions and sends appropriate commands to simulated actuators
 4. Includes proper error handling and logging
 5. Uses rclpy best practices like proper shutdown and resource cleanup
 
@@ -485,11 +485,11 @@ Test your system by running all nodes together and verifying the data flows corr
 
 ## Summary
 
-This chapter introduced the integration of Python-based AI algorithms with ROS 2 systems using the rclpy library. Key concepts include:
+This chapter introduced the integration of Pythonbased AI algorithms with ROS 2 systems using the rclpy library. Key concepts include:
 
-- The rclpy library serves as the Python client library for ROS 2
-- Common patterns for AI-ROS integration include sensor processing, decision-making, and action execution
-- Proper error handling and resource management are essential for robust AI-ROS systems
-- The Python ecosystem provides rich support for AI algorithms that can be easily integrated into ROS 2
+ The rclpy library serves as the Python client library for ROS 2
+ Common patterns for AIROS integration include sensor processing, decisionmaking, and action execution
+ Proper error handling and resource management are essential for robust AIROS systems
+ The Python ecosystem provides rich support for AI algorithms that can be easily integrated into ROS 2
 
 Successfully bridging AI algorithms with ROS 2 enables the development of intelligent robotic systems that can perceive, reason, and act in complex environments.

@@ -1,101 +1,101 @@
----
-title: Ch17 - Vision-Language Models for Robot Perception
+-----
+title: Ch17  VisionLanguage Models for Robot Perception
 module: 4
 chapter: 17
-sidebar_label: Ch17: Vision-Language Models for Robot Perception
-description: Integrating Vision-Language Models with robotics for enhanced perception and understanding
-tags: [vlm, vision-language, robotics, clip, blip, multimodal, perception]
+sidebar_label: Ch17: VisionLanguage Models for Robot Perception
+description: Integrating VisionLanguage Models with robotics for enhanced perception and understanding
+tags: [vlm, visionlanguage, robotics, clip, blip, multimodal, perception]
 difficulty: advanced
 estimated_duration: 90
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
-# Vision-Language Models for Robot Perception
+# VisionLanguage Models for Robot Perception
 
 ## Learning Outcomes
-- Understand Vision-Language Models (VLMs) and their application in robotics
-- Implement CLIP-based visual grounding for robotic systems
-- Create multimodal perception systems using vision-language fusion
-- Integrate VLMs with robotic control systems
-- Develop object detection and recognition systems enhanced with language understanding
-- Create spatial reasoning systems that combine vision and language
-- Evaluate VLM performance in robotic perception tasks
-- Optimize VLM inference for real-time robotic applications
+ Understand VisionLanguage Models (VLMs) and their application in robotics
+ Implement CLIPbased visual grounding for robotic systems
+ Create multimodal perception systems using visionlanguage fusion
+ Integrate VLMs with robotic control systems
+ Develop object detection and recognition systems enhanced with language understanding
+ Create spatial reasoning systems that combine vision and language
+ Evaluate VLM performance in robotic perception tasks
+ Optimize VLM inference for realtime robotic applications
 
 ## Theory
 
-### Vision-Language Models Overview
+### VisionLanguage Models Overview
 
-Vision-Language Models (VLMs) represent a breakthrough in artificial intelligence that combines visual understanding with language comprehension. These models learn joint representations of images and text, enabling them to perform tasks that require both visual and linguistic understanding.
+VisionLanguage Models (VLMs) represent a breakthrough in artificial intelligence that combines visual understanding with language comprehension. These models learn joint representations of images and text, enabling them to perform tasks that require both visual and linguistic understanding.
 
 <MermaidDiagram chart={`
 graph TD;
-    A[Vision-Language Models] --> B[CLIP];
-    A --> C[BLIP];
-    A --> D[Flamingo];
-    A --> E[BLIP-2];
-    A --> F[IDEFICS];
+    A[VisionLanguage Models] > B[CLIP];
+    A > C[BLIP];
+    A > D[Flamingo];
+    A > E[BLIP2];
+    A > F[IDEFICS];
     
-    B --> G[Multimodal Encoder];
-    B --> H[Contrastive Learning];
-    B --> I[Zero-Shot Recognition];
+    B > G[Multimodal Encoder];
+    B > H[Contrastive Learning];
+    B > I[ZeroShot Recognition];
     
-    C --> J[Image Captioning];
-    C --> K[Visual Question Answering];
-    C --> L[Image-Text Retrieval];
+    C > J[Image Captioning];
+    C > K[Visual Question Answering];
+    C > L[ImageText Retrieval];
     
-    D --> M[Sequential Processing];
-    D --> N[Recursive Generative];
-    D --> O[Open-ended Vision-Language Tasks];
+    D > M[Sequential Processing];
+    D > N[Recursive Generative];
+    D > O[Openended VisionLanguage Tasks];
     
-    E --> P[Vision-Language Encoder];
-    E --> Q[Language Model Integration];
-    E --> R[Generative Capabilities];
+    E > P[VisionLanguage Encoder];
+    E > Q[Language Model Integration];
+    E > R[Generative Capabilities];
     
-    F --> S[Open Vocabulary];
-    F --> T[Context Understanding];
-    F --> U[Instruction Following];
+    F > S[Open Vocabulary];
+    F > T[Context Understanding];
+    F > U[Instruction Following];
     
-    V[Robot Perception] --> W[Object Recognition];
-    V --> X[Scene Understanding];
-    V --> Y[Visual Grounding];
-    V --> Z[Human-Robot Interaction];
+    V[Robot Perception] > W[Object Recognition];
+    V > X[Scene Understanding];
+    V > Y[Visual Grounding];
+    V > Z[HumanRobot Interaction];
     
-    G --> W;
-    P --> X;
-    M --> Y;
-    S --> Z;
+    G > W;
+    P > X;
+    M > Y;
+    S > Z;
     
     style A fill:#4CAF50,stroke:#388E3C,color:#fff;
     style V fill:#FF9800,stroke:#E65100,color:#fff;
     style W fill:#2196F3,stroke:#0D47A1,color:#fff;
 `} />
 
-### CLIP (Contrastive Language-Image Pre-training)
+### CLIP (Contrastive LanguageImage Pretraining)
 
-CLIP represents a paradigm shift in visual recognition by training a model to match images with their corresponding text descriptions. The model learns visual concepts from natural language supervision, enabling zero-shot transfer to downstream tasks.
+CLIP represents a paradigm shift in visual recognition by training a model to match images with their corresponding text descriptions. The model learns visual concepts from natural language supervision, enabling zeroshot transfer to downstream tasks.
 
 **Architecture Components:**
-- **Image Encoder**: Processes images into embeddings (usually Vision Transformer or ResNet)
-- **Text Encoder**: Processes text into embeddings (usually Transformer)
-- **Contrastive Loss**: Learns to align matching image-text pairs while pushing apart non-matching pairs
+ **Image Encoder**: Processes images into embeddings (usually Vision Transformer or ResNet)
+ **Text Encoder**: Processes text into embeddings (usually Transformer)
+ **Contrastive Loss**: Learns to align matching imagetext pairs while pushing apart nonmatching pairs
 
 **Robotic Applications:**
-- Object recognition without task-specific training
-- Visual grounding for manipulation tasks
-- Scene understanding and context awareness
-- Human-robot interaction through natural language
+ Object recognition without taskspecific training
+ Visual grounding for manipulation tasks
+ Scene understanding and context awareness
+ Humanrobot interaction through natural language
 
-### Vision-Language Grounding
+### VisionLanguage Grounding
 
-Vision-language grounding connects natural language expressions to visual content, enabling robots to understand commands like "pick up the red mug on the left side of the table."
+Visionlanguage grounding connects natural language expressions to visual content, enabling robots to understand commands like "pick up the red mug on the left side of the table."
 
 **Spatial Relations Understanding:**
-- Relative positioning (left, right, front, behind)
-- Spatial containment (inside, on top of, under)
-- Size-based selection (biggest, smallest)
-- Color and shape-based filtering
+ Relative positioning (left, right, front, behind)
+ Spatial containment (inside, on top of, under)
+ Sizebased selection (biggest, smallest)
+ Color and shapebased filtering
 
 ### Multimodal Embedding Spaces
 
@@ -106,21 +106,21 @@ Image_I ∈ R^D ←→ Text_T ∈ R^D
 Similarity(I, T) = cosine(Image_I, Text_T)
 ```
 
-This enables robots to perform zero-shot recognition by comparing visual inputs with textual descriptions without requiring labeled training data for each specific object or scene.
+This enables robots to perform zeroshot recognition by comparing visual inputs with textual descriptions without requiring labeled training data for each specific object or scene.
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
 ### Lab 1: Setting up CLIP Integration with Robotics
 
 1. **Install required dependencies**:
    ```bash
-   pip install openai-clip
+   pip install openaiclip
    pip install transformers torch torchvision torchaudio
-   pip install opencv-python
-   pip install rospy sensor-msgs cv-bridge
+   pip install opencvpython
+   pip install rospy sensormsgs cvbridge
    ```
 
-2. **Create a CLIP-based object recognizer** (`clip_object_recognizer.py`):
+2. **Create a CLIPbased object recognizer** (`clip_object_recognizer.py`):
    ```python
    #!/usr/bin/env python3
 
@@ -141,7 +141,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            
            # Load CLIP model
            self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-           self.model, self.preprocess = clip.load("ViT-B/32", device=self.device)
+           self.model, self.preprocess = clip.load("ViTB/32", device=self.device)
            self.model.eval()
            
            # Initialize OpenCV bridge
@@ -175,7 +175,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
                # Convert ROS Image to OpenCV format
                cv_image = self.cv_bridge.imgmsg_to_cv2(msg, "bgr8")
                
-               # Run CLIP-based object recognition
+               # Run CLIPbased object recognition
                results = self.recognize_objects(cv_image, self.default_categories)
                
                # Publish results
@@ -192,7 +192,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            except Exception as e:
                rospy.logerr(f"Error processing image: {e}")
 
-       def recognize_objects(self, image: np.ndarray, categories: List[str]) -> Dict:
+       def recognize_objects(self, image: np.ndarray, categories: List[str]) > Dict:
            """Recognize objects using CLIP"""
            # Preprocess image
            image_tensor = self.preprocess(image).unsqueeze(0).to(self.device)
@@ -204,10 +204,10 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            # Get model predictions
            with torch.no_grad():
                logits_per_image, logits_per_text = self.model(image_tensor, text_tokens)
-               probs = logits_per_image.softmax(dim=-1).cpu().numpy()[0]
+               probs = logits_per_image.softmax(dim=1).cpu().numpy()[0]
            
-           # Get top-k predictions
-           top_indices = np.argsort(probs)[-self.top_k:][::-1]
+           # Get topk predictions
+           top_indices = np.argsort(probs)[self.top_k:][::1]
            
            results = []
            for idx in top_indices:
@@ -224,7 +224,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
                "timestamp": rospy.Time.now().to_sec()
            }
 
-       def annotate_image(self, image: np.ndarray, results: Dict) -> np.ndarray:
+       def annotate_image(self, image: np.ndarray, results: Dict) > np.ndarray:
            """Add annotation text to image"""
            annotated = image.copy()
            height, width = image.shape[:2]
@@ -237,9 +237,9 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
                # Add background rectangle
                text_size = cv2.getTextSize(text, cv2.FONT_HERSHEY_SIMPLEX, 0.7, 2)[0]
                cv2.rectangle(annotated, 
-                           (10, y_pos - text_size[1] - 10), 
+                           (10, y_pos  text_size[1]  10), 
                            (10 + text_size[0], y_pos + 10), 
-                           (0, 0, 0), -1)
+                           (0, 0, 0), 1)
                
                # Add text
                cv2.putText(annotated, text, (10, y_pos), 
@@ -281,7 +281,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            
            # Load models
            self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-           self.clip_model, self.clip_preprocess = clip.load("ViT-B/32", device=self.device)
+           self.clip_model, self.clip_preprocess = clip.load("ViTB/32", device=self.device)
            self.clip_model.eval()
            
            # Initialize LLM for spatial reasoning
@@ -347,9 +347,9 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
                
                rospy.loginfo(f"Grounding result: {result}")
 
-       def extract_objects_in_image(self, image: np.ndarray) -> List[Dict]:
-           """Extract objects using CLIP zero-shot classification"""
-           # This is a simplified object extraction - in practice, you'd use
+       def extract_objects_in_image(self, image: np.ndarray) > List[Dict]:
+           """Extract objects using CLIP zeroshot classification"""
+           # This is a simplified object extraction  in practice, you'd use
            # more sophisticated methods like object detection or segmentation
            
            common_objects = [
@@ -369,7 +369,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            
            with torch.no_grad():
                logits_per_image, _ = self.clip_model(image_tensor, text_tokens)
-               probs = logits_per_image.softmax(dim=-1).cpu().numpy()[0]
+               probs = logits_per_image.softmax(dim=1).cpu().numpy()[0]
            
            # Get objects with confidence above threshold
            threshold = 0.1
@@ -388,9 +388,9 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            
            return detected_objects
 
-       def estimate_object_bbox(self, image: np.ndarray, object_name: str) -> List[int]:
+       def estimate_object_bbox(self, image: np.ndarray, object_name: str) > List[int]:
            """Estimate bounding box for an object in image"""
-           # This is a placeholder - in a real implementation, you'd use
+           # This is a placeholder  in a real implementation, you'd use
            # object detection models (YOLO, SSD, etc.) to get actual bounding boxes
            height, width = image.shape[:2]
            
@@ -403,7 +403,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            
            return [int(x), int(y), int(w), int(h)]
 
-       def ground_command_in_image(self, command: str, image: np.ndarray, objects: List[Dict]) -> Dict:
+       def ground_command_in_image(self, command: str, image: np.ndarray, objects: List[Dict]) > Dict:
            """Ground natural language command in visual scene"""
            # Parse spatial relations from command
            spatial_relations = self.parse_spatial_relations(command)
@@ -430,7 +430,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            
            return result
 
-       def parse_spatial_relations(self, command: str) -> List[Dict]:
+       def parse_spatial_relations(self, command: str) > List[Dict]:
            """Parse spatial relations from natural language command"""
            relations = []
            command_lower = command.lower()
@@ -439,7 +439,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
                for phrase in phrases:
                    if phrase in command_lower:
                        # Extract potential object references
-                       # This is simplified - a complete implementation would
+                       # This is simplified  a complete implementation would
                        # use more sophisticated NLP parsing
                        parts = command_lower.split(phrase)
                        if len(parts) > 1:
@@ -456,16 +456,16 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            
            return relations
 
-       def extract_subject(self, text: str) -> str:
+       def extract_subject(self, text: str) > str:
            """Extract subject/object noun phrase"""
            # Simplified noun extraction
            # In practice, use NLP parsing (spaCy, NLTK)
            words = text.strip().split()
            if words:
-               return words[-1]  # Last word as potential object
+               return words[1]  # Last word as potential object
            return ""
 
-       def extract_object_reference(self, text: str) -> str:
+       def extract_object_reference(self, text: str) > str:
            """Extract object reference from text"""
            # Simplified object reference extraction
            words = text.strip().split()
@@ -473,7 +473,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
                return words[0]  # First word as potential reference
            return ""
 
-       def resolve_spatial_query(self, relations: List[Dict], objects: List[Dict]) -> Optional[Dict]:
+       def resolve_spatial_query(self, relations: List[Dict], objects: List[Dict]) > Optional[Dict]:
            """Resolve spatial query to find target object"""
            for rel in relations:
                subject = rel.get("subject", "")
@@ -495,7 +495,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            
            return None
 
-       def find_object_by_name(self, name: str, objects: List[Dict]) -> Optional[Dict]:
+       def find_object_by_name(self, name: str, objects: List[Dict]) > Optional[Dict]:
            """Find object by name in objects list"""
            for obj in objects:
                if name.lower() in obj["name"].lower():
@@ -504,7 +504,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
 
        def find_object_by_spatial_relation(
            self, target_name: str, reference_obj: Dict, relation: str, objects: List[Dict]
-       ) -> Optional[Dict]:
+       ) > Optional[Dict]:
            """Find object based on spatial relation to reference object"""
            ref_center = reference_obj["center"]
            
@@ -521,8 +521,8 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
                    continue
                
                obj_center = obj["center"]
-               x_diff = obj_center[0] - ref_center[0]
-               y_diff = obj_center[1] - ref_center[1]
+               x_diff = obj_center[0]  ref_center[0]
+               y_diff = obj_center[1]  ref_center[1]
                
                # Apply spatial relation filter
                if self.meets_spatial_criteria(x_diff, y_diff, relation):
@@ -534,16 +534,16 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            
            return None
 
-       def meets_spatial_criteria(self, x_diff: float, y_diff: float, relation: str) -> bool:
+       def meets_spatial_criteria(self, x_diff: float, y_diff: float, relation: str) > bool:
            """Check if spatial relationship is satisfied"""
            EPSILON = 20  # Pixel tolerance for spatial relations
            
            if relation == "left":
-               return x_diff < -EPSILON
+               return x_diff < EPSILON
            elif relation == "right":
                return x_diff > EPSILON
            elif relation == "above" or relation == "over":
-               return y_diff < -EPSILON
+               return y_diff < EPSILON
            elif relation == "below" or relation == "under":
                return y_diff > EPSILON
            elif relation == "near" or relation == "close to":
@@ -555,7 +555,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            else:
                return True  # Default to true for other relations
 
-       def generate_region_proposals(self, target_object: Optional[Dict], image: np.ndarray) -> List[Dict]:
+       def generate_region_proposals(self, target_object: Optional[Dict], image: np.ndarray) > List[Dict]:
            """Generate region proposals for target object"""
            if not target_object:
                return []
@@ -575,10 +575,10 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            
            # Extended region (for context)
            extended_bbox = [
-               max(0, bbox[0] - 50),  # x
-               max(0, bbox[1] - 50),  # y
-               min(image.shape[1] - bbox[0] + 100, bbox[2] + 100),  # width
-               min(image.shape[0] - bbox[1] + 100, bbox[3] + 100)   # height
+               max(0, bbox[0]  50),  # x
+               max(0, bbox[1]  50),  # y
+               min(image.shape[1]  bbox[0] + 100, bbox[2] + 100),  # width
+               min(image.shape[0]  bbox[1] + 100, bbox[3] + 100)   # height
            ]
            
            proposals.append({
@@ -592,7 +592,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            
            return proposals
 
-       def search_for_object(self, command: str, objects: List[Dict]) -> Optional[Dict]:
+       def search_for_object(self, command: str, objects: List[Dict]) > Optional[Dict]:
            """Search for object directly referenced in command"""
            command_lower = command.lower()
            
@@ -612,7 +612,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            
            return best_match
 
-       def calculate_text_similarity(self, text1: str, text2: str) -> float:
+       def calculate_text_similarity(self, text1: str, text2: str) > float:
            """Calculate simple text similarity"""
            words1 = set(text1.split())
            words2 = set(text2.split())
@@ -671,7 +671,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            
            # Initialize models
            self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-           self.clip_model, self.clip_preprocess = clip.load("ViT-B/32", device=self.device)
+           self.clip_model, self.clip_preprocess = clip.load("ViTB/32", device=self.device)
            self.clip_model.eval()
            
            # Initialize OpenCV bridge
@@ -780,7 +780,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
                
                rate.sleep()
 
-       def process_multimodal_query(self, query: str, image: np.ndarray, depth: Optional[np.ndarray] = None) -> Optional[PerceptionResult]:
+       def process_multimodal_query(self, query: str, image: np.ndarray, depth: Optional[np.ndarray] = None) > Optional[PerceptionResult]:
            """Process a multimodal query"""
            try:
                # Extract objects using CLIP
@@ -813,8 +813,8 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
                rospy.logerr(f"Error processing multimodal query: {e}")
                return None
 
-       def extract_objects_with_clip(self, image: np.ndarray) -> List[Dict]:
-           """Extract objects using CLIP zero-shot classification"""
+       def extract_objects_with_clip(self, image: np.ndarray) > List[Dict]:
+           """Extract objects using CLIP zeroshot classification"""
            # Common object categories for household/industrial environments
            categories = [
                "person", "bottle", "cup", "fork", "knife", "spoon", "bowl",
@@ -837,7 +837,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            # Get predictions
            with torch.no_grad():
                logits_per_image, _ = self.clip_model(image_tensor, text_tokens)
-               probs = logits_per_image.softmax(dim=-1).cpu().numpy()[0]
+               probs = logits_per_image.softmax(dim=1).cpu().numpy()[0]
            
            # Get objects above confidence threshold
            detected_objects = []
@@ -857,9 +857,9 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            detected_objects.sort(key=lambda x: x["confidence"], reverse=True)
            return detected_objects
 
-       def estimate_object_bbox_with_clip(self, object_name: str, image: np.ndarray) -> List[int]:
-           """Estimate bounding box for object using CLIP-guided approach"""
-           # This is a simplified approach - in practice you'd use
+       def estimate_object_bbox_with_clip(self, object_name: str, image: np.ndarray) > List[int]:
+           """Estimate bounding box for object using CLIPguided approach"""
+           # This is a simplified approach  in practice you'd use
            # more sophisticated techniques like sliding window or attention visualization
            height, width = image.shape[:2]
            
@@ -890,12 +890,12 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            h = int(h_pct * height)
            w = int(w_pct * width)
            
-           x = np.random.randint(0, width - w)
-           y = np.random.randint(0, height - h)
+           x = np.random.randint(0, width  w)
+           y = np.random.randint(0, height  h)
            
            return [int(x), int(y), int(w), int(h)]
 
-       def analyze_spatial_relations(self, objects: List[Dict]) -> List[Dict]:
+       def analyze_spatial_relations(self, objects: List[Dict]) > List[Dict]:
            """Analyze spatial relationships between objects"""
            relations = []
            
@@ -909,13 +909,13 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            
            return relations
 
-       def calculate_spatial_relationship(self, obj1: Dict, obj2: Dict) -> Optional[Dict]:
+       def calculate_spatial_relationship(self, obj1: Dict, obj2: Dict) > Optional[Dict]:
            """Calculate spatial relationship between two objects"""
            center1 = obj1["center"]
            center2 = obj2["center"]
            
-           x_diff = center1[0] - center2[0]
-           y_diff = center1[1] - center2[1]
+           x_diff = center1[0]  center2[0]
+           y_diff = center1[1]  center2[1]
            distance = np.sqrt(x_diff**2 + y_diff**2)
            
            # Determine spatial relation based on relative positions
@@ -947,7 +947,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
                "confidence": min(obj1["confidence"], obj2["confidence"]) * 0.8
            }
 
-       def generate_scene_description(self, query: str, objects: List[Dict], spatial_relations: List[Dict]) -> str:
+       def generate_scene_description(self, query: str, objects: List[Dict], spatial_relations: List[Dict]) > str:
            """Generate scene description using LLM"""
            # This would use an LLM in practice
            # For now, create a simple description
@@ -969,7 +969,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            
            return description
 
-       def identify_regions_of_interest(self, query: str, objects: List[Dict], spatial_relations: List[Dict]) -> List[Dict]:
+       def identify_regions_of_interest(self, query: str, objects: List[Dict], spatial_relations: List[Dict]) > List[Dict]:
            """Identify regions of interest based on query"""
            roi = []
            
@@ -997,7 +997,7 @@ This enables robots to perform zero-shot recognition by comparing visual inputs 
            
            return roi
 
-       def calculate_overall_confidence(self, objects: List[Dict], spatial_relations: List[Dict]) -> float:
+       def calculate_overall_confidence(self, objects: List[Dict], spatial_relations: List[Dict]) > float:
            """Calculate overall perception confidence"""
            if not objects:
                return 0.0
@@ -1080,7 +1080,7 @@ from visual_grounding_system import VisualGroundingSystem
 from clip_object_recognizer import ClipObjectRecognizer
 
 class CompleteVLMPipeline:
-   """Complete Vision-Language Model pipeline for robotic perception"""
+   """Complete VisionLanguage Model pipeline for robotic perception"""
    
    def __init__(self):
        rospy.init_node('complete_vlm_pipeline', anonymous=True)
@@ -1124,7 +1124,7 @@ class CompleteVLMPipeline:
            # This command likely requires general scene understanding
            self.route_to_perception(command)
    
-   def contains_visual_reference(self, command: str) -> bool:
+   def contains_visual_reference(self, command: str) > bool:
        """Check if command contains visual references"""
        visual_keywords = [
            'the', 'that', 'there', 'left', 'right', 'front', 'behind', 
@@ -1153,9 +1153,9 @@ class CompleteVLMPipeline:
        })
        self.perception_context_pub.publish(context_msg)
    
-   def extract_attention_targets(self, command: str) -> List[str]:
+   def extract_attention_targets(self, command: str) > List[str]:
        """Extract potential attention targets from command"""
-       # Simple keyword extraction - in practice, use more sophisticated NLP
+       # Simple keyword extraction  in practice, use more sophisticated NLP
        words = command.lower().split()
        targets = []
        
@@ -1172,7 +1172,7 @@ class CompleteVLMPipeline:
                targets.append(clean_word)
        
        # Also look for color + object combinations
-       for i in range(len(words)-1):
+       for i in range(len(words)1):
            if words[i].lower() in ['red', 'blue', 'green', 'yellow', 'black', 'white'] and words[i+1] in potential_targets:
                targets.append(f"{words[i]} {words[i+1]}")
        
@@ -1208,7 +1208,7 @@ class CompleteVLMPipeline:
        except json.JSONDecodeError:
            rospy.logerr("Error decoding grounding result")
    
-   def integrate_perception_results(self) -> Optional[Dict]:
+   def integrate_perception_results(self) > Optional[Dict]:
        """Integrate perception results with system state"""
        if not self.latest_perception:
            return None
@@ -1223,7 +1223,7 @@ class CompleteVLMPipeline:
        
        return integrated_result
    
-   def integrate_grounding_results(self) -> Optional[Dict]:
+   def integrate_grounding_results(self) > Optional[Dict]:
        """Integrate grounding results with system state"""
        if not self.latest_grounding:
            return None
@@ -1238,7 +1238,7 @@ class CompleteVLMPipeline:
        
        return integrated_result
    
-   def calculate_system_confidence(self) -> float:
+   def calculate_system_confidence(self) > float:
        """Calculate overall system confidence"""
        # This is a simplified confidence calculation
        # In practice, use more sophisticated methods
@@ -1262,7 +1262,7 @@ class CompleteVLMPipeline:
        else:
            return 0.5  # Default confidence
    
-   def generate_recommendations(self, perception_data: Dict) -> List[str]:
+   def generate_recommendations(self, perception_data: Dict) > List[str]:
        """Generate recommendations based on perception data"""
        recommendations = []
        objects = perception_data.get("objects", [])
@@ -1271,10 +1271,10 @@ class CompleteVLMPipeline:
            recommendations.append("Scene is complex with many objects detected")
        
        if any(obj["confidence"] > 0.9 for obj in objects):
-           recommendations.append("High-confidence object detections available")
+           recommendations.append("Highconfidence object detections available")
        
        if any("person" in obj["name"] for obj in objects):
-           recommendations.append("Human detected - consider social interaction protocols")
+           recommendations.append("Human detected  consider social interaction protocols")
        
        # Add other recommendation logic based on objects detected
        manipulable_objects = [
@@ -1287,7 +1287,7 @@ class CompleteVLMPipeline:
        
        return recommendations
    
-   def extract_actionable_information(self, grounding_data: Dict) -> List[Dict]:
+   def extract_actionable_information(self, grounding_data: Dict) > List[Dict]:
        """Extract actionable information from grounding results"""
        actionables = []
        
@@ -1342,38 +1342,38 @@ if __name__ == '__main__':
    main()
 ```
 
-## Mini-project
+## Miniproject
 
 Create a complete multimodal perception system that integrates:
 
-1. Vision-language model for object recognition and scene understanding
-2. Spatial reasoning for location-based queries
+1. Visionlanguage model for object recognition and scene understanding
+2. Spatial reasoning for locationbased queries
 3. Integration with robotic manipulation planning
-4. Real-time processing capabilities
+4. Realtime processing capabilities
 5. Confidence estimation for all perception outputs
 6. Error handling and fallback mechanisms
 7. Performance evaluation metrics
-8. Human-robot interaction through natural language
+8. Humanrobot interaction through natural language
 
 Your project should demonstrate:
-- Complete VLM integration with robotics system
-- Effective visual grounding for robotic tasks
-- Multimodal data fusion for enhanced perception
-- Real-time performance with appropriate optimization
-- Robustness to different lighting and environmental conditions
-- Natural language interaction with the robotic system
+ Complete VLM integration with robotics system
+ Effective visual grounding for robotic tasks
+ Multimodal data fusion for enhanced perception
+ Realtime performance with appropriate optimization
+ Robustness to different lighting and environmental conditions
+ Natural language interaction with the robotic system
 
 ## Summary
 
-This chapter covered Vision-Language Models in robotics:
+This chapter covered VisionLanguage Models in robotics:
 
-- **VLM Fundamentals**: Understanding contrastive learning and joint visual-linguistic embeddings
-- **CLIP Integration**: Implementing zero-shot object recognition with Vision-Language models
-- **Spatial Reasoning**: Creating systems that understand spatial relationships between objects
-- **Multimodal Fusion**: Combining visual and linguistic information for enhanced perception
-- **Visual Grounding**: Connecting natural language expressions to visual content
-- **Real-time Processing**: Optimizing VLMs for robotic applications
-- **Confidence Estimation**: Assessing the reliability of perception outputs
-- **Error Handling**: Creating robust systems that handle uncertain perception
+ **VLM Fundamentals**: Understanding contrastive learning and joint visuallinguistic embeddings
+ **CLIP Integration**: Implementing zeroshot object recognition with VisionLanguage models
+ **Spatial Reasoning**: Creating systems that understand spatial relationships between objects
+ **Multimodal Fusion**: Combining visual and linguistic information for enhanced perception
+ **Visual Grounding**: Connecting natural language expressions to visual content
+ **Realtime Processing**: Optimizing VLMs for robotic applications
+ **Confidence Estimation**: Assessing the reliability of perception outputs
+ **Error Handling**: Creating robust systems that handle uncertain perception
 
-Vision-Language Models enable robots to understand their environment in more human-like ways, connecting visual perception with natural language concepts. This capability is essential for creating robots that can interact naturally with humans and understand complex, language-described tasks in diverse environments.
+VisionLanguage Models enable robots to understand their environment in more humanlike ways, connecting visual perception with natural language concepts. This capability is essential for creating robots that can interact naturally with humans and understand complex, languagedescribed tasks in diverse environments.

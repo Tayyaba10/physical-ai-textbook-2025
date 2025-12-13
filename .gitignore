@@ -1,0 +1,73 @@
+# Dependencies
+node_modules/
+
+# Docusaurus build outputs
+build/
+dist/
+.nyc_output/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env*
+!.env.example
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+ehthumbs.db
+Icon?
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+lib-cov/
+
+# Temporary folders
+tmp/
+temp/
+
+# Docusaurus-specific
+.cache/
+.docusaurus/
+.server/
+.client/
+
+# Backend (if present)
+backend/__pycache__/
+backend/*.pyc
+backend/venv/
+backend/ENV/
+backend/env/
+backend/.env
+backend/.venv
+backend/.pytest_cache/
+backend/.coverage
+backend/htmlcov/
+
+# ROS (if present)
+**/build/
+**/install/
+**/log/
+.devel/

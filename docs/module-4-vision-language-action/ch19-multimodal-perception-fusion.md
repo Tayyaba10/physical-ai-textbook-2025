@@ -1,72 +1,72 @@
----
-title: Ch19 - Multi-modal Perception Fusion
+-----
+title: Ch19  Multimodal Perception Fusion
 module: 4
 chapter: 19
-sidebar_label: Ch19: Multi-modal Perception Fusion
+sidebar_label: Ch19: Multimodal Perception Fusion
 description: Fusing multiple sensor modalities using advanced AI for enhanced robotic perception
-tags: [multimodal, perception, fusion, vision, lidar, radar, sensors, deep-learning, transformers]
+tags: [multimodal, perception, fusion, vision, lidar, radar, sensors, deeplearning, transformers]
 difficulty: advanced
 estimated_duration: 150
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
-# Multi-modal Perception Fusion
+# Multimodal Perception Fusion
 
 ## Learning Outcomes
-- Understand the principles of multi-modal sensor fusion for robotics
-- Implement fusion of vision, LiDAR, radar, IMU, and other sensor modalities
-- Design neural architectures for multi-modal perception
-- Apply transformer-based fusion techniques
-- Evaluate the performance benefits of multi-modal fusion
-- Handle sensor calibration and synchronization
-- Implement robust perception systems using multiple sensors
-- Create confidence-aware perception fusion systems
+ Understand the principles of multimodal sensor fusion for robotics
+ Implement fusion of vision, LiDAR, radar, IMU, and other sensor modalities
+ Design neural architectures for multimodal perception
+ Apply transformerbased fusion techniques
+ Evaluate the performance benefits of multimodal fusion
+ Handle sensor calibration and synchronization
+ Implement robust perception systems using multiple sensors
+ Create confidenceaware perception fusion systems
 
 ## Theory
 
-### Multi-modal Perception Fundamentals
+### Multimodal Perception Fundamentals
 
-Multi-modal perception in robotics involves combining information from different sensory modalities to create a more comprehensive understanding of the environment than any single sensor could provide.
+Multimodal perception in robotics involves combining information from different sensory modalities to create a more comprehensive understanding of the environment than any single sensor could provide.
 
 <MermaidDiagram chart={`
 graph TD;
-    A[Multi-modal Sensor Fusion] --> B[Vision];
-    A --> C[LiDAR];
-    A --> D[Radar];
-    A --> E[IMU];
-    A --> F[Other Sensors];
+    A[Multimodal Sensor Fusion] > B[Vision];
+    A > C[LiDAR];
+    A > D[Radar];
+    A > E[IMU];
+    A > F[Other Sensors];
     
-    B --> G[Semantic Segmentation];
-    B --> H[Object Detection];
-    B --> I[Depth Estimation];
+    B > G[Semantic Segmentation];
+    B > H[Object Detection];
+    B > I[Depth Estimation];
     
-    C --> J[Point Cloud Processing];
-    C --> K[3D Object Detection];
-    C --> L[Environment Mapping];
+    C > J[Point Cloud Processing];
+    C > K[3D Object Detection];
+    C > L[Environment Mapping];
     
-    D --> M[Long Range Detection];
-    D --> N[Weather Robustness];
-    D --> O[Doppler Information];
+    D > M[Long Range Detection];
+    D > N[Weather Robustness];
+    D > O[Doppler Information];
     
-    E --> P[Inertial Navigation];
-    E --> Q[Orientation Tracking];
-    E --> R[Motion Compensation];
+    E > P[Inertial Navigation];
+    E > Q[Orientation Tracking];
+    E > R[Motion Compensation];
     
-    F --> S[Touch Feedback];
-    F --> T[Auditory Input];
-    F --> U[Tactile Sensing];
+    F > S[Touch Feedback];
+    F > T[Auditory Input];
+    F > U[Tactile Sensing];
     
-    G --> V[Spatio-Temporal Fusion];
-    H --> V;
-    J --> V;
-    M --> V;
-    P --> V;
+    G > V[SpatioTemporal Fusion];
+    H > V;
+    J > V;
+    M > V;
+    P > V;
     
-    V --> W[Fused Perception Output];
-    W --> X[Robotic Action];
-    W --> Y[Navigation Planning];
-    W --> Z[Interaction Decision];
+    V > W[Fused Perception Output];
+    W > X[Robotic Action];
+    W > Y[Navigation Planning];
+    W > Z[Interaction Decision];
     
     style A fill:#4CAF50,stroke:#388E3C,color:#fff;
     style V fill:#2196F3,stroke:#0D47A1,color:#fff;
@@ -79,27 +79,27 @@ graph TD;
 
 **LiDAR**: Precise distance measurements, robust to lighting conditions, but sparse data and no texture information.
 
-**Radar**: Long-range detection, works in adverse weather, provides velocity information, but lower resolution.
+**Radar**: Longrange detection, works in adverse weather, provides velocity information, but lower resolution.
 
-**IMU**: High-frequency motion data, drift over time, excellent for short-term motion tracking.
+**IMU**: Highfrequency motion data, drift over time, excellent for shortterm motion tracking.
 
 ### Fusion Architectures
 
-**Early Fusion**: Raw sensor data is combined before feature extraction. Allows for cross-modality learning but requires sensor synchronization.
+**Early Fusion**: Raw sensor data is combined before feature extraction. Allows for crossmodality learning but requires sensor synchronization.
 
-**Late Fusion**: Features from each sensor modality are extracted separately and then combined. More robust to sensor failures but may miss cross-modal patterns.
+**Late Fusion**: Features from each sensor modality are extracted separately and then combined. More robust to sensor failures but may miss crossmodal patterns.
 
 **Deep Fusion**: Learnable fusion layers within deep neural networks. Combines benefits of early and late fusion.
 
-### Transformer-Based Fusion
+### TransformerBased Fusion
 
 Attention mechanisms allow the model to focus on the most relevant information from each modality at different spatial and temporal locations.
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
-### Lab 1: Setting up Multi-modal Sensor Data Pipeline
+### Lab 1: Setting up Multimodal Sensor Data Pipeline
 
-1. **Create a multi-modal data loader** (`multimodal_dataloader.py`):
+1. **Create a multimodal data loader** (`multimodal_dataloader.py`):
    ```python
    #!/usr/bin/env python3
 
@@ -193,11 +193,11 @@ Attention mechanisms allow the model to focus on the most relevant information f
            except Exception as e:
                rospy.logerr(f"Error processing IMU data: {e}")
        
-       def synchronize_modalities(self) -> Optional[Dict]:
+       def synchronize_modalities(self) > Optional[Dict]:
            """Synchronize data from different sensors within time window"""
            # Remove old data outside sync window
            current_time = rospy.get_rostime().to_sec()
-           window_start = current_time - self.sync_window
+           window_start = current_time  self.sync_window
            
            # Filter buffers
            self.rgb_buffer = [(data, ts, header) for data, ts, header in self.rgb_buffer if ts >= window_start]
@@ -209,9 +209,9 @@ Attention mechanisms allow the model to focus on the most relevant information f
                return None
            
            # Find closest timestamps
-           rgb_ts = [(abs(ts - current_time), i) for i, (_, ts, _) in enumerate(self.rgb_buffer)]
-           lidar_ts = [(abs(ts - current_time), i) for i, (_, ts, _) in enumerate(self.lidar_buffer)]
-           imu_ts = [(abs(ts - current_time), i) for i, (_, _, _, ts, _) in enumerate(self.imu_buffer)]
+           rgb_ts = [(abs(ts  current_time), i) for i, (_, ts, _) in enumerate(self.rgb_buffer)]
+           lidar_ts = [(abs(ts  current_time), i) for i, (_, ts, _) in enumerate(self.lidar_buffer)]
+           imu_ts = [(abs(ts  current_time), i) for i, (_, _, _, ts, _) in enumerate(self.imu_buffer)]
            
            if not (rgb_ts and lidar_ts and imu_ts):
                return None
@@ -235,8 +235,8 @@ Attention mechanisms allow the model to focus on the most relevant information f
            
            return synchronized_data
        
-       def preprocess_multimodal_data(self, data: Dict) -> Dict:
-           """Preprocess multi-modal data for neural networks"""
+       def preprocess_multimodal_data(self, data: Dict) > Dict:
+           """Preprocess multimodal data for neural networks"""
            processed_data = {}
            
            # Process RGB image
@@ -249,8 +249,8 @@ Attention mechanisms allow the model to focus on the most relevant information f
                lidar_tensor = torch.from_numpy(data['lidar']).float()
                # Normalize point cloud
                lidar_mean = lidar_tensor.mean(dim=0, keepdim=True)
-               lidar_std = lidar_tensor.std(dim=0, keepdim=True) + 1e-8
-               normalized_lidar = (lidar_tensor - lidar_mean) / lidar_std
+               lidar_std = lidar_tensor.std(dim=0, keepdim=True) + 1e8
+               normalized_lidar = (lidar_tensor  lidar_mean) / lidar_std
                processed_data['lidar'] = normalized_lidar.unsqueeze(0)
            
            # Process IMU data
@@ -268,9 +268,9 @@ Attention mechanisms allow the model to focus on the most relevant information f
            return processed_data
    ```
 
-### Lab 2: Creating a Cross-Modal Attention Fusion Network
+### Lab 2: Creating a CrossModal Attention Fusion Network
 
-1. **Implement a cross-modal fusion network** (`crossmodal_fusion_network.py`):
+1. **Implement a crossmodal fusion network** (`crossmodal_fusion_network.py`):
    ```python
    #!/usr/bin/env python3
 
@@ -310,7 +310,7 @@ Attention mechanisms allow the model to focus on the most relevant information f
            x = x.flatten(2).transpose(1, 2)  # [B, num_patches, embed_dim]
            
            # Add class token and positional embeddings
-           cls_tokens = self.cls_token.expand(B, -1, -1)
+           cls_tokens = self.cls_token.expand(B, 1, 1)
            x = torch.cat([cls_tokens, x], dim=1)
            x = x + self.pos_embed
            
@@ -322,7 +322,7 @@ Attention mechanisms allow the model to focus on the most relevant information f
            return x
 
    class Block(nn.Module):
-       """Transformer block with cross-modal attention"""
+       """Transformer block with crossmodal attention"""
        def __init__(self, dim, num_heads, mlp_ratio=4., qkv_bias=False, drop=0., attn_drop=0.):
            super().__init__()
            self.norm1 = nn.LayerNorm(dim)
@@ -337,12 +337,12 @@ Attention mechanisms allow the model to focus on the most relevant information f
            return x
 
    class Attention(nn.Module):
-       """Multi-head attention with potential cross-modal capabilities"""
+       """Multihead attention with potential crossmodal capabilities"""
        def __init__(self, dim, num_heads=8, qkv_bias=False, attn_drop=0., proj_drop=0.):
            super().__init__()
            self.num_heads = num_heads
            head_dim = dim // num_heads
-           self.scale = head_dim ** -0.5
+           self.scale = head_dim ** 0.5
 
            self.qkv = nn.Linear(dim, dim * 3, bias=qkv_bias)
            self.attn_drop = nn.Dropout(attn_drop)
@@ -354,8 +354,8 @@ Attention mechanisms allow the model to focus on the most relevant information f
            qkv = self.qkv(x).reshape(B, N, 3, self.num_heads, C // self.num_heads).permute(2, 0, 3, 1, 4)
            q, k, v = qkv.unbind(0)  # make torchscript happy (cannot use tensor as tuple)
 
-           attn = (q @ k.transpose(-2, -1)) * self.scale
-           attn = attn.softmax(dim=-1)
+           attn = (q @ k.transpose(2, 1)) * self.scale
+           attn = attn.softmax(dim=1)
            attn = self.attn_drop(attn)
 
            x = (attn @ v).transpose(1, 2).reshape(B, N, C)
@@ -364,7 +364,7 @@ Attention mechanisms allow the model to focus on the most relevant information f
            return x
 
    class Mlp(nn.Module):
-       """MLP as used in Vision Transformer, MLP-Mixer and related networks"""
+       """MLP as used in Vision Transformer, MLPMixer and related networks"""
        def __init__(self, in_features, hidden_features=None, out_features=None, act_layer=nn.GELU, drop=0.):
            super().__init__()
            out_features = out_features or in_features
@@ -383,7 +383,7 @@ Attention mechanisms allow the model to focus on the most relevant information f
            return x
 
    class PointNetEncoder(nn.Module):
-       """PointNet-style encoder for LiDAR points"""
+       """PointNetstyle encoder for LiDAR points"""
        def __init__(self, in_features=3, embed_dim=512):
            super().__init__()
            
@@ -428,13 +428,13 @@ Attention mechanisms allow the model to focus on the most relevant information f
        
        def forward(self, accel, gyro, quat):
            # Concatenate IMU data
-           imu_data = torch.cat([accel, gyro, quat], dim=-1)  # [batch, seq_len, 10]
+           imu_data = torch.cat([accel, gyro, quat], dim=1)  # [batch, seq_len, 10]
            
            # LSTM processing
            lstm_out, _ = self.lstm(imu_data)
            
            # Take the last output
-           last_output = lstm_out[:, -1, :]  # [batch, hidden_dim]
+           last_output = lstm_out[:, 1, :]  # [batch, hidden_dim]
            
            # Final projection
            output = self.fc(last_output)  # [batch, output_dim]
@@ -443,7 +443,7 @@ Attention mechanisms allow the model to focus on the most relevant information f
            return output
 
    class CrossModalFusion(nn.Module):
-       """Cross-modal attention fusion module"""
+       """Crossmodal attention fusion module"""
        def __init__(self, vision_dim=768, lidar_dim=512, imu_dim=128, fused_dim=1024):
            super().__init__()
            
@@ -457,7 +457,7 @@ Attention mechanisms allow the model to focus on the most relevant information f
            self.lidar_proj = nn.Linear(lidar_dim, fused_dim)
            self.imu_proj = nn.Linear(imu_dim, fused_dim)
            
-           # Cross-attention layers
+           # Crossattention layers
            self.vision_lidar_attn = nn.MultiheadAttention(fused_dim, num_heads=8, batch_first=True)
            self.lidar_imu_attn = nn.MultiheadAttention(fused_dim, num_heads=8, batch_first=True)
            self.global_fusion_attn = nn.MultiheadAttention(fused_dim, num_heads=8, batch_first=True)
@@ -498,13 +498,13 @@ Attention mechanisms allow the model to focus on the most relevant information f
            lidar_seq = lidar_proj.unsqueeze(1)    # [batch, 1, fused_dim]
            imu_seq = imu_proj.unsqueeze(1)        # [batch, 1, fused_dim]
            
-           # Cross-attention between vision and lidar
+           # Crossattention between vision and lidar
            vis_lid_query = vision_seq
            vis_lid_key_value = lidar_seq
            vis_lid_attn_out, _ = self.vision_lidar_attn(vis_lid_query, vis_lid_key_value, vis_lid_key_value)
            vis_lid_fused = self.norm_fused(vision_seq + vis_lid_attn_out)  # Residual connection
            
-           # Cross-attention between lidar and IMU
+           # Crossattention between lidar and IMU
            lid_imu_query = lidar_seq
            lid_imu_key_value = imu_seq
            lid_imu_attn_out, _ = self.lidar_imu_attn(lid_imu_query, lid_imu_key_value, lid_imu_key_value)
@@ -512,12 +512,12 @@ Attention mechanisms allow the model to focus on the most relevant information f
            
            # Global fusion of all modalities
            all_features = torch.cat([
-               vis_lid_fused,  # Vision-Lidar fused
-               lid_imu_fused,  # LiDAR-IMU fused  
+               vis_lid_fused,  # VisionLidar fused
+               lid_imu_fused,  # LiDARIMU fused  
                imu_seq         # Original IMU (for stability)
            ], dim=1)  # [batch, 3, fused_dim]
            
-           # Self-attention across modalities
+           # Selfattention across modalities
            global_fused, _ = self.global_fusion_attn(all_features, all_features, all_features)
            
            # Global pooling (average)
@@ -529,7 +529,7 @@ Attention mechanisms allow the model to focus on the most relevant information f
            return fused_output
 
    class MultiModalPerceptionFusion(nn.Module):
-       """Complete multi-modal perception fusion network"""
+       """Complete multimodal perception fusion network"""
        def __init__(self, num_classes=10):
            super().__init__()
            
@@ -538,10 +538,10 @@ Attention mechanisms allow the model to focus on the most relevant information f
            self.lidar_encoder = PointNetEncoder()
            self.imu_encoder = IMUEncoder()
            
-           # Cross-modal fusion
+           # Crossmodal fusion
            self.cross_fusion = CrossModalFusion()
            
-           # Task-specific heads
+           # Taskspecific heads
            self.classification_head = nn.Linear(1024, num_classes)
            self.detection_head = nn.Linear(1024, 4)  # bbox coordinates
            self.segmentation_head = nn.Linear(1024, 21)  # 21 semantic classes
@@ -560,7 +560,7 @@ Attention mechanisms allow the model to focus on the most relevant information f
            # Fuse modalities
            fused_feat = self.cross_fusion(vision_cls_feat, lidar_feat, imu_feat)
            
-           # Task-specific outputs
+           # Taskspecific outputs
            classification_out = self.classification_head(fused_feat)
            detection_out = self.detection_head(fused_feat)
            segmentation_out = self.segmentation_head(fused_feat)
@@ -621,7 +621,7 @@ Attention mechanisms allow the model to focus on the most relevant information f
            self.camera_matrix = np.array(msg.K).reshape(3, 3)
            self.dist_coeffs = np.array(msg.D)
        
-       def get_transform(self, source_frame: str, target_frame: str) -> Optional[np.ndarray]:
+       def get_transform(self, source_frame: str, target_frame: str) > Optional[np.ndarray]:
            """Get transformation matrix between two frames"""
            try:
                transform_stamped = self.tf_buffer.lookup_transform(
@@ -656,7 +656,7 @@ Attention mechanisms allow the model to focus on the most relevant information f
                return None
        
        def project_lidar_to_camera(self, lidar_points: np.ndarray, 
-                                 lidar_to_camera_transform: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
+                                 lidar_to_camera_transform: np.ndarray) > Tuple[np.ndarray, np.ndarray]:
            """Project LiDAR points to camera image coordinates"""
            if self.camera_matrix is None:
                rospy.logwarn("Camera matrix not available")
@@ -680,7 +680,7 @@ Attention mechanisms allow the model to focus on the most relevant information f
            )[0].squeeze()
            
            # Get depths for filtering
-           depths = camera_frame_points[:, 2]  # z-coordinate in camera frame
+           depths = camera_frame_points[:, 2]  # zcoordinate in camera frame
            
            # Filter points in front of camera
            valid_points = depths > 0
@@ -691,7 +691,7 @@ Attention mechanisms allow the model to focus on the most relevant information f
        
        def associate_sensor_data(self, rgb_image_shape: Tuple[int, int], 
                                lidar_points: np.ndarray, 
-                               imu_data: Dict) -> Dict:
+                               imu_data: Dict) > Dict:
            """Associate data from different sensors"""
            # Get transforms
            lidar_to_camera = self.get_transform('lidar_frame', 'camera_frame')
@@ -730,7 +730,7 @@ Attention mechanisms allow the model to focus on the most relevant information f
                }
            }
        
-       def calibrate_sensors(self) -> bool:
+       def calibrate_sensors(self) > bool:
            """Perform sensor calibration routine"""
            rospy.loginfo("Starting sensor calibration...")
            
@@ -771,7 +771,7 @@ Attention mechanisms allow the model to focus on the most relevant information f
                rospy.logerr(f"Calibration failed: {e}")
                return False
        
-       def validate_calibration(self, data_association: Dict) -> Dict:
+       def validate_calibration(self, data_association: Dict) > Dict:
            """Validate the quality of calibration"""
            if 'associations' not in data_association:
                return {'valid': False, 'error': 'No associations to validate'}
@@ -807,7 +807,7 @@ Attention mechanisms allow the model to focus on the most relevant information f
            }
 
    class MultiModalFusionPipeline:
-       """Complete pipeline for multi-modal fusion with calibration"""
+       """Complete pipeline for multimodal fusion with calibration"""
        def __init__(self):
            self.calibration_module = SensorCalibrationModule()
            self.fusion_network = MultiModalPerceptionFusion()
@@ -826,10 +826,10 @@ Attention mechanisms allow the model to focus on the most relevant information f
            # Data association results
            self.associations = None
            
-           rospy.loginfo("Multi-modal Fusion Pipeline initialized")
+           rospy.loginfo("Multimodal Fusion Pipeline initialized")
        
        def process_multimodal_data(self, rgb_img, lidar_points, imu_data, timestamp):
-           """Process synchronized multi-modal data"""
+           """Process synchronized multimodal data"""
            # Validate calibration
            if not self.calibration_module.is_calibrated:
                if not self.calibration_module.calibrate_sensors():
@@ -879,7 +879,7 @@ Attention mechanisms allow the model to focus on the most relevant information f
 
 ## Runnable Code Example
 
-Here's a complete multi-modal fusion system that demonstrates the integration:
+Here's a complete multimodal fusion system that demonstrates the integration:
 
 ```python
 #!/usr/bin/env python3
@@ -903,7 +903,7 @@ from crossmodal_fusion_network import MultiModalPerceptionFusion
 from calibration_module import SensorCalibrationModule, MultiModalFusionPipeline
 
 class CompleteMultiModalFusionSystem:
-    """Complete multi-modal fusion system for robotic perception"""
+    """Complete multimodal fusion system for robotic perception"""
     
     def __init__(self):
         rospy.init_node('complete_multimodal_fusion_system', anonymous=True)
@@ -927,10 +927,10 @@ class CompleteMultiModalFusionSystem:
         self.fusion_interval = 0.5  # seconds between fusion
         self.confidence_threshold = 0.5  # minimum confidence for valid perception
         
-        rospy.loginfo("Complete Multi-modal Fusion System initialized")
+        rospy.loginfo("Complete Multimodal Fusion System initialized")
     
     def run_fusion_cycle(self):
-        """Run one cycle of multi-modal fusion"""
+        """Run one cycle of multimodal fusion"""
         # Synchronize data from all modalities
         synchronized_data = self.data_loader.synchronize_modalities()
         
@@ -940,10 +940,10 @@ class CompleteMultiModalFusionSystem:
         
         # Check if it's time for fusion (rate limiting)
         current_time = time.time()
-        if current_time - self.last_fusion_time < self.fusion_interval:
+        if current_time  self.last_fusion_time < self.fusion_interval:
             return
         
-        # Preprocess multi-modal data
+        # Preprocess multimodal data
         try:
             processed_data = self.data_loader.preprocess_multimodal_data(synchronized_data)
         except Exception as e:
@@ -1020,8 +1020,8 @@ class CompleteMultiModalFusionSystem:
         rospy.loginfo(f"Perception: Class {top_class_idx} with probability {top_class_prob:.3f}")
     
     def run(self):
-        """Main loop for multi-modal fusion system"""
-        rospy.loginfo("Starting multi-modal fusion system...")
+        """Main loop for multimodal fusion system"""
+        rospy.loginfo("Starting multimodal fusion system...")
         
         # Calibrate sensors if needed
         if not self.calibration_module.is_calibrated:
@@ -1041,13 +1041,13 @@ class CompleteMultiModalFusionSystem:
                 
                 # Publish system status
                 status_msg = String()
-                status_msg.data = f"Fusion system active. Last fusion: {time.time() - self.last_fusion_time:.2f}s ago"
+                status_msg.data = f"Fusion system active. Last fusion: {time.time()  self.last_fusion_time:.2f}s ago"
                 self.fusion_status_pub.publish(status_msg)
                 
                 rate.sleep()
                 
             except KeyboardInterrupt:
-                rospy.loginfo("Shutting down multi-modal fusion system...")
+                rospy.loginfo("Shutting down multimodal fusion system...")
                 break
             except Exception as e:
                 rospy.logerr(f"Error in main loop: {e}")
@@ -1060,7 +1060,7 @@ def main():
     try:
         system.run()
     except rospy.ROSInterruptException:
-        rospy.loginfo("Multi-modal fusion system interrupted")
+        rospy.loginfo("Multimodal fusion system interrupted")
     except Exception as e:
         rospy.logerr(f"Fatal error in fusion system: {e}")
 
@@ -1068,18 +1068,18 @@ if __name__ == '__main__':
     main()
 ```
 
-### Launch file for the multi-modal fusion system:
+### Launch file for the multimodal fusion system:
 
 ```xml
 <launch>
-  <!-- Multi-modal Fusion System -->
+  <! Multimodal Fusion System >
   <node name="multimodal_fusion_system" pkg="robot_perception" type="complete_multimodal_fusion_system.py" output="screen">
-    <!-- Parameters for fusion -->
+    <! Parameters for fusion >
     <param name="fusion_interval" value="0.5"/>
     <param name="confidence_threshold" value="0.5"/>
   </node>
   
-  <!-- Example sensor nodes (these should be running) -->
+  <! Example sensor nodes (these should be running) >
   <group ns="sensors">
     <node name="camera_driver" pkg="usb_cam" type="usb_cam_node" output="screen">
       <param name="video_device" value="/dev/video0"/>
@@ -1096,7 +1096,7 @@ if __name__ == '__main__':
     <node name="imu_driver" pkg="razor_imu_9dof" type="imu_node" output="screen"/>
   </group>
   
-  <!-- TF transforms for sensors -->
+  <! TF transforms for sensors >
   <node name="static_transform_publisher" pkg="tf2_ros" type="static_transform_publisher" 
         args="0.1 0.0 0.3 0.0 0.0 0.0 base_link camera_link" />
   <node name="static_transform_publisher" pkg="tf2_ros" type="static_transform_publisher" 
@@ -1106,38 +1106,38 @@ if __name__ == '__main__':
 </launch>
 ```
 
-## Mini-project
+## Miniproject
 
-Create a complete multi-modal perception fusion system that:
+Create a complete multimodal perception fusion system that:
 
 1. Implements sensor data synchronization and calibration
 2. Fuses RGB camera, LiDAR, and IMU data using neural networks
-3. Implements transformer-based cross-modal attention mechanisms
-4. Creates task-specific heads for classification, detection, and segmentation
+3. Implements transformerbased crossmodal attention mechanisms
+4. Creates taskspecific heads for classification, detection, and segmentation
 5. Designs confidence estimation for fusion outputs
 6. Implements robustness mechanisms for sensor failures
-7. Evaluates fusion performance against single-modal baselines
+7. Evaluates fusion performance against singlemodal baselines
 8. Demonstrates the system in a robotic navigation scenario
 
 Your project should include:
-- Complete multi-modal data pipeline with synchronization
-- Cross-modal attention fusion network
-- Sensor calibration and data association module
-- Robust perception system with failure recovery
-- Performance evaluation metrics
-- Comparative analysis with single-modal approaches
-- Navigation demonstration using fused perception
+ Complete multimodal data pipeline with synchronization
+ Crossmodal attention fusion network
+ Sensor calibration and data association module
+ Robust perception system with failure recovery
+ Performance evaluation metrics
+ Comparative analysis with singlemodal approaches
+ Navigation demonstration using fused perception
 
 ## Summary
 
-This chapter covered multi-modal perception fusion for robotics:
+This chapter covered multimodal perception fusion for robotics:
 
-- **Sensor Synchronization**: Techniques for synchronizing data from different sensors
-- **Cross-Modal Attention**: Transformer-based mechanisms for fusing information across modalities
-- **Calibration**: Procedures for determining spatial relationships between sensors
-- **Deep Fusion**: Neural architectures that learn to combine multi-modal information
-- **Confidence Estimation**: Mechanisms to assess the quality of fused perceptions
-- **Robustness**: Handling sensor failures and degraded conditions
-- **Evaluation**: Metrics for assessing the benefits of multi-modal fusion
+ **Sensor Synchronization**: Techniques for synchronizing data from different sensors
+ **CrossModal Attention**: Transformerbased mechanisms for fusing information across modalities
+ **Calibration**: Procedures for determining spatial relationships between sensors
+ **Deep Fusion**: Neural architectures that learn to combine multimodal information
+ **Confidence Estimation**: Mechanisms to assess the quality of fused perceptions
+ **Robustness**: Handling sensor failures and degraded conditions
+ **Evaluation**: Metrics for assessing the benefits of multimodal fusion
 
-Multi-modal perception fusion enables robots to gain a more comprehensive understanding of their environment, leading to improved robustness and performance in challenging conditions where single sensors may fail or provide inadequate information.
+Multimodal perception fusion enables robots to gain a more comprehensive understanding of their environment, leading to improved robustness and performance in challenging conditions where single sensors may fail or provide inadequate information.

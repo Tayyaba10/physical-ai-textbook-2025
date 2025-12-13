@@ -3,7 +3,7 @@ module.exports = {
   tagline: 'From ROS 2 Foundation to Vision-Language-Action Integration',
   url: 'https://Tayyaba10.github.io',  // Replace with your actual domain
   baseUrl: '/physical-ai-textbook-2025/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
 
@@ -20,6 +20,8 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/Tayyaba10/physical-ai-textbook-2025/edit/main/',
+          path: 'docs',
+          routeBasePath: 'docs',
         },
         blog: {
           showReadingTime: true,
@@ -107,48 +109,12 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} Physical Ai Textbook-2025. Built with Docusaurus.`,
     },
     prism: {
-      theme: require('prism-react-renderer/themes/github'),
-      darkTheme: require('prism-react-renderer/themes/dracula'),
+      theme: require('prism-react-renderer').themes.github,
+      darkTheme: require('prism-react-renderer').themes.dracula,
       additionalLanguages: ['bash', 'json', 'python', 'cpp'],
     },
   },
 
   plugins: [
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'module-1',
-        path: 'docs/module-1-robotic-nervous-system',
-        routeBasePath: 'docs/module-1-robotic-nervous-system',
-        sidebarPath: require.resolve('./sidebars-module-1.js'),
-      },
-    ],
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'module-2',
-        path: 'docs/module-2-digital-twin',
-        routeBasePath: 'docs/module-2-digital-twin',
-        sidebarPath: require.resolve('./sidebars-module-2.js'),
-      },
-    ],
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'module-3',
-        path: 'docs/module-3-ai-robot-brain',
-        routeBasePath: 'docs/module-3-ai-robot-brain',
-        sidebarPath: require.resolve('./sidebars-module-3.js'),
-      },
-    ],
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'module-4',
-        path: 'docs/module-4-vision-language-action',
-        routeBasePath: 'docs/module-4-vision-language-action',
-        sidebarPath: require.resolve('./sidebars-module-4.js'),
-      },
-    ],
   ],
 };

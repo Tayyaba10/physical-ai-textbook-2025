@@ -1,71 +1,71 @@
----
-title: Ch20 - Capstone – Voice → Plan → Navigate → Manipulate
+-----
+title: Ch20  Capstone  Voice → Plan → Navigate → Manipulate
 module: 4
 chapter: 20
-sidebar_label: Ch20: Capstone – Voice → Plan → Navigate → Manipulate
+sidebar_label: Ch20: Capstone  Voice → Plan → Navigate → Manipulate
 description: Complete capstone project integrating voice control, cognitive planning, navigation, and manipulation
-tags: [capstone, integration, voice-control, planning, navigation, manipulation, ai-robotics]
+tags: [capstone, integration, voicecontrol, planning, navigation, manipulation, airobotics]
 difficulty: advanced
 estimated_duration: 240
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
 # Capstone: Voice → Plan → Navigate → Manipulate
 
 ## Learning Outcomes
-- Integrate voice recognition, cognitive planning, navigation, and manipulation systems
-- Create end-to-end robotic systems from voice command to physical action
-- Implement safety validation throughout the pipeline
-- Design multimodal interfaces connecting language, vision, and action
-- Evaluate system performance for complex voice-controlled tasks
-- Handle error recovery and graceful degradation in multi-component systems
-- Create comprehensive logging and debugging systems
-- Design user-friendly interfaces for complex robotic systems
+ Integrate voice recognition, cognitive planning, navigation, and manipulation systems
+ Create endtoend robotic systems from voice command to physical action
+ Implement safety validation throughout the pipeline
+ Design multimodal interfaces connecting language, vision, and action
+ Evaluate system performance for complex voicecontrolled tasks
+ Handle error recovery and graceful degradation in multicomponent systems
+ Create comprehensive logging and debugging systems
+ Design userfriendly interfaces for complex robotic systems
 
 ## Theory
 
-### Integrated Voice-to-Action Pipeline
+### Integrated VoicetoAction Pipeline
 
-The complete voice-to-action system involves multiple interconnected components that need to work seamlessly together. Each component affects the others, requiring careful integration and validation.
+The complete voicetoaction system involves multiple interconnected components that need to work seamlessly together. Each component affects the others, requiring careful integration and validation.
 
 <MermaidDiagram chart={`
 graph TD;
-    A[User Voice Command] --> B[Whisper Transcription];
-    B --> C[Command Parsing];
-    C --> D[GPT-4o Task Planning];
-    D --> E[Hierarchical Plan];
+    A[User Voice Command] > B[Whisper Transcription];
+    B > C[Command Parsing];
+    C > D[GPT4o Task Planning];
+    D > E[Hierarchical Plan];
     
-    F[Visual Input] --> G[Object Detection];
-    G --> H[Environment Mapping];
-    H --> I[Context Integration];
+    F[Visual Input] > G[Object Detection];
+    G > H[Environment Mapping];
+    H > I[Context Integration];
     
-    J[Navigation System] --> K[Path Planning];
-    K --> L[Obstacle Avoidance];
-    L --> M[Safe Navigation];
+    J[Navigation System] > K[Path Planning];
+    K > L[Obstacle Avoidance];
+    L > M[Safe Navigation];
     
-    N[Manipulation System] --> O[Grasp Planning];
-    O --> P[Collision Checking];
-    P --> Q[Safe Manipulation];
+    N[Manipulation System] > O[Grasp Planning];
+    O > P[Collision Checking];
+    P > Q[Safe Manipulation];
     
-    E --> R[Plan Validation];
-    I --> R;
-    R --> S[Execution Monitoring];
+    E > R[Plan Validation];
+    I > R;
+    R > S[Execution Monitoring];
     
-    S --> T[Navigation Execution];
-    S --> U[Manipulation Execution];
+    S > T[Navigation Execution];
+    S > U[Manipulation Execution];
     
-    T --> V[Safety Validation];
-    U --> V;
-    V --> W[Physical Robot Action];
+    T > V[Safety Validation];
+    U > V;
+    V > W[Physical Robot Action];
     
-    W --> X[Feedback Generation];
-    X --> Y[Voice Response];
-    X --> Z[Visual Feedback];
+    W > X[Feedback Generation];
+    X > Y[Voice Response];
+    X > Z[Visual Feedback];
     
-    E --> AA[Recovery Planning];
-    AA --> BB[Alternative Actions];
-    BB --> W;
+    E > AA[Recovery Planning];
+    AA > BB[Alternative Actions];
+    BB > W;
     
     style A fill:#E91E63,stroke:#AD1457,color:#fff;
     style W fill:#4CAF50,stroke:#388E3C,color:#fff;
@@ -89,15 +89,15 @@ graph TD;
 
 ### Architecture Patterns
 
-**Event-Driven Architecture**: Components communicate through event messages, allowing loose coupling and independent failure handling.
+**EventDriven Architecture**: Components communicate through event messages, allowing loose coupling and independent failure handling.
 
-**State Machine Architecture**: Explicit state management for complex multi-step processes.
+**State Machine Architecture**: Explicit state management for complex multistep processes.
 
 **Layered Architecture**: Clear separation between sensory input, cognitive processing, and action execution.
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
-### Lab 1: Building the Voice-to-Action Pipeline
+### Lab 1: Building the VoicetoAction Pipeline
 
 1. **Create the main integration node** (`voice_action_integration.py`):
    ```python
@@ -164,7 +164,7 @@ graph TD;
            self.command_processing_thread.daemon = True
            self.command_processing_thread.start()
            
-           rospy.loginfo("Voice-Action Integration System initialized")
+           rospy.loginfo("VoiceAction Integration System initialized")
        
        def scan_callback(self, msg: LaserScan):
            """Update laser scan data"""
@@ -181,7 +181,7 @@ graph TD;
            with self.state_lock:
                if msg.status_list:
                    # Check the status of the most recent goal (last in list)
-                   last_status = msg.status_list[-1]
+                   last_status = msg.status_list[1]
                    if last_status.status == 3:  # Succeeded
                        self.navigation_active = False
                    elif last_status.status in [1, 2, 4, 5, 8]:  # Active/Aborted/etc.
@@ -249,14 +249,14 @@ graph TD;
                    rospy.logerr(f"Error processing command: {e}")
                    continue
        
-       def process_single_command(self, command_text: str) -> bool:
+       def process_single_command(self, command_text: str) > bool:
            """Process a single command through the entire pipeline"""
            rospy.loginfo(f"Processing command: {command_text}")
            
            # Step 1: Contextual understanding
            context = self.get_environment_context()
            
-           # Step 2: Use GPT-4o to parse command and generate plan
+           # Step 2: Use GPT4o to parse command and generate plan
            plan = self.generate_action_plan(command_text, context)
            
            if not plan:
@@ -282,7 +282,7 @@ graph TD;
                rospy.logerr("Command plan execution failed")
                return False
        
-       def get_environment_context(self) -> Dict:
+       def get_environment_context(self) > Dict:
            """Get current environment context"""
            with self.state_lock:
                context = {
@@ -309,7 +309,7 @@ graph TD;
                }
                return context
        
-       def get_obstacle_information(self) -> List[Dict]:
+       def get_obstacle_information(self) > List[Dict]:
            """Extract obstacle information from laser scan"""
            if not self.laser_data:
                return []
@@ -337,52 +337,52 @@ graph TD;
            
            return obstacles
        
-       def get_known_locations(self) -> List[Dict]:
+       def get_known_locations(self) > List[Dict]:
            """Get known locations (would come from map or localization)"""
            # In real implementation, this would query a location database
            return [
                {"name": "kitchen", "x": 2.0, "y": 1.0},
-               {"name": "living_room", "x": 1.0, "y": -1.0},
-               {"name": "bedroom", "x": -1.0, "y": 1.5},
+               {"name": "living_room", "x": 1.0, "y": 1.0},
+               {"name": "bedroom", "x": 1.0, "y": 1.5},
                {"name": "office", "x": 0.5, "y": 2.0},
-               {"name": "charging_station", "x": -2.0, "y": -2.0}
+               {"name": "charging_station", "x": 2.0, "y": 2.0}
            ]
        
-       def get_detected_objects(self) -> List[Dict]:
+       def get_detected_objects(self) > List[Dict]:
            """Get detected objects (would come from perception system)"""
            # In real implementation, this would come from object detection
            # For this example, return empty list (would be populated by vision system)
            if self.image_data is not None:
                # Simulate object detection from image
-               # This is a placeholder - real implementation would use actual object detection
+               # This is a placeholder  real implementation would use actual object detection
                return [
                    {"name": "coffee_cup", "type": "container", "location": "kitchen", "distance": 1.5, "confidence": 0.9},
                    {"name": "book", "type": "stationery", "location": "living_room", "distance": 2.0, "confidence": 0.8}
                ]
            return []
        
-       def generate_action_plan(self, command: str, context: Dict) -> Optional[Dict]:
-           """Generate action plan using GPT-4o based on command and context"""
+       def generate_action_plan(self, command: str, context: Dict) > Optional[Dict]:
+           """Generate action plan using GPT4o based on command and context"""
            prompt = f"""
            User Command: "{command}"
            
            Environment Context: {json.dumps(context, indent=2)}
            
            Available Actions:
-           - navigate_to(location_name): Move robot to named location
-           - approach_object(object_name): Move robot to specific object
-           - inspect_object(object_name): Examine an object with sensors
-           - grasp_object(object_name): Pick up an object (if manipulator equipped)
-           - place_object(object_name, location): Place object at location
-           - open_container(container_name): Open a container/door
-           - close_container(container_name): Close a container/door
-           - follow_person(person_name): Follow a person for some distance
-           - wait(duration_seconds): Pause execution for specified duration
-           - speak_response(text): Speak text response to user
-           - find_person(person_name): Locate a specific person
-           - escort_person(destination): Guide a person to destination
-           - patrol_area(area_name): Move through predefined area
-           - charge_robot(): Return to charging station
+            navigate_to(location_name): Move robot to named location
+            approach_object(object_name): Move robot to specific object
+            inspect_object(object_name): Examine an object with sensors
+            grasp_object(object_name): Pick up an object (if manipulator equipped)
+            place_object(object_name, location): Place object at location
+            open_container(container_name): Open a container/door
+            close_container(container_name): Close a container/door
+            follow_person(person_name): Follow a person for some distance
+            wait(duration_seconds): Pause execution for specified duration
+            speak_response(text): Speak text response to user
+            find_person(person_name): Locate a specific person
+            escort_person(destination): Guide a person to destination
+            patrol_area(area_name): Move through predefined area
+            charge_robot(): Return to charging station
            
            Generate a detailed action plan that:
            1. Breaks down the command into specific actions
@@ -395,7 +395,7 @@ graph TD;
            The plan should be in JSON format:
            {{
              "command_original": "{command}",
-             "reasoning": "step-by-step reasoning about the plan",
+             "reasoning": "stepbystep reasoning about the plan",
              "actions": [
                {{
                  "id": 1,
@@ -423,7 +423,7 @@ graph TD;
            
            try:
                response = self.openai_client.chat.completions.create(
-                   model="gpt-4o",
+                   model="gpt4o",
                    messages=[
                        {
                            "role": "system",
@@ -444,7 +444,7 @@ graph TD;
                if response_text.startswith('```'):
                    start_idx = response_text.find('{')
                    end_idx = response_text.rfind('}') + 1
-                   if start_idx != -1 and end_idx != -1:
+                   if start_idx != 1 and end_idx != 1:
                        response_text = response_text[start_idx:end_idx]
                
                plan_data = json.loads(response_text)
@@ -454,7 +454,7 @@ graph TD;
                rospy.logerr(f"Error generating action plan: {e}")
                return None
        
-       def validate_plan_safety(self, plan: Dict) -> bool:
+       def validate_plan_safety(self, plan: Dict) > bool:
            """Validate the safety of the generated plan"""
            actions = plan.get("actions", [])
            
@@ -484,13 +484,13 @@ graph TD;
            
            return True
        
-       def is_safe_navigation_destination(self, location_name: str) -> bool:
+       def is_safe_navigation_destination(self, location_name: str) > bool:
            """Check if navigation destination is safe"""
            # In real implementation, this would check:
-           # - Known map for obstacles
-           # - Dynamic obstacles from sensors
-           # - Reachability of the location
-           # - Safety of the area
+           #  Known map for obstacles
+           #  Dynamic obstacles from sensors
+           #  Reachability of the location
+           #  Safety of the area
            
            known_locations = self.get_known_locations()
            target_location = next((loc for loc in known_locations if loc["name"] == location_name), None)
@@ -502,7 +502,7 @@ graph TD;
            # Check for obstacles in path
            if self.laser_data:
                # Simple check: ensure path is mostly clear
-               front_ranges = self.laser_data.ranges[len(self.laser_data.ranges)//2-20:len(self.laser_data.ranges)//2+20]
+               front_ranges = self.laser_data.ranges[len(self.laser_data.ranges)//220:len(self.laser_data.ranges)//2+20]
                valid_ranges = [r for r in front_ranges if not (np.isinf(r) or np.isnan(r))]
                
                if valid_ranges and min(valid_ranges) < 0.5:  # Dangerous to move if obstacle within 0.5m
@@ -511,7 +511,7 @@ graph TD;
            
            return True
        
-       def is_safe_to_approach_object(self, object_name: str) -> bool:
+       def is_safe_to_approach_object(self, object_name: str) > bool:
            """Check if it's safe to approach an object"""
            # Check environment context for the object
            detected_objects = self.get_detected_objects()
@@ -537,16 +537,16 @@ graph TD;
            rospy.logwarn(f"Cannot safely approach undetected object: {object_name}")
            return False
        
-       def are_manipulation_safeties_met(self) -> bool:
+       def are_manipulation_safeties_met(self) > bool:
            """Check if manipulator safety conditions are met"""
            # In real implementation, this would check:
-           # - Robot position (is it in a safe area for manipulation?)
-           # - Object detectability (can we see the object clearly?)
-           # - Manipulator status (is it ready?)
-           # - Surroundings (are there people nearby?)
+           #  Robot position (is it in a safe area for manipulation?)
+           #  Object detectability (can we see the object clearly?)
+           #  Manipulator status (is it ready?)
+           #  Surroundings (are there people nearby?)
            return True  # Placeholder value
        
-       def execute_plan(self, plan: Dict) -> bool:
+       def execute_plan(self, plan: Dict) > bool:
            """Execute the action plan"""
            actions = plan.get("actions", [])
            rospy.loginfo(f"Starting execution of plan with {len(actions)} actions")
@@ -582,7 +582,7 @@ graph TD;
            rospy.loginfo("Plan execution completed successfully")
            return True
        
-       def execute_single_action(self, action: Dict) -> bool:
+       def execute_single_action(self, action: Dict) > bool:
            """Execute a single action"""
            action_type = action.get("type", "")
            parameters = action.get("parameters", {})
@@ -609,7 +609,7 @@ graph TD;
                rospy.logwarn(f"Unknown action type: {action_type}")
                return True  # Don't fail on unknown actions, just skip them
        
-       def execute_navigation_action(self, params: Dict) -> bool:
+       def execute_navigation_action(self, params: Dict) > bool:
            """Execute navigation action"""
            location_name = params.get("location")
            
@@ -644,7 +644,7 @@ graph TD;
            timeout = 60.0  # 1 minute timeout
            
            rate = rospy.Rate(10)  # 10 Hz
-           while (rospy.Time.now().to_sec() - start_time) < timeout:
+           while (rospy.Time.now().to_sec()  start_time) < timeout:
                if not self.navigation_active:
                    rospy.loginfo(f"Navigation to {location_name} completed successfully")
                    return True
@@ -653,7 +653,7 @@ graph TD;
            rospy.logerr(f"Navigation to {location_name} timed out after {timeout} seconds")
            return False
        
-       def execute_approach_action(self, params: Dict) -> bool:
+       def execute_approach_action(self, params: Dict) > bool:
            """Execute object approach action"""
            object_name = params.get("object_name")
            
@@ -670,10 +670,10 @@ graph TD;
                return False
            
            # Approach strategy: navigate to a position 0.5m in front of the object
-           # This is simplified - real implementation would require more complex path planning
+           # This is simplified  real implementation would require more complex path planning
            object_dist = target_object["distance"]
            if object_dist > 0.5:  # Only navigate if object is farther than our target distance
-               # Calculate target position (simplified - assumes object is in front of robot)
+               # Calculate target position (simplified  assumes object is in front of robot)
                target_x = target_object["x"] if "x" in target_object else 0.5
                target_y = target_object["y"] if "y" in target_object else 0.0
                
@@ -693,7 +693,7 @@ graph TD;
                timeout = 30.0  # 30 second timeout for approach
                
                rate = rospy.Rate(10)  # 10 Hz
-               while (rospy.Time.now().to_sec() - start_time) < timeout:
+               while (rospy.Time.now().to_sec()  start_time) < timeout:
                    if not self.navigation_active:
                        rospy.loginfo(f"Approach to {object_name} completed")
                        return True
@@ -706,7 +706,7 @@ graph TD;
                rospy.loginfo(f"Already close enough to {object_name}")
                return True
        
-       def execute_speak_action(self, params: Dict) -> bool:
+       def execute_speak_action(self, params: Dict) > bool:
            """Execute speech action"""
            text = params.get("text", "")
            if text:
@@ -717,14 +717,14 @@ graph TD;
                rospy.logwarn("Speak action with empty text")
                return False
        
-       def execute_wait_action(self, params: Dict) -> bool:
+       def execute_wait_action(self, params: Dict) > bool:
            """Execute wait action"""
            duration = params.get("duration", 1.0)
            rospy.loginfo(f"Waiting for {duration} seconds")
            rospy.sleep(duration)
            return True
        
-       def execute_inspection_action(self, params: Dict) -> bool:
+       def execute_inspection_action(self, params: Dict) > bool:
            """Execute object inspection action"""
            object_name = params.get("object_name")
            rospy.loginfo(f"Inspecting object: {object_name}")
@@ -737,7 +737,7 @@ graph TD;
            self.publish_feedback(f"Inspection of {object_name} completed")
            return True
        
-       def attempt_recovery(self, plan: Dict, failed_step: int, failed_action: Dict) -> bool:
+       def attempt_recovery(self, plan: Dict, failed_step: int, failed_action: Dict) > bool:
            """Attempt to recover from action failure"""
            recovery_strategies = plan.get("failure_recovery", [])
            failed_condition = f"{failed_action.get('type', 'unknown')}_failed"
@@ -798,7 +798,7 @@ graph TD;
        try:
            rospy.spin()
        except KeyboardInterrupt:
-           rospy.loginfo("Shutting down Voice-Action Integration System")
+           rospy.loginfo("Shutting down VoiceAction Integration System")
 
    if __name__ == '__main__':
        main()
@@ -905,7 +905,7 @@ graph TD;
                    "timestamp": rospy.Time.now().to_sec()
                })
        
-       def is_position_safe(self, x: float, y: float) -> bool:
+       def is_position_safe(self, x: float, y: float) > bool:
            """Check if a position is safe to navigate to"""
            if not self.laser_scan:
                # If no sensor data available, be conservative
@@ -913,12 +913,12 @@ graph TD;
                return False
            
            # Convert position to robot frame
-           dx = x - self.robot_pose.x
-           dy = y - self.robot_pose.y
+           dx = x  self.robot_pose.x
+           dy = y  self.robot_pose.y
            distance_to_position = math.sqrt(dx*dx + dy*dy)
            
            # Check if position is too close to current obstacles
-           # This is a simplified check - in real implementation, use path planning
+           # This is a simplified check  in real implementation, use path planning
            min_range = min(self.laser_scan.ranges) if self.laser_scan.ranges else float('inf')
            if min_range < self.safety_distance:
                rospy.logwarn(f"Position ({x}, {y}) potentially unsafe due to nearby obstacles")
@@ -955,25 +955,25 @@ graph TD;
                        "timestamp": rospy.Time.now().to_sec()
                    })
        
-       def validate_and_modify_command(self, cmd: Twist) -> Optional[Twist]:
+       def validate_and_modify_command(self, cmd: Twist) > Optional[Twist]:
            """Validate and modify command to ensure safety"""
            if not self.laser_scan:
                # If no laser data, only allow zero velocity commands
                if cmd.linear.x == 0.0 and cmd.angular.z == 0.0:
                    return cmd
                else:
-                   rospy.logwarn("No laser data, rejecting non-zero velocity command")
+                   rospy.logwarn("No laser data, rejecting nonzero velocity command")
                    return None
            
            # Validate linear speed
            if abs(cmd.linear.x) > self.max_linear_speed:
                rospy.logwarn(f"Linear velocity {cmd.linear.x} exceeds limit {self.max_linear_speed}")
-               cmd.linear.x = np.clip(cmd.linear.x, -self.max_linear_speed, self.max_linear_speed)
+               cmd.linear.x = np.clip(cmd.linear.x, self.max_linear_speed, self.max_linear_speed)
            
            # Validate angular speed
            if abs(cmd.angular.z) > self.max_angular_speed:
                rospy.logwarn(f"Angular velocity {cmd.angular.z} exceeds limit {self.max_angular_speed}")
-               cmd.angular.z = np.clip(cmd.angular.z, -self.max_angular_speed, self.max_angular_speed)
+               cmd.angular.z = np.clip(cmd.angular.z, self.max_angular_speed, self.max_angular_speed)
            
            # Check for forward obstacles if trying to move forward
            if cmd.linear.x > 0:
@@ -989,7 +989,7 @@ graph TD;
                    obstacle_distance = self.get_closest_obstacle_distance()
                    if obstacle_distance < (stopping_distance + self.robot_radius + 0.1):  # +0.1m safety margin
                        # Reduce speed proportionally to distance
-                       new_speed = (obstacle_distance - self.robot_radius - 0.1) / (self.safety_distance - self.robot_radius - 0.1) * self.max_linear_speed
+                       new_speed = (obstacle_distance  self.robot_radius  0.1) / (self.safety_distance  self.robot_radius  0.1) * self.max_linear_speed
                        cmd.linear.x = max(0.0, min(cmd.linear.x, new_speed))
                        rospy.loginfo(f"Reducing forward speed due to obstacle at {obstacle_distance:.2f}m: {cmd.linear.x:.2f}m/s")
            
@@ -1005,8 +1005,8 @@ graph TD;
                    # Similar check for backward obstacles
                    obstacle_distance = self.get_closest_backward_obstacle_distance()
                    if obstacle_distance < (stopping_distance + self.robot_radius + 0.1):
-                       new_speed = -min(abs(cmd.linear.x), 
-                                      max(0.0, (obstacle_distance - self.robot_radius - 0.1) / (self.safety_distance - self.robot_radius - 0.1) * self.max_linear_speed))
+                       new_speed = min(abs(cmd.linear.x), 
+                                      max(0.0, (obstacle_distance  self.robot_radius  0.1) / (self.safety_distance  self.robot_radius  0.1) * self.max_linear_speed))
                        cmd.linear.x = max(new_speed, cmd.linear.x)
                        rospy.loginfo(f"Reducing backward speed due to rear obstacle")
            
@@ -1018,15 +1018,15 @@ graph TD;
            
            return cmd
        
-       def has_obstacles_ahead(self, check_distance: float) -> bool:
+       def has_obstacles_ahead(self, check_distance: float) > bool:
            """Check for obstacles in the forward direction"""
            if not self.laser_scan:
                return False
            
-           # Check front quarter of laser scan (simplified - check middle portion)
+           # Check front quarter of laser scan (simplified  check middle portion)
            n_ranges = len(self.laser_scan.ranges)
-           front_start = n_ranges // 2 - n_ranges // 8  # 3/4 to 5/8 of ranges (front left-right)
-           front_end = n_ranges // 2 + n_ranges // 8    # 1/2 + 1/8 = 5/8 to 7/8 of ranges (front right-left)
+           front_start = n_ranges // 2  n_ranges // 8  # 3/4 to 5/8 of ranges (front leftright)
+           front_end = n_ranges // 2 + n_ranges // 8    # 1/2 + 1/8 = 5/8 to 7/8 of ranges (front rightleft)
            
            for i in range(front_start, front_end):
                if i < len(self.laser_scan.ranges) and self.laser_scan.ranges[i] < check_distance:
@@ -1034,7 +1034,7 @@ graph TD;
                        return True
            return False
        
-       def has_obstacles_behind(self, check_distance: float) -> bool:
+       def has_obstacles_behind(self, check_distance: float) > bool:
            """Check for obstacles in the rear direction"""
            if not self.laser_scan:
                return False
@@ -1059,7 +1059,7 @@ graph TD;
            
            return False
        
-       def has_emergency_obstacles(self) -> bool:
+       def has_emergency_obstacles(self) > bool:
            """Check for obstacles in emergency stop range"""
            if not self.laser_scan:
                return False
@@ -1071,13 +1071,13 @@ graph TD;
            
            return False
        
-       def get_closest_obstacle_distance(self) -> float:
+       def get_closest_obstacle_distance(self) > float:
            """Get distance to closest obstacle in front"""
            if not self.laser_scan:
                return float('inf')
            
            n_ranges = len(self.laser_scan.ranges)
-           front_start = n_ranges // 2 - n_ranges // 8
+           front_start = n_ranges // 2  n_ranges // 8
            front_end = n_ranges // 2 + n_ranges // 8
            
            min_distance = float('inf')
@@ -1089,7 +1089,7 @@ graph TD;
            
            return min_distance
        
-       def get_closest_backward_obstacle_distance(self) -> float:
+       def get_closest_backward_obstacle_distance(self) > float:
            """Get distance to closest obstacle in rear"""
            if not self.laser_scan:
                return float('inf')
@@ -1114,7 +1114,7 @@ graph TD;
            """Periodic safety checks"""
            # Check for stale sensor data
            if self.laser_scan:
-               time_since_scan = rospy.Time.now().to_sec() - event.current_real.to_sec()
+               time_since_scan = rospy.Time.now().to_sec()  event.current_real.to_sec()
                if time_since_scan > 1.0:  # If laser scan is more than 1 second old
                    rospy.logwarn("Laser scan data is stale, entering safety mode")
                    self.reduce_speed_for_stale_sensors()
@@ -1178,9 +1178,9 @@ graph TD;
            # Add to internal history
            self.safety_violations.append(violation)
            if len(self.safety_violations) > self.max_violations_history:
-               self.safety_violations = self.safety_violations[-self.max_violations_history:]
+               self.safety_violations = self.safety_violations[self.max_violations_history:]
        
-       def get_safety_status(self) -> Dict:
+       def get_safety_status(self) > Dict:
            """Get current safety status"""
            status = {
                "timestamp": rospy.Time.now().to_sec(),
@@ -1195,7 +1195,7 @@ graph TD;
                    "y": self.robot_pose.y
                },
                "recent_violations_count": len(self.safety_violations),
-               "last_violation": self.safety_violations[-1] if self.safety_violations else None
+               "last_violation": self.safety_violations[1] if self.safety_violations else None
            }
            
            status_msg = String()
@@ -1237,7 +1237,7 @@ graph TD;
        openai_api_key_arg = DeclareLaunchArgument(
            'openai_api_key',
            default_value='',
-           description='OpenAI API key for GPT-4o access'
+           description='OpenAI API key for GPT4o access'
        )
        
        use_sim_time_arg = DeclareLaunchArgument(
@@ -1303,9 +1303,9 @@ graph TD;
        )
        
        # Add other necessary nodes for a complete system:
-       # - Robot driver
-       # - Navigation stack
-       # - Perception pipeline (if manipulator included)
+       #  Robot driver
+       #  Navigation stack
+       #  Perception pipeline (if manipulator included)
        
        # Create launch description
        ld = LaunchDescription()
@@ -1378,7 +1378,7 @@ graph TD;
            # Test 3: Safety validation (should be blocked if obstacles in path)
            self.run_test("safety_validation", "Move forward toward the obstacle")
            
-           # Test 4: Multi-step command
+           # Test 4: Multistep command
            self.run_test("multi_step", "Navigate to bedroom, find John, escort him to kitchen")
            
            # Test 5: Recovery from failure
@@ -1389,7 +1389,7 @@ graph TD;
        
        def run_test(self, test_name: str, command: str):
            """Run a single test case"""
-           rospy.loginfo(f"Running test: {test_name} - Command: '{command}'")
+           rospy.loginfo(f"Running test: {test_name}  Command: '{command}'")
            
            self.current_test = {
                "name": test_name,
@@ -1407,12 +1407,12 @@ graph TD;
            start_time = rospy.Time.now().to_sec()
            timeout = 30.0
            
-           while (rospy.Time.now().to_sec() - start_time) < timeout:
+           while (rospy.Time.now().to_sec()  start_time) < timeout:
                rospy.sleep(0.1)
            
            # Record results
            self.current_test["end_time"] = rospy.Time.now().to_sec()
-           self.current_test["duration"] = self.current_test["end_time"] - self.current_test["start_time"]
+           self.current_test["duration"] = self.current_test["end_time"]  self.current_test["start_time"]
            
            # Determine success based on feedback
            success = False
@@ -1457,7 +1457,7 @@ graph TD;
 
 ## Runnable Code Example
 
-Here's a complete integrated system that demonstrates the full voice-to-action pipeline:
+Here's a complete integrated system that demonstrates the full voicetoaction pipeline:
 
 ```python
 #!/usr/bin/env python3
@@ -1540,7 +1540,7 @@ class CompleteVoiceToActionSystem:
         self.listening_thread = None
         self.voice_activation_enabled = rospy.get_param('~voice_activation', False)
         
-        rospy.loginfo("Complete Voice-to-Action System initialized")
+        rospy.loginfo("Complete VoicetoAction System initialized")
     
     def start_voice_activation(self):
         """Start voice activation if enabled"""
@@ -1666,7 +1666,7 @@ class CompleteVoiceToActionSystem:
         """Update navigation status"""
         if msg.status_list:
             # Most recent goal status
-            last_status = msg.status_list[-1]
+            last_status = msg.status_list[1]
             if last_status.status == 3:  # Succeeded
                 self.navigation_active = False
                 self.publish_feedback("Navigation completed successfully")
@@ -1724,7 +1724,7 @@ class CompleteVoiceToActionSystem:
                 rospy.logerr(f"Error processing command queue: {e}")
                 continue
     
-    def process_command_item(self, command_item: Dict) -> bool:
+    def process_command_item(self, command_item: Dict) > bool:
         """Process a single command item through the full pipeline"""
         command_text = command_item["text"]
         rospy.loginfo(f"Processing command: {command_text}")
@@ -1732,7 +1732,7 @@ class CompleteVoiceToActionSystem:
         # Get environment context
         context = self.get_environment_context()
         
-        # Generate plan using GPT-4o
+        # Generate plan using GPT4o
         plan = self.generate_action_plan(command_text, context)
         
         if not plan:
@@ -1759,7 +1759,7 @@ class CompleteVoiceToActionSystem:
             self.publish_feedback(f"Command failed: {command_text[:50]}...")
             return False
     
-    def get_environment_context(self) -> Dict:
+    def get_environment_context(self) > Dict:
         """Get current environment context"""
         context = {
             "robot_state": {
@@ -1780,7 +1780,7 @@ class CompleteVoiceToActionSystem:
         }
         return context
     
-    def get_obstacle_information(self) -> List[Dict]:
+    def get_obstacle_information(self) > List[Dict]:
         """Extract obstacle information from laser scan"""
         if not self.laser_data:
             return []
@@ -1807,18 +1807,18 @@ class CompleteVoiceToActionSystem:
         
         return obstacles
     
-    def get_known_locations(self) -> List[Dict]:
+    def get_known_locations(self) > List[Dict]:
         """Get known locations in the environment"""
         # In real implementation, this would come from map server
         return [
             {"name": "kitchen", "x": 2.0, "y": 1.0},
-            {"name": "living_room", "x": 1.0, "y": -1.0},
-            {"name": "bedroom", "x": -1.0, "y": 1.5},
+            {"name": "living_room", "x": 1.0, "y": 1.0},
+            {"name": "bedroom", "x": 1.0, "y": 1.5},
             {"name": "office", "y": 0.5, "y": 2.0},
-            {"name": "charging_station", "x": -2.0, "y": -2.0}
+            {"name": "charging_station", "x": 2.0, "y": 2.0}
         ]
     
-    def get_detected_objects(self) -> List[Dict]:
+    def get_detected_objects(self) > List[Dict]:
         """Get detected objects from perception system"""
         # In real implementation, this would come from object detection
         if self.image_data:
@@ -1829,8 +1829,8 @@ class CompleteVoiceToActionSystem:
             ]
         return []
     
-    def generate_action_plan(self, command: str, context: Dict) -> Optional[Dict]:
-        """Generate action plan using GPT-4o"""
+    def generate_action_plan(self, command: str, context: Dict) > Optional[Dict]:
+        """Generate action plan using GPT4o"""
         prompt = f"""
         Command: "{command}"
         
@@ -1838,20 +1838,20 @@ class CompleteVoiceToActionSystem:
         {json.dumps(context, indent=2)}
         
         Available Actions:
-        - navigate_to(location_name): Move robot to named location
-        - approach_object(object_name): Move robot near specific object
-        - inspect_object(object_name): Examine object with sensors
-        - grasp_object(object_name): Grasp an object (if equipped with manipulator)
-        - place_object(object_name, location): Place object at location
-        - open_container(container_name): Open a container/door
-        - close_container(container_name): Close a container/door
-        - follow_person(person_name): Follow a person
-        - wait(duration_seconds): Pause for specified duration
-        - speak_response(text): Speak a response to user
-        - find_person(person_name): Locate a specific person
-        - escort_person(person_name, destination): Guide person to location
-        - patrol_area(area_name): Move through predefined area
-        - charge_robot(): Return to charging station
+         navigate_to(location_name): Move robot to named location
+         approach_object(object_name): Move robot near specific object
+         inspect_object(object_name): Examine object with sensors
+         grasp_object(object_name): Grasp an object (if equipped with manipulator)
+         place_object(object_name, location): Place object at location
+         open_container(container_name): Open a container/door
+         close_container(container_name): Close a container/door
+         follow_person(person_name): Follow a person
+         wait(duration_seconds): Pause for specified duration
+         speak_response(text): Speak a response to user
+         find_person(person_name): Locate a specific person
+         escort_person(person_name, destination): Guide person to location
+         patrol_area(area_name): Move through predefined area
+         charge_robot(): Return to charging station
         
         Generate a detailed action plan that:
         1. Breaks down the command into specific, executable actions
@@ -1865,7 +1865,7 @@ class CompleteVoiceToActionSystem:
         Return as JSON:
         {{
           "original_command": "{command}",
-          "reasoning": "step-by-step reasoning about the plan",
+          "reasoning": "stepbystep reasoning about the plan",
           "actions": [
             {{
               "id": 1,
@@ -1893,7 +1893,7 @@ class CompleteVoiceToActionSystem:
         
         try:
             response = self.openai_client.chat.completions.create(
-                model="gpt-4o",
+                model="gpt4o",
                 messages=[
                     {
                         "role": "system",
@@ -1914,7 +1914,7 @@ class CompleteVoiceToActionSystem:
             if response_text.startswith('```'):
                 start_idx = response_text.find('{')
                 end_idx = response_text.rfind('}') + 1
-                if start_idx != -1 and end_idx != -1:
+                if start_idx != 1 and end_idx != 1:
                     response_text = response_text[start_idx:end_idx]
             
             plan_data = json.loads(response_text)
@@ -1926,7 +1926,7 @@ class CompleteVoiceToActionSystem:
             rospy.logerr(f"Error generating action plan: {e}")
             return None
     
-    def validate_plan_safety(self, plan: Dict) -> bool:
+    def validate_plan_safety(self, plan: Dict) > bool:
         """Validate the safety of the generated plan"""
         actions = plan.get("actions", [])
         
@@ -1950,7 +1950,7 @@ class CompleteVoiceToActionSystem:
         
         return True
     
-    def is_safe_navigation_destination(self, location_name: str) -> bool:
+    def is_safe_navigation_destination(self, location_name: str) > bool:
         """Check if navigation destination is safe"""
         known_locations = self.get_known_locations()
         target_loc = next((loc for loc in known_locations if loc["name"] == location_name), None)
@@ -1962,14 +1962,14 @@ class CompleteVoiceToActionSystem:
         # Check laser scan for obstacles to destination
         if self.laser_data:
             # For simplicity, check if there's a clear path (this would need more sophisticated path planning in reality)
-            front_ranges = self.laser_data.ranges[len(self.laser_data.ranges)//2-20:len(self.laser_data.ranges)//2+20]
+            front_ranges = self.laser_data.ranges[len(self.laser_data.ranges)//220:len(self.laser_data.ranges)//2+20]
             valid_ranges = [r for r in front_ranges if not (np.isinf(r) or np.isnan(r))]
             if valid_ranges and min(valid_ranges) < 0.5:
                 return False  # Obstacle in front path
         
         return True
     
-    def is_safe_to_approach_object(self, object_name: str) -> bool:
+    def is_safe_to_approach_object(self, object_name: str) > bool:
         """Check if it's safe to approach an object"""
         detected_objects = self.get_detected_objects()
         target_obj = next((obj for obj in detected_objects if obj["name"] == object_name), None)
@@ -1985,7 +1985,7 @@ class CompleteVoiceToActionSystem:
         
         return True
     
-    def execute_plan(self, plan: Dict) -> bool:
+    def execute_plan(self, plan: Dict) > bool:
         """Execute the action plan step by step"""
         actions = plan.get("actions", [])
         rospy.loginfo(f"Executing plan with {len(actions)} actions")
@@ -2012,7 +2012,7 @@ class CompleteVoiceToActionSystem:
         rospy.loginfo("Plan execution completed successfully")
         return True
     
-    def execute_single_action(self, action: Dict) -> bool:
+    def execute_single_action(self, action: Dict) > bool:
         """Execute a single action in the plan"""
         action_type = action.get("type", "")
         params = action.get("parameters", {})
@@ -2035,7 +2035,7 @@ class CompleteVoiceToActionSystem:
             rospy.logwarn(f"Unknown action type: {action_type}, skipping...")
             return True  # Don't fail on unknown actions
     
-    def execute_navigation_action(self, params: Dict) -> bool:
+    def execute_navigation_action(self, params: Dict) > bool:
         """Execute navigation action"""
         location_name = params.get("location")
         
@@ -2065,10 +2065,10 @@ class CompleteVoiceToActionSystem:
         
         # Wait for navigation to complete
         start_time = rospy.Time.now().to_sec()
-        timeout = 60.0  # 1-minute timeout
+        timeout = 60.0  # 1minute timeout
         
         rate = rospy.Rate(10)  # 10 Hz
-        while (rospy.Time.now().to_sec() - start_time) < timeout:
+        while (rospy.Time.now().to_sec()  start_time) < timeout:
             if not self.navigation_active:
                 rospy.loginfo(f"Navigation to {location_name} completed")
                 return True
@@ -2077,7 +2077,7 @@ class CompleteVoiceToActionSystem:
         rospy.logerr(f"Navigation to {location_name} timed out")
         return False
     
-    def execute_approach_action(self, params: Dict) -> bool:
+    def execute_approach_action(self, params: Dict) > bool:
         """Execute object approach action"""
         object_name = params.get("object_name")
         
@@ -2094,7 +2094,7 @@ class CompleteVoiceToActionSystem:
             return False
         
         # Calculate approach pose (1m in front of object)
-        approach_x = target_obj["x"]  # Simplified - would need transform computation
+        approach_x = target_obj["x"]  # Simplified  would need transform computation
         approach_y = target_obj["y"]
         
         goal = PoseStamped()
@@ -2110,10 +2110,10 @@ class CompleteVoiceToActionSystem:
         
         # Wait for approach completion
         start_time = rospy.Time.now().to_sec()
-        timeout = 45.0  # 45-second timeout for approach
+        timeout = 45.0  # 45second timeout for approach
         
         rate = rospy.Rate(10)
-        while (rospy.Time.now().to_sec() - start_time) < timeout:
+        while (rospy.Time.now().to_sec()  start_time) < timeout:
             if not self.navigation_active:
                 rospy.loginfo(f"Approach to {object_name} completed")
                 return True
@@ -2122,7 +2122,7 @@ class CompleteVoiceToActionSystem:
         rospy.logerr(f"Approach to {object_name} timed out")
         return False
     
-    def execute_speak_action(self, params: Dict) -> bool:
+    def execute_speak_action(self, params: Dict) > bool:
         """Execute speech response action"""
         text = params.get("text", "")
         if text:
@@ -2131,14 +2131,14 @@ class CompleteVoiceToActionSystem:
             return True
         return False
     
-    def execute_wait_action(self, params: Dict) -> bool:
+    def execute_wait_action(self, params: Dict) > bool:
         """Execute wait action"""
         duration = params.get("duration", 1.0)
         rospy.loginfo(f"Waiting for {duration} seconds")
         rospy.sleep(duration)
         return True
     
-    def execute_inspection_action(self, params: Dict) -> bool:
+    def execute_inspection_action(self, params: Dict) > bool:
         """Execute object inspection action"""
         object_name = params.get("object_name")
         rospy.loginfo(f"Inspecting object: {object_name}")
@@ -2150,7 +2150,7 @@ class CompleteVoiceToActionSystem:
         self.publish_feedback(f"Inspection of {object_name} completed")
         return True
     
-    def attempt_recovery(self, plan: Dict, failed_step: int, failed_action: Dict) -> bool:
+    def attempt_recovery(self, plan: Dict, failed_step: int, failed_action: Dict) > bool:
         """Attempt to recover from action failure"""
         recovery_strategies = plan.get("failure_recovery", [])
         failed_condition = f"{failed_action.get('type', 'unknown')}_failed"
@@ -2205,7 +2205,7 @@ class CompleteVoiceToActionSystem:
        try:
            rospy.spin()
        except KeyboardInterrupt:
-           rospy.loginfo("Shutting down Complete Voice-to-Action System")
+           rospy.loginfo("Shutting down Complete VoicetoAction System")
 
    if __name__ == '__main__':
        main()
@@ -2216,13 +2216,13 @@ class CompleteVoiceToActionSystem:
 1. **Build the package**:
    ```bash
    cd ~/ros2_ws
-   colcon build --packages-select robot_voice_control
+   colcon build packagesselect robot_voice_control
    source install/setup.bash
    ```
 
 2. **Run the complete system**:
    ```bash
-   ros2 launch robot_voice_control voice_to_action_system.launch.py openai_api_key:="<your-api-key>"
+   ros2 launch robot_voice_control voice_to_action_system.launch.py openai_api_key:="<yourapikey>"
    ```
 
 3. **Send voice commands** (in another terminal):
@@ -2234,40 +2234,40 @@ class CompleteVoiceToActionSystem:
    ros2 topic pub /voice_command std_msgs/String "data: 'Approach the red cup and inspect it'"
    ```
 
-## Mini-project
+## Miniproject
 
-Create a complete voice-controlled robot system that:
+Create a complete voicecontrolled robot system that:
 
-1. Implements voice recognition using Whisper for real-time command processing
-2. Integrates with GPT-4o for cognitive task planning
+1. Implements voice recognition using Whisper for realtime command processing
+2. Integrates with GPT4o for cognitive task planning
 3. Incorporates safety validation at multiple levels (perception, planning, execution)
 4. Creates a multimodal interface connecting voice, vision, and action
 5. Implements error recovery and graceful degradation mechanisms
 6. Evaluates system performance with various input scenarios
 7. Documents the complete system architecture and design decisions
-8. Creates a user-friendly interface for non-technical operators
+8. Creates a userfriendly interface for nontechnical operators
 
 Your project should include:
-- Complete voice recognition and processing pipeline
-- GPT-4o integration for task planning
-- Multi-sensor fusion for enhanced perception
-- Safety validation throughout the system
-- Error handling and recovery mechanisms
-- Performance evaluation and testing
-- User interface for command input
-- Documentation of system design and decisions
+ Complete voice recognition and processing pipeline
+ GPT4o integration for task planning
+ Multisensor fusion for enhanced perception
+ Safety validation throughout the system
+ Error handling and recovery mechanisms
+ Performance evaluation and testing
+ User interface for command input
+ Documentation of system design and decisions
 
 ## Summary
 
-This chapter covered multi-modal perception fusion in robotics:
+This chapter covered multimodal perception fusion in robotics:
 
-- **Multi-modal Integration**: Combining information from different sensor modalities
-- **Fusion Architectures**: Early, late, and deep fusion approaches
-- **Transformer-Based Fusion**: Using attention mechanisms for cross-modal processing
-- **Sensor Calibration**: Ensuring proper alignment between modalities
-- **Synchronization**: Managing temporal alignment of sensor data
-- **Fusion Algorithms**: Techniques for combining multi-modal information
-- **Uncertainty Management**: Handling uncertainty in fused perceptions
-- **Performance Evaluation**: Metrics for assessing fusion effectiveness
+ **Multimodal Integration**: Combining information from different sensor modalities
+ **Fusion Architectures**: Early, late, and deep fusion approaches
+ **TransformerBased Fusion**: Using attention mechanisms for crossmodal processing
+ **Sensor Calibration**: Ensuring proper alignment between modalities
+ **Synchronization**: Managing temporal alignment of sensor data
+ **Fusion Algorithms**: Techniques for combining multimodal information
+ **Uncertainty Management**: Handling uncertainty in fused perceptions
+ **Performance Evaluation**: Metrics for assessing fusion effectiveness
 
-Multi-modal perception fusion enables robots to develop a more comprehensive understanding of their environment by combining complementary information from multiple sensors, resulting in more robust and accurate perception systems that can handle challenging conditions.
+Multimodal perception fusion enables robots to develop a more comprehensive understanding of their environment by combining complementary information from multiple sensors, resulting in more robust and accurate perception systems that can handle challenging conditions.

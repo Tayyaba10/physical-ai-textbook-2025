@@ -1,5 +1,5 @@
----
-title: Ch5 - Building & Launching ROS 2 Packages
+-----
+title: Ch5  Building & Launching ROS 2 Packages
 module: 1
 chapter: 5
 sidebar_label: Ch5: Building & Launching ROS 2 Packages
@@ -7,20 +7,20 @@ description: Managing ROS 2 packages, building systems, and launch configuration
 tags: [ros2, packages, building, launch, cmake, ament]
 difficulty: intermediate
 estimated_duration: 60
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
 # Building & Launching ROS 2 Packages
 
 ## Learning Outcomes
-- Understand the structure and organization of ROS 2 packages
-- Create and manage packages using colcon build system
-- Configure CMakeLists.txt and package.xml for different build types
-- Create launch files to start multiple nodes with parameters
-- Use launch arguments and conditional launching
-- Integrate third-party libraries into ROS 2 packages
-- Deploy packages to different environments
+ Understand the structure and organization of ROS 2 packages
+ Create and manage packages using colcon build system
+ Configure CMakeLists.txt and package.xml for different build types
+ Create launch files to start multiple nodes with parameters
+ Use launch arguments and conditional launching
+ Integrate thirdparty libraries into ROS 2 packages
+ Deploy packages to different environments
 
 ## Theory
 
@@ -30,21 +30,21 @@ ROS 2 packages follow a standardized structure that enables consistent building 
 
 <MermaidDiagram chart={`
 graph TD;
-    A[ROS 2 Package] --> B[package.xml];
-    A --> C[CMakeLists.txt];
-    A --> D[src/];
-    A --> E[include/];
-    A --> F[launch/];
-    A --> G[config/];
-    A --> H[rviz/];
-    A --> I[urdf/];
-    A --> J[params/];
+    A[ROS 2 Package] > B[package.xml];
+    A > C[CMakeLists.txt];
+    A > D[src/];
+    A > E[include/];
+    A > F[launch/];
+    A > G[config/];
+    A > H[rviz/];
+    A > I[urdf/];
+    A > J[params/];
     
-    D --> K[Node Source Files];
-    E --> L[Header Files];
-    F --> M[Launch Files];
-    G --> N[Configuration Files];
-    I --> O[URDF/Xacro Files];
+    D > K[Node Source Files];
+    E > L[Header Files];
+    F > M[Launch Files];
+    G > N[Configuration Files];
+    I > O[URDF/Xacro Files];
     
     style A fill:#4CAF50,stroke:#388E3C,color:#fff;
     style B fill:#2196F3,stroke:#0D47A1,color:#fff;
@@ -53,39 +53,39 @@ graph TD;
 
 ### Build Systems in ROS 2
 
-ROS 2 uses the `colcon` build system, which is a command-line tool that provides a unified interface for building different types of packages (CMake, Python, etc.) in a workspace. The primary build systems are:
-- `ament_cmake` for C++ packages
-- `ament_python` for Python packages
-- `ament_cmake_python` for mixed C++/Python packages
+ROS 2 uses the `colcon` build system, which is a commandline tool that provides a unified interface for building different types of packages (CMake, Python, etc.) in a workspace. The primary build systems are:
+ `ament_cmake` for C++ packages
+ `ament_python` for Python packages
+ `ament_cmake_python` for mixed C++/Python packages
 
 ### Launch System
 
 The ROS 2 launch system uses Python files instead of XML (as in ROS 1) to provide more flexibility and powerful features such as:
-- Conditional launching
-- Launch arguments
-- Node composition
-- Event handling
+ Conditional launching
+ Launch arguments
+ Node composition
+ Event handling
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
 ### Lab 1: Creating a Complex Package with Multiple Components
 
 1. **Create a comprehensive package** with both C++ and Python nodes:
    ```bash
    cd ~/ros2_ws/src
-   ros2 pkg create --build-type ament_cmake --dependencies rclcpp rclpy std_msgs geometry_msgs sensor_msgs example_interfaces complex_robot_controller
+   ros2 pkg create buildtype ament_cmake dependencies rclcpp rclpy std_msgs geometry_msgs sensor_msgs example_interfaces complex_robot_controller
    cd complex_robot_controller
    ```
 
 2. **Create directory structure**:
    ```bash
-   mkdir -p src include launch config
+   mkdir p src include launch config
    ```
 
 3. **Update package.xml** to include all dependencies:
    ```xml
    <?xml version="1.0"?>
-   <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+   <?xmlmodel href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
    <package format="3">
      <name>complex_robot_controller</name>
      <version>0.0.0</version>
@@ -162,12 +162,12 @@ The ROS 2 launch system uses Python files instead of XML (as in ROS 1) to provid
        obstacle_detected_(false),
        safety_distance_(0.8)
      {
-       cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
-       scan_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
+       cmd_vel_pub_ = this>create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
+       scan_sub_ = this>create_subscription<sensor_msgs::msg::LaserScan>(
          "scan", 10, 
          std::bind(&MotionController::scan_callback, this, std::placeholders::_1));
        
-       safety_timer_ = this->create_wall_timer(
+       safety_timer_ = this>create_wall_timer(
          std::chrono::milliseconds(100),  // 10 Hz
          std::bind(&MotionController::safety_timer_callback, this));
      }
@@ -178,12 +178,12 @@ The ROS 2 launch system uses Python files instead of XML (as in ROS 1) to provid
        float min_distance = std::numeric_limits<float>::max();
        
        // Consider only the front 90 degrees
-       int start_idx = msg->ranges.size() / 2 - 45;
-       int end_idx = msg->ranges.size() / 2 + 45;
+       int start_idx = msg>ranges.size() / 2  45;
+       int end_idx = msg>ranges.size() / 2 + 45;
        
-       for (int i = start_idx; i < end_idx && i < msg->ranges.size(); ++i) {
-         if (msg->ranges[i] < min_distance && !std::isinf(msg->ranges[i]) && !std::isnan(msg->ranges[i])) {
-           min_distance = msg->ranges[i];
+       for (int i = start_idx; i < end_idx && i < msg>ranges.size(); ++i) {
+         if (msg>ranges[i] < min_distance && !std::isinf(msg>ranges[i]) && !std::isnan(msg>ranges[i])) {
+           min_distance = msg>ranges[i];
          }
        }
        
@@ -198,14 +198,14 @@ The ROS 2 launch system uses Python files instead of XML (as in ROS 1) to provid
          // Stop and rotate away from obstacle
          cmd_msg.linear.x = 0.0;
          cmd_msg.angular.z = angular_vel_;
-         RCLCPP_WARN(this->get_logger(), "Obstacle detected! Rotating away.");
+         RCLCPP_WARN(this>get_logger(), "Obstacle detected! Rotating away.");
        } else {
          // Move forward
          cmd_msg.linear.x = linear_vel_;
          cmd_msg.angular.z = 0.0;
        }
        
-       cmd_vel_pub_->publish(cmd_msg);
+       cmd_vel_pub_>publish(cmd_msg);
      }
    }
 
@@ -226,7 +226,7 @@ The ROS 2 launch system uses Python files instead of XML (as in ROS 1) to provid
    project(complex_robot_controller)
 
    if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-     add_compile_options(-Wall -Wextra -Wpedantic)
+     add_compile_options(Wall Wextra Wpedantic)
    endif()
 
    # Find dependencies
@@ -288,7 +288,7 @@ The ROS 2 launch system uses Python files instead of XML (as in ROS 1) to provid
        robot_namespace = DeclareLaunchArgument(
            'robot_namespace',
            default_value='robot1',
-           description='Robot namespace for multi-robot systems')
+           description='Robot namespace for multirobot systems')
            
        linear_velocity = DeclareLaunchArgument(
            'linear_velocity',
@@ -337,7 +337,7 @@ The ROS 2 launch system uses Python files instead of XML (as in ROS 1) to provid
        return ld
    ```
 
-2. **Create a launch file for multi-robot setup** (`launch/multi_robot.launch.py`):
+2. **Create a launch file for multirobot setup** (`launch/multi_robot.launch.py`):
    ```python
    import os
    from launch import LaunchDescription
@@ -405,7 +405,7 @@ The ROS 2 launch system uses Python files instead of XML (as in ROS 1) to provid
 1. **Build the package**:
    ```bash
    cd ~/ros2_ws
-   colcon build --packages-select complex_robot_controller --symlink-install
+   colcon build packagesselect complex_robot_controller symlinkinstall
    ```
 
 2. **Source the workspace**:
@@ -491,8 +491,8 @@ class BehaviorController(Node):
         self.scan_data = msg
         # Process scan data to detect obstacles
         if len(msg.ranges) > 0:
-            # Get front-facing ranges (±30 degrees)
-            front_ranges = msg.ranges[len(msg.ranges)//2 - 15 : len(msg.ranges)//2 + 15]
+            # Get frontfacing ranges (±30 degrees)
+            front_ranges = msg.ranges[len(msg.ranges)//2  15 : len(msg.ranges)//2 + 15]
             front_ranges = [r for r in front_ranges if not (math.isinf(r) or math.isnan(r))]
             
             if front_ranges:
@@ -522,7 +522,7 @@ class BehaviorController(Node):
                 status_msg.data = "Exploring"
                 self.status_pub.publish(status_msg)
         elif self.behavior_mode == 'follow':
-            # Simple wall-following behavior
+            # Simple wallfollowing behavior
             if self.scan_data.ranges:
                 right_dist = self.scan_data.ranges[0] if not math.isinf(self.scan_data.ranges[0]) else float('inf')
                 front_dist = self.scan_data.ranges[len(self.scan_data.ranges)//2] if not math.isinf(self.scan_data.ranges[len(self.scan_data.ranges)//2]) else float('inf')
@@ -530,7 +530,7 @@ class BehaviorController(Node):
                 if front_dist < self.safety_distance:
                     cmd.angular.z = self.angular_velocity  # Turn left
                 elif right_dist > 0.5:  # Too far from wall
-                    cmd.angular.z = -self.angular_velocity  # Turn right
+                    cmd.angular.z = self.angular_velocity  # Turn right
                 elif right_dist < 0.2:  # Too close to wall
                     cmd.angular.z = self.angular_velocity  # Turn left
                 else:
@@ -667,10 +667,10 @@ setup(
             'behavior_controller = complex_robot_controller.behavior_controller:main',
         ],
     },
-)
+)-
 ```
 
-## Mini-project
+## Miniproject
 
 Create a complete navigation stack package with the following components:
 
@@ -682,20 +682,20 @@ Create a complete navigation stack package with the following components:
 6. Proper error handling and logging throughout the system
 
 Create a README.md file that explains how to:
-- Build the package
-- Launch the navigation stack
-- Configure different navigation parameters
-- Test the system with simulated sensor data
+ Build the package
+ Launch the navigation stack
+ Configure different navigation parameters
+ Test the system with simulated sensor data
 
 ## Summary
 
 This chapter covered the complete workflow for building and launching ROS 2 packages:
 
-- Package structure organization with proper CMakeLists.txt and package.xml configuration
-- The colcon build system for compiling different types of packages
-- Launch files using Python for complex system startup
-- Parameter management using YAML configuration files
-- Multi-robot system setup with namespaces
-- Best practices for package organization and deployment
+ Package structure organization with proper CMakeLists.txt and package.xml configuration
+ The colcon build system for compiling different types of packages
+ Launch files using Python for complex system startup
+ Parameter management using YAML configuration files
+ Multirobot system setup with namespaces
+ Best practices for package organization and deployment
 
 The launch system in ROS 2 provides powerful features for managing complex robotic systems, allowing for conditional launching, argument passing, and node composition. Properly configured packages with appropriate parameters and launch files are essential for developing robust and maintainable robotics applications.

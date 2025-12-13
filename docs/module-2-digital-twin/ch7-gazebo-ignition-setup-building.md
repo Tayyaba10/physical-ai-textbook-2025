@@ -1,50 +1,50 @@
----
-title: Ch7 - Gazebo Ignition Setup & World Building
+-----
+title: Ch7  Gazebo Ignition Setup & World Building
 module: 2
 chapter: 7
 sidebar_label: Ch7: Gazebo Ignition Setup & World Building
 description: Setting up Gazebo Ignition for robotics simulation and creating custom worlds
-tags: [gazebo, ignition, simulation, world-building, sdf, robotics]
+tags: [gazebo, ignition, simulation, worldbuilding, sdf, robotics]
 difficulty: intermediate
 estimated_duration: 90
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
 # Gazebo Ignition Setup & World Building
 
 ## Learning Outcomes
-- Install and configure Gazebo Ignition for robotics simulation
-- Understand the SDF (Simulation Description Format) for world definition
-- Create custom worlds with static and dynamic objects
-- Configure sensors and physics properties for simulation
-- Integrate Gazebo with ROS 2 for robot simulation
-- Build complex simulation environments for specific robotics applications
-- Optimize simulation performance for different use cases
+ Install and configure Gazebo Ignition for robotics simulation
+ Understand the SDF (Simulation Description Format) for world definition
+ Create custom worlds with static and dynamic objects
+ Configure sensors and physics properties for simulation
+ Integrate Gazebo with ROS 2 for robot simulation
+ Build complex simulation environments for specific robotics applications
+ Optimize simulation performance for different use cases
 
 ## Theory
 
 ### Gazebo Ignition Architecture
 
-Gazebo Ignition (now known as Ignition Gazebo) is a next-generation robotics simulation framework that provides a modular architecture for creating realistic simulation environments. It replaced the older Gazebo Classic with improved performance, modularity, and plugin architecture.
+Gazebo Ignition (now known as Ignition Gazebo) is a nextgeneration robotics simulation framework that provides a modular architecture for creating realistic simulation environments. It replaced the older Gazebo Classic with improved performance, modularity, and plugin architecture.
 
 <MermaidDiagram chart={`
 graph TD;
-    A[Gazebo Ignition] --> B[Simulation Core];
-    A --> C[Rendering Engine];
-    A --> D[Physics Engine];
-    A --> E[Sensor System];
-    A --> F[GUI Framework];
+    A[Gazebo Ignition] > B[Simulation Core];
+    A > C[Rendering Engine];
+    A > D[Physics Engine];
+    A > E[Sensor System];
+    A > F[GUI Framework];
     
-    B --> G[Entity Component System];
-    C --> H[OGRE 2.x];
-    D --> I[DART/ODE/Bullet];
-    E --> J[Sensor Plugins];
-    F --> K[QML/Qt GUI];
+    B > G[Entity Component System];
+    C > H[OGRE 2.x];
+    D > I[DART/ODE/Bullet];
+    E > J[Sensor Plugins];
+    F > K[QML/Qt GUI];
     
-    L[ROS 2 Integration] --> M[ROS 2 Bridge];
-    M --> N[Topic Mapping];
-    M --> O[Service Mapping];
+    L[ROS 2 Integration] > M[ROS 2 Bridge];
+    M > N[Topic Mapping];
+    M > O[Service Mapping];
     
     style A fill:#4CAF50,stroke:#388E3C,color:#fff;
     style M fill:#2196F3,stroke:#0D47A1,color:#fff;
@@ -52,31 +52,31 @@ graph TD;
 
 ### SDF (Simulation Description Format)
 
-SDF is the XML-based format used to describe simulation environments in Gazebo. It defines:
-- World structure and properties
-- Models and their relationships
-- Physics engine settings
-- Lighting and environment properties
-- Sensors and plugins
+SDF is the XMLbased format used to describe simulation environments in Gazebo. It defines:
+ World structure and properties
+ Models and their relationships
+ Physics engine settings
+ Lighting and environment properties
+ Sensors and plugins
 
 Key SDF elements:
-- `<world>`: The root element for a simulation world
-- `<model>`: Represents a physical object in the world
-- `<link>`: A rigid body part of a model
-- `<joint>`: Connection between links
-- `<sensor>`: Sensor attached to a link
-- `<plugin>`: Custom code to extend simulation functionality
+ `<world>`: The root element for a simulation world
+ `<model>`: Represents a physical object in the world
+ `<link>`: A rigid body part of a model
+ `<joint>`: Connection between links
+ `<sensor>`: Sensor attached to a link
+ `<plugin>`: Custom code to extend simulation functionality
 
 ### World Building Principles
 
 Creating effective simulation worlds requires understanding:
-- Spatial relationships and scale
-- Object mass and inertial properties
-- Collision and visual geometries
-- Sensor placement and environment interaction
-- Physics properties that affect robot behavior
+ Spatial relationships and scale
+ Object mass and inertial properties
+ Collision and visual geometries
+ Sensor placement and environment interaction
+ Physics properties that affect robot behavior
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
 ### Lab 1: Installing and Setting up Gazebo Ignition
 
@@ -84,24 +84,24 @@ Creating effective simulation worlds requires understanding:
    ```bash
    # For Ubuntu 22.04
    sudo apt update
-   sudo apt install -y wget
-   wget https://packages.osrfoundation.org/gazebo.gpg -O /tmp/gazebo.gpg
-   sudo mkdir -p /etc/apt/keyrings
-   sudo cp /tmp/gazebo.gpg /etc/apt/keyrings/gazebo-archive-keyring.gpg
-   echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/gazebo-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(source /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+   sudo apt install y wget
+   wget https://packages.osrfoundation.org/gazebo.gpg O /tmp/gazebo.gpg
+   sudo mkdir p /etc/apt/keyrings
+   sudo cp /tmp/gazebo.gpg /etc/apt/keyrings/gazeboarchivekeyring.gpg
+   echo "deb [arch=$(dpkg printarchitecture) signedby=/etc/apt/keyrings/gazeboarchivekeyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntustable $(source /etc/osrelease && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/gazebostable.list > /dev/null
    sudo apt update
-   sudo apt install ignition-garden
+   sudo apt install ignitiongarden
    ```
 
 2. **Verify Installation**:
    ```bash
-   ign gazebo --version
+   ign gazebo version
    ```
 
 3. **Set up Gazebo resources**:
    ```bash
    # Create a directory for custom worlds
-   mkdir -p ~/gazebo_worlds
+   mkdir p ~/gazebo_worlds
    export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:~/gazebo_worlds
    ```
 
@@ -118,7 +118,7 @@ Creating effective simulation worlds requires understanding:
          <real_time_update_rate>1000.0</real_time_update_rate>
        </physics>
 
-       <!-- Lighting -->
+       <! Lighting >
        <light name="sun" type="directional">
          <cast_shadows>true</cast_shadows>
          <pose>0 0 10 0 0 0</pose>
@@ -130,10 +130,10 @@ Creating effective simulation worlds requires understanding:
            <linear>0.01</linear>
            <quadratic>0.001</quadratic>
          </attenuation>
-         <direction>-0.3 0.3 -1</direction>
+         <direction>0.3 0.3 1</direction>
        </light>
 
-       <!-- Ground plane -->
+       <! Ground plane >
        <model name="ground_plane">
          <static>true</static>
          <link name="link">
@@ -160,7 +160,7 @@ Creating effective simulation worlds requires understanding:
          </link>
        </model>
 
-       <!-- Walls -->
+       <! Walls >
        <model name="wall_1">
          <pose>5 0 2.5 0 0 0</pose>
          <static>true</static>
@@ -187,7 +187,7 @@ Creating effective simulation worlds requires understanding:
        </model>
 
        <model name="wall_2">
-         <pose>-5 0 2.5 0 0 0</pose>
+         <pose>5 0 2.5 0 0 0</pose>
          <static>true</static>
          <link name="link">
            <collision name="collision">
@@ -237,7 +237,7 @@ Creating effective simulation worlds requires understanding:
        </model>
 
        <model name="wall_4">
-         <pose>0 -5 2.5 0 0 1.5707</pose>
+         <pose>0 5 2.5 0 0 1.5707</pose>
          <static>true</static>
          <link name="link">
            <collision name="collision">
@@ -261,7 +261,7 @@ Creating effective simulation worlds requires understanding:
          </link>
        </model>
 
-       <!-- Add a simple robot -->
+       <! Add a simple robot >
        <model name="simple_robot">
          <pose>0 0 0.2 0 0 0</pose>
          <link name="chassis">
@@ -315,16 +315,16 @@ Creating effective simulation worlds requires understanding:
          <real_time_update_rate>1000.0</real_time_update_rate>
        </physics>
 
-       <!-- Lighting -->
+       <! Lighting >
        <light name="sun" type="directional">
          <cast_shadows>true</cast_shadows>
          <pose>0 0 10 0 0 0</pose>
          <diffuse>0.8 0.8 0.8 1</diffuse>
          <specular>0.2 0.2 0.2 1</specular>
-         <direction>-0.3 0.3 -1</direction>
+         <direction>0.3 0.3 1</direction>
        </light>
 
-       <!-- Ground plane with texture -->
+       <! Ground plane with texture >
        <model name="floor">
          <static>true</static>
          <link name="link">
@@ -351,7 +351,7 @@ Creating effective simulation worlds requires understanding:
          </link>
        </model>
 
-       <!-- Furniture -->
+       <! Furniture >
        <model name="desk">
          <pose>2 2 0.4 0 0 0</pose>
          <static>true</static>
@@ -402,9 +402,9 @@ Creating effective simulation worlds requires understanding:
          </joint>
        </model>
 
-       <!-- Bookshelf -->
+       <! Bookshelf >
        <model name="bookshelf">
-         <pose>-3 0 0.6 0 0 0</pose>
+         <pose>3 0 0.6 0 0 0</pose>
          <static>true</static>
          <link name="link">
            <collision name="collision">
@@ -428,9 +428,9 @@ Creating effective simulation worlds requires understanding:
          </link>
        </model>
 
-       <!-- Add a robot with sensors -->
+       <! Add a robot with sensors >
        <model name="sensor_robot">
-         <pose>-2 -3 0.3 0 0 0</pose>
+         <pose>2 3 0.3 0 0 0</pose>
          <link name="chassis">
            <inertial>
              <mass>2.0</mass>
@@ -462,7 +462,7 @@ Creating effective simulation worlds requires understanding:
            </visual>
          </link>
 
-         <!-- Laser scanner -->
+         <! Laser scanner >
          <link name="laser_link">
            <pose>0.15 0 0.1 0 0 0</pose>
            <inertial>
@@ -499,7 +499,7 @@ Creating effective simulation worlds requires understanding:
            <pose>0.15 0 0.1 0 0 0</pose>
          </joint>
 
-         <!-- Attach laser sensor -->
+         <! Attach laser sensor >
          <sensor name="laser" type="ray">
            <pose>0 0 0 0 0 0</pose>
            <ray>
@@ -507,7 +507,7 @@ Creating effective simulation worlds requires understanding:
                <horizontal>
                  <samples>360</samples>
                  <resolution>1</resolution>
-                 <min_angle>-3.14159</min_angle>
+                 <min_angle>3.14159</min_angle>
                  <max_angle>3.14159</max_angle>
                </horizontal>
              </scan>
@@ -534,8 +534,8 @@ Creating effective simulation worlds requires understanding:
 
 1. **Install Ignition ROS 2 bridge**:
    ```bash
-   sudo apt install ros-humble-ros-ign-bridge
-   sudo apt install ros-humble-ign-gazebo
+   sudo apt install roshumblerosignbridge
+   sudo apt install roshumbleigngazebo
    ```
 
 2. **Create a launch file** (`launch/gazebo_with_robot.launch.py`):
@@ -569,7 +569,7 @@ Creating effective simulation worlds requires understanding:
                os.path.join(gazebo_ros_share, 'launch', 'gz_sim.launch.py')
            ),
            launch_arguments={
-               'gz_args': ['-r ', LaunchConfiguration('world')]
+               'gz_args': ['r ', LaunchConfiguration('world')]
            }.items()
        )
        
@@ -613,7 +613,7 @@ Here's a complete example with a more sophisticated world that includes a struct
       <real_time_update_rate>1000.0</real_time_update_rate>
     </physics>
 
-    <!-- Sky -->
+    <! Sky >
     <scene>
       <sky>
         <clouds>
@@ -623,16 +623,16 @@ Here's a complete example with a more sophisticated world that includes a struct
       </sky>
     </scene>
 
-    <!-- Lighting -->
+    <! Lighting >
     <light name="sun" type="directional">
       <cast_shadows>true</cast_shadows>
       <pose>0 0 10 0 0 0</pose>
       <diffuse>0.8 0.8 0.8 1</diffuse>
       <specular>0.2 0.2 0.2 1</specular>
-      <direction>-0.3 0.3 -1</direction>
+      <direction>0.3 0.3 1</direction>
     </light>
 
-    <!-- Ground plane with road markings -->
+    <! Ground plane with road markings >
     <model name="ground_plane">
       <static>true</static>
       <link name="link">
@@ -655,8 +655,8 @@ Here's a complete example with a more sophisticated world that includes a struct
             <diffuse>0.3 0.3 0.3 1</diffuse>
             <specular>0.1 0.1 0.1 1</specular>
           </material>
-          <!-- Road markings -->
-          <plugin filename="gz-sim-visual-system" name="gz::sim::systems::Visual">
+          <! Road markings >
+          <plugin filename="gzsimvisualsystem" name="gz::sim::systems::Visual">
             <visual>
               <geometry type="box">
                 <box size="20 0.2 0.01" />
@@ -671,9 +671,9 @@ Here's a complete example with a more sophisticated world that includes a struct
       </link>
     </model>
 
-    <!-- Buildings -->
+    <! Buildings >
     <model name="building_1">
-      <pose>-5 5 5 0 0 0</pose>
+      <pose>5 5 5 0 0 0</pose>
       <static>true</static>
       <link name="link">
         <collision name="collision">
@@ -722,9 +722,9 @@ Here's a complete example with a more sophisticated world that includes a struct
       </link>
     </model>
 
-    <!-- Trees -->
+    <! Trees >
     <model name="tree_1">
-      <pose>-8 -8 1.5 0 0 0</pose>
+      <pose>8 8 1.5 0 0 0</pose>
       <static>true</static>
       <link name="trunk">
         <collision name="collision">
@@ -775,7 +775,7 @@ Here's a complete example with a more sophisticated world that includes a struct
       </joint>
     </model>
 
-    <!-- Robotic platform with sensors -->
+    <! Robotic platform with sensors >
     <model name="autonomous_robot">
       <pose>0 0 0.3 0 0 0</pose>
       <link name="base_link">
@@ -807,9 +807,9 @@ Here's a complete example with a more sophisticated world that includes a struct
         </visual>
       </link>
 
-      <!-- Differential drive wheels -->
+      <! Differential drive wheels >
       <link name="left_wheel">
-        <pose>-0.2 -0.4 -0.15 0 0 0</pose>
+        <pose>0.2 0.4 0.15 0 0 0</pose>
         <inertial>
           <mass>0.5</mass>
           <inertia>
@@ -841,7 +841,7 @@ Here's a complete example with a more sophisticated world that includes a struct
       </link>
 
       <link name="right_wheel">
-        <pose>-0.2 0.4 -0.15 0 0 0</pose>
+        <pose>0.2 0.4 0.15 0 0 0</pose>
         <inertial>
           <mass>0.5</mass>
           <inertia>
@@ -888,8 +888,8 @@ Here's a complete example with a more sophisticated world that includes a struct
         </axis>
       </joint>
 
-      <!-- Sensors -->
-      <!-- RGB-D Camera -->
+      <! Sensors >
+      <! RGBD Camera >
       <link name="camera_link">
         <pose>0.3 0 0.2 0 0 0</pose>
         <inertial>
@@ -927,7 +927,7 @@ Here's a complete example with a more sophisticated world that includes a struct
       <sensor name="rgbd_camera" type="rgbd_camera">
         <pose>0 0 0 0 0 0</pose>
         <camera>
-          <horizontal_fov>1.047</horizontal_fov> <!-- 60 degrees -->
+          <horizontal_fov>1.047</horizontal_fov> <! 60 degrees >
           <image>
             <width>640</width>
             <height>480</height>
@@ -941,7 +941,7 @@ Here's a complete example with a more sophisticated world that includes a struct
         <update_rate>15</update_rate>
       </sensor>
 
-      <!-- IMU Sensor -->
+      <! IMU Sensor >
       <sensor name="imu_sensor" type="imu">
         <pose>0 0 0 0 0 0</pose>
         <always_on>true</always_on>
@@ -1000,9 +1000,9 @@ class GazeboRobotController(Node):
         cmd = Twist()
         
         if self.scan_data is not None:
-            # Get front-facing ranges (±30 degrees)
+            # Get frontfacing ranges (±30 degrees)
             front_ranges = self.scan_data.ranges[
-                len(self.scan_data.ranges)//2 - 30 : 
+                len(self.scan_data.ranges)//2  30 : 
                 len(self.scan_data.ranges)//2 + 30]
             
             # Filter out invalid values
@@ -1049,7 +1049,7 @@ if __name__ == '__main__':
     main()
 ```
 
-## Mini-project
+## Miniproject
 
 Create a complete warehouse simulation environment with the following features:
 
@@ -1061,21 +1061,21 @@ Create a complete warehouse simulation environment with the following features:
 6. A controller node that enables the robot to navigate autonomously
 
 Your simulation should include:
-- Custom SDF world file for the warehouse
-- Robot model with sensors
-- At least 3 moving obstacles
-- Navigation controller to move between waypoints
-- Collision avoidance
-- Performance metrics logging
+ Custom SDF world file for the warehouse
+ Robot model with sensors
+ At least 3 moving obstacles
+ Navigation controller to move between waypoints
+ Collision avoidance
+ Performance metrics logging
 
 ## Summary
 
 This chapter covered the setup and use of Gazebo Ignition for robotics simulation:
 
-- **Installation and Configuration**: Setting up Gazebo Ignition and understanding its architecture
-- **SDF World Building**: Creating simulation environments using the Simulation Description Format
-- **Sensor Integration**: Adding sensors to robots in simulation
-- **ROS 2 Integration**: Connecting Gazebo with ROS 2 for realistic robotics simulation
-- **Environment Design**: Creating complex simulation worlds with static and dynamic objects
+ **Installation and Configuration**: Setting up Gazebo Ignition and understanding its architecture
+ **SDF World Building**: Creating simulation environments using the Simulation Description Format
+ **Sensor Integration**: Adding sensors to robots in simulation
+ **ROS 2 Integration**: Connecting Gazebo with ROS 2 for realistic robotics simulation
+ **Environment Design**: Creating complex simulation worlds with static and dynamic objects
 
 Gazebo Ignition provides a powerful platform for developing, testing, and validating robotics applications in a safe, controlled environment before deploying to real hardware.

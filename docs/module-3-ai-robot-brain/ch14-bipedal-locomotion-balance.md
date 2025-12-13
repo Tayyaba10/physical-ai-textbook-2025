@@ -1,26 +1,26 @@
----
-title: Ch14 - Bipedal Locomotion & Balance Control
+-----
+title: Ch14  Bipedal Locomotion & Balance Control
 module: 3
 chapter: 14
 sidebar_label: Ch14: Bipedal Locomotion & Balance Control
 description: Implementing bipedal locomotion and balance control using Isaac Sim and advanced control systems
-tags: [bipedal, locomotion, balance, control, humanoid, robotics, isaac-sim, MPC]
+tags: [bipedal, locomotion, balance, control, humanoid, robotics, isaacsim, MPC]
 difficulty: advanced
 estimated_duration: 150
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
 # Bipedal Locomotion & Balance Control
 
 ## Learning Outcomes
-- Understand the principles of bipedal locomotion and balance control
-- Implement advanced control strategies for humanoid robots
-- Create dynamic walking gaits using model predictive control (MPC)
-- Simulate bipedal robots in Isaac Sim with realistic physics
-- Design and tune balance controllers for perturbation recovery
-- Implement footstep planning and trajectory generation
-- Evaluate stability and performance of bipedal locomotion systems
+ Understand the principles of bipedal locomotion and balance control
+ Implement advanced control strategies for humanoid robots
+ Create dynamic walking gaits using model predictive control (MPC)
+ Simulate bipedal robots in Isaac Sim with realistic physics
+ Design and tune balance controllers for perturbation recovery
+ Implement footstep planning and trajectory generation
+ Evaluate stability and performance of bipedal locomotion systems
 
 ## Theory
 
@@ -30,21 +30,21 @@ Bipedal locomotion presents unique challenges compared to wheeled or quadrupedal
 
 <MermaidDiagram chart={`
 graph TD;
-    A[Bipedal Locomotion] --> B[Balance Control];
-    A --> C[Locomotion Gait];
-    A --> D[Stability Analysis];
+    A[Bipedal Locomotion] > B[Balance Control];
+    A > C[Locomotion Gait];
+    A > D[Stability Analysis];
     
-    B --> E[Center of Mass Control];
-    B --> F[Zero Moment Point];
-    B --> G[Capture Point];
+    B > E[Center of Mass Control];
+    B > F[Zero Moment Point];
+    B > G[Capture Point];
     
-    C --> H[Walk Cycle];
-    C --> I[Step Planning];
-    C --> J[Trajectory Generation];
+    C > H[Walk Cycle];
+    C > I[Step Planning];
+    C > J[Trajectory Generation];
     
-    D --> K[Stability Margins];
-    D --> L[Robustness Analysis];
-    D --> M[Recovery Strategies];
+    D > K[Stability Margins];
+    D > L[Robustness Analysis];
+    D > M[Recovery Strategies];
     
     style A fill:#4CAF50,stroke:#388E3C,color:#fff;
     style B fill:#2196F3,stroke:#0D47A1,color:#fff;
@@ -63,15 +63,15 @@ graph TD;
 
 Bipedal gaits involve complex coordination of joints and careful foot placement. Key phases include:
 
-- **Single Support**: One foot in contact with ground
-- **Double Support**: Both feet in contact during step transitions
-- **Swing Phase**: Non-stance leg swinging forward
+ **Single Support**: One foot in contact with ground
+ **Double Support**: Both feet in contact during step transitions
+ **Swing Phase**: Nonstance leg swinging forward
 
 ### Model Predictive Control (MPC) for Walking
 
-MPC is particularly well-suited for bipedal walking due to its ability to handle constraints and predict future states. The controller optimizes a cost function over a prediction horizon while respecting system dynamics and constraints.
+MPC is particularly wellsuited for bipedal walking due to its ability to handle constraints and predict future states. The controller optimizes a cost function over a prediction horizon while respecting system dynamics and constraints.
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
 ### Lab 1: Setting up a Bipedal Robot Model in Isaac Sim
 
@@ -89,7 +89,7 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
        <color rgba="1.0 1.0 1.0 1.0"/>
      </material>
 
-     <!-- Torso -->
+     <! Torso >
      <link name="torso">
        <inertial>
          <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -111,7 +111,7 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
        </collision>
      </link>
 
-     <!-- Head -->
+     <! Head >
      <link name="head">
        <inertial>
          <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -139,22 +139,22 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
        <origin xyz="0 0 1.0" rpy="0 0 0"/>
      </joint>
 
-     <!-- Left Hip -->
+     <! Left Hip >
      <link name="left_hip">
        <inertial>
-         <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+         <origin xyz="0 0 0.15" rpy="0 0 0"/>
          <mass value="2.0"/>
          <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.02"/>
        </inertial>
        <visual>
-         <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+         <origin xyz="0 0 0.15" rpy="0 0 0"/>
          <geometry>
            <cylinder radius="0.05" length="0.3"/>
          </geometry>
          <material name="blue"/>
        </visual>
        <collision>
-         <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+         <origin xyz="0 0 0.15" rpy="0 0 0"/>
          <geometry>
            <cylinder radius="0.05" length="0.3"/>
          </geometry>
@@ -166,25 +166,25 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
        <child link="left_hip"/>
        <origin xyz="0 0.15 0" rpy="0 0 0"/>
        <axis xyz="1 0 0"/>
-       <limit lower="-1.57" upper="1.57" effort="100" velocity="1.0"/>
+       <limit lower="1.57" upper="1.57" effort="100" velocity="1.0"/>
      </joint>
 
-     <!-- Left Upper Leg -->
+     <! Left Upper Leg >
      <link name="left_upper_leg">
        <inertial>
-         <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+         <origin xyz="0 0 0.2" rpy="0 0 0"/>
          <mass value="3.0"/>
          <inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.03"/>
        </inertial>
        <visual>
-         <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+         <origin xyz="0 0 0.2" rpy="0 0 0"/>
          <geometry>
            <cylinder radius="0.06" length="0.4"/>
          </geometry>
          <material name="blue"/>
        </visual>
        <collision>
-         <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+         <origin xyz="0 0 0.2" rpy="0 0 0"/>
          <geometry>
            <cylinder radius="0.06" length="0.4"/>
          </geometry>
@@ -194,27 +194,27 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
      <joint name="left_knee_joint" type="revolute">
        <parent link="left_hip"/>
        <child link="left_upper_leg"/>
-       <origin xyz="0 0 -0.3" rpy="0 0 0"/>
+       <origin xyz="0 0 0.3" rpy="0 0 0"/>
        <axis xyz="1 0 0"/>
        <limit lower="0" upper="2.35" effort="100" velocity="1.0"/>
      </joint>
 
-     <!-- Left Lower Leg -->
+     <! Left Lower Leg >
      <link name="left_lower_leg">
        <inertial>
-         <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+         <origin xyz="0 0 0.2" rpy="0 0 0"/>
          <mass value="2.5"/>
          <inertia ixx="0.15" ixy="0.0" ixz="0.0" iyy="0.15" iyz="0.0" izz="0.02"/>
        </inertial>
        <visual>
-         <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+         <origin xyz="0 0 0.2" rpy="0 0 0"/>
          <geometry>
            <cylinder radius="0.05" length="0.4"/>
          </geometry>
          <material name="blue"/>
        </visual>
        <collision>
-         <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+         <origin xyz="0 0 0.2" rpy="0 0 0"/>
          <geometry>
            <cylinder radius="0.05" length="0.4"/>
          </geometry>
@@ -224,27 +224,27 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
      <joint name="left_ankle_joint" type="revolute">
        <parent link="left_upper_leg"/>
        <child link="left_lower_leg"/>
-       <origin xyz="0 0 -0.4" rpy="0 0 0"/>
+       <origin xyz="0 0 0.4" rpy="0 0 0"/>
        <axis xyz="1 0 0"/>
-       <limit lower="-0.78" upper="0.78" effort="50" velocity="1.0"/>
+       <limit lower="0.78" upper="0.78" effort="50" velocity="1.0"/>
      </joint>
 
-     <!-- Left Foot -->
+     <! Left Foot >
      <link name="left_foot">
        <inertial>
-         <origin xyz="0.05 0 -0.025" rpy="0 0 0"/>
+         <origin xyz="0.05 0 0.025" rpy="0 0 0"/>
          <mass value="1.0"/>
          <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.005"/>
        </inertial>
        <visual>
-         <origin xyz="0.05 0 -0.025" rpy="0 0 0"/>
+         <origin xyz="0.05 0 0.025" rpy="0 0 0"/>
          <geometry>
            <box size="0.2 0.1 0.05"/>
          </geometry>
          <material name="red"/>
        </visual>
        <collision>
-         <origin xyz="0.05 0 -0.025" rpy="0 0 0"/>
+         <origin xyz="0.05 0 0.025" rpy="0 0 0"/>
          <geometry>
            <box size="0.2 0.1 0.05"/>
          </geometry>
@@ -254,25 +254,25 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
      <joint name="left_foot_joint" type="fixed">
        <parent link="left_lower_leg"/>
        <child link="left_foot"/>
-       <origin xyz="0 0 -0.4" rpy="0 0 0"/>
+       <origin xyz="0 0 0.4" rpy="0 0 0"/>
      </joint>
 
-     <!-- Right Leg (mirror of left) -->
+     <! Right Leg (mirror of left) >
      <link name="right_hip">
        <inertial>
-         <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+         <origin xyz="0 0 0.15" rpy="0 0 0"/>
          <mass value="2.0"/>
          <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.02"/>
        </inertial>
        <visual>
-         <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+         <origin xyz="0 0 0.15" rpy="0 0 0"/>
          <geometry>
            <cylinder radius="0.05" length="0.3"/>
          </geometry>
          <material name="blue"/>
        </visual>
        <collision>
-         <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+         <origin xyz="0 0 0.15" rpy="0 0 0"/>
          <geometry>
            <cylinder radius="0.05" length="0.3"/>
          </geometry>
@@ -282,26 +282,26 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
      <joint name="right_hip_joint" type="revolute">
        <parent link="torso"/>
        <child link="right_hip"/>
-       <origin xyz="0 -0.15 0" rpy="0 0 0"/>
+       <origin xyz="0 0.15 0" rpy="0 0 0"/>
        <axis xyz="1 0 0"/>
-       <limit lower="-1.57" upper="1.57" effort="100" velocity="1.0"/>
+       <limit lower="1.57" upper="1.57" effort="100" velocity="1.0"/>
      </joint>
 
      <link name="right_upper_leg">
        <inertial>
-         <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+         <origin xyz="0 0 0.2" rpy="0 0 0"/>
          <mass value="3.0"/>
          <inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.03"/>
        </inertial>
        <visual>
-         <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+         <origin xyz="0 0 0.2" rpy="0 0 0"/>
          <geometry>
            <cylinder radius="0.06" length="0.4"/>
          </geometry>
          <material name="blue"/>
        </visual>
        <collision>
-         <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+         <origin xyz="0 0 0.2" rpy="0 0 0"/>
          <geometry>
            <cylinder radius="0.06" length="0.4"/>
          </geometry>
@@ -311,26 +311,26 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
      <joint name="right_knee_joint" type="revolute">
        <parent link="right_hip"/>
        <child link="right_upper_leg"/>
-       <origin xyz="0 0 -0.3" rpy="0 0 0"/>
+       <origin xyz="0 0 0.3" rpy="0 0 0"/>
        <axis xyz="1 0 0"/>
        <limit lower="0" upper="2.35" effort="100" velocity="1.0"/>
      </joint>
 
      <link name="right_lower_leg">
        <inertial>
-         <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+         <origin xyz="0 0 0.2" rpy="0 0 0"/>
          <mass value="2.5"/>
          <inertia ixx="0.15" ixy="0.0" ixz="0.0" iyy="0.15" iyz="0.0" izz="0.02"/>
        </inertial>
        <visual>
-         <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+         <origin xyz="0 0 0.2" rpy="0 0 0"/>
          <geometry>
            <cylinder radius="0.05" length="0.4"/>
          </geometry>
          <material name="blue"/>
        </visual>
        <collision>
-         <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+         <origin xyz="0 0 0.2" rpy="0 0 0"/>
          <geometry>
            <cylinder radius="0.05" length="0.4"/>
          </geometry>
@@ -340,26 +340,26 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
      <joint name="right_ankle_joint" type="revolute">
        <parent link="right_upper_leg"/>
        <child link="right_lower_leg"/>
-       <origin xyz="0 0 -0.4" rpy="0 0 0"/>
+       <origin xyz="0 0 0.4" rpy="0 0 0"/>
        <axis xyz="1 0 0"/>
-       <limit lower="-0.78" upper="0.78" effort="50" velocity="1.0"/>
+       <limit lower="0.78" upper="0.78" effort="50" velocity="1.0"/>
      </joint>
 
      <link name="right_foot">
        <inertial>
-         <origin xyz="0.05 0 -0.025" rpy="0 0 0"/>
+         <origin xyz="0.05 0 0.025" rpy="0 0 0"/>
          <mass value="1.0"/>
          <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.005"/>
        </inertial>
        <visual>
-         <origin xyz="0.05 0 -0.025" rpy="0 0 0"/>
+         <origin xyz="0.05 0 0.025" rpy="0 0 0"/>
          <geometry>
            <box size="0.2 0.1 0.05"/>
          </geometry>
          <material name="red"/>
        </visual>
        <collision>
-         <origin xyz="0.05 0 -0.025" rpy="0 0 0"/>
+         <origin xyz="0.05 0 0.025" rpy="0 0 0"/>
          <geometry>
            <box size="0.2 0.1 0.05"/>
          </geometry>
@@ -369,25 +369,25 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
      <joint name="right_foot_joint" type="fixed">
        <parent link="right_lower_leg"/>
        <child link="right_foot"/>
-       <origin xyz="0 0 -0.4" rpy="0 0 0"/>
+       <origin xyz="0 0 0.4" rpy="0 0 0"/>
      </joint>
 
-     <!-- Arms for additional balance control -->
+     <! Arms for additional balance control >
      <link name="left_upper_arm">
        <inertial>
-         <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+         <origin xyz="0 0 0.15" rpy="0 0 0"/>
          <mass value="1.5"/>
          <inertia ixx="0.05" ixy="0.0" ixz="0.0" iyy="0.05" iyz="0.0" izz="0.01"/>
        </inertial>
        <visual>
-         <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+         <origin xyz="0 0 0.15" rpy="0 0 0"/>
          <geometry>
            <cylinder radius="0.04" length="0.3"/>
          </geometry>
          <material name="blue"/>
        </visual>
        <collision>
-         <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+         <origin xyz="0 0 0.15" rpy="0 0 0"/>
          <geometry>
            <cylinder radius="0.04" length="0.3"/>
          </geometry>
@@ -399,24 +399,24 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
        <child link="left_upper_arm"/>
        <origin xyz="0.1 0.15 0.7" rpy="0 0 0"/>
        <axis xyz="0 1 0"/>
-       <limit lower="-1.57" upper="1.57" effort="50" velocity="1.0"/>
+       <limit lower="1.57" upper="1.57" effort="50" velocity="1.0"/>
      </joint>
 
      <link name="right_upper_arm">
        <inertial>
-         <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+         <origin xyz="0 0 0.15" rpy="0 0 0"/>
          <mass value="1.5"/>
          <inertia ixx="0.05" ixy="0.0" ixz="0.0" iyy="0.05" iyz="0.0" izz="0.01"/>
        </inertial>
        <visual>
-         <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+         <origin xyz="0 0 0.15" rpy="0 0 0"/>
          <geometry>
            <cylinder radius="0.04" length="0.3"/>
          </geometry>
          <material name="blue"/>
        </visual>
        <collision>
-         <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+         <origin xyz="0 0 0.15" rpy="0 0 0"/>
          <geometry>
            <cylinder radius="0.04" length="0.3"/>
          </geometry>
@@ -426,9 +426,9 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
      <joint name="right_shoulder_joint" type="revolute">
        <parent link="torso"/>
        <child link="right_upper_arm"/>
-       <origin xyz="0.1 -0.15 0.7" rpy="0 0 0"/>
+       <origin xyz="0.1 0.15 0.7" rpy="0 0 0"/>
        <axis xyz="0 1 0"/>
-       <limit lower="-1.57" upper="1.57" effort="50" velocity="1.0"/>
+       <limit lower="1.57" upper="1.57" effort="50" velocity="1.0"/>
      </joint>
    </robot>
    ```
@@ -553,7 +553,7 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
        def imu_callback(self, msg):
            """Update CoM estimate from IMU data"""
            # Integrate acceleration to estimate velocity and position
-           # This is a simplified approach - in reality you'd use sensor fusion
+           # This is a simplified approach  in reality you'd use sensor fusion
            linear_acc = msg.linear_acceleration
            angular_vel = msg.angular_velocity
            
@@ -561,7 +561,7 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
            dt = 0.01  # Assuming 100Hz control loop
            self.com_velocity[0] += linear_acc.x * dt
            self.com_velocity[1] += linear_acc.y * dt
-           self.com_velocity[2] += (linear_acc.z - self.gravity) * dt
+           self.com_velocity[2] += (linear_acc.z  self.gravity) * dt
            
            # Update CoM position
            self.com_position += self.com_velocity * dt
@@ -571,14 +571,14 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
        
        def compute_zmp(self):
            """Compute Zero Moment Point from CoM state"""
-           # ZMP_x = com_x - (h/g) * com_acc_x
-           # ZMP_y = com_y - (h/g) * com_acc_y
+           # ZMP_x = com_x  (h/g) * com_acc_x
+           # ZMP_y = com_y  (h/g) * com_acc_y
            
            # For this simplified version, we'll use the current CoM position
            # adjusted by the inverted pendulum dynamics
            zmp = Point()
-           zmp.x = self.com_position[0] - (self.height / self.gravity) * (self.com_velocity[0] * self.omega)
-           zmp.y = self.com_position[1] - (self.height / self.gravity) * (self.com_velocity[1] * self.omega)
+           zmp.x = self.com_position[0]  (self.height / self.gravity) * (self.com_velocity[0] * self.omega)
+           zmp.y = self.com_position[1]  (self.height / self.gravity) * (self.com_velocity[1] * self.omega)
            zmp.z = 0.0  # ZMP is on ground plane
            
            return zmp
@@ -630,7 +630,7 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
            # Update reference
            self.com_ref = np.array([
                forward_progress,  # Forward movement
-               lateral_oscillation if self.support_foot == "left" else -lateral_oscillation,  # Lateral movement
+               lateral_oscillation if self.support_foot == "left" else lateral_oscillation,  # Lateral movement
                self.nominal_com_height
            ])
            
@@ -649,7 +649,7 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
            # to ensure ZMP remains in support polygon
            if self.support_foot == "left":
                # Right foot should go near capture point
-               target_pos = capture_point + np.array([0.1, -self.step_width/2])
+               target_pos = capture_point + np.array([0.1, self.step_width/2])
                self.support_foot = "right"
            else:
                # Left foot should go near capture point
@@ -804,14 +804,14 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
            # State and control penalties
            for k in range(N):
                # State cost (tracking reference)
-               state_error = X[:, k] - reference_trajectory[k]
+               state_error = X[:, k]  reference_trajectory[k]
                cost += cp.quad_form(state_error, self.Q)
                
                # Control effort penalty
                cost += self.R * cp.sum_squares(U[:, k])
            
            # Terminal cost
-           final_error = X[:, N] - reference_trajectory[N-1]  # Use last reference
+           final_error = X[:, N]  reference_trajectory[N1]  # Use last reference
            cost += cp.quad_form(final_error, self.Q_final)
            
            # Constraints
@@ -885,7 +885,7 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
                if self.support_foot == "left":
                    y_ref = 0.1 * math.sin(2 * math.pi * t / (2 * self.step_duration))
                else:
-                   y_ref = -0.1 * math.sin(2 * math.pi * t / (2 * self.step_duration))
+                   y_ref = 0.1 * math.sin(2 * math.pi * t / (2 * self.step_duration))
                
                # For now, assume zero velocity in reference (this is simplified)
                ref_traj[:, k] = [x_ref, y_ref, 0, 0]
@@ -917,7 +917,7 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
            
            # Update status
            status_msg = String()
-           status_msg.data = f"MPC Active - State: [{self.state[0]:.3f}, {self.state[1]:.3f}, {self.state[2]:.3f}, {self.state[3]:.3f}]"
+           status_msg.data = f"MPC Active  State: [{self.state[0]:.3f}, {self.state[1]:.3f}, {self.state[2]:.3f}, {self.state[3]:.3f}]"
            self.mpc_status_pub.publish(status_msg)
            
            # Simple integration to update state (in reality, this would come from sensors)
@@ -939,7 +939,7 @@ MPC is particularly well-suited for bipedal walking due to its ability to handle
            # Update state: x_{k+1} = A*x_k + B*u_k
            self.state = A @ self.state + B @ zmp_cmd
            
-           self.get_logger().debug(f'MPC Step - ZMP Cmd: ({zmp_cmd[0]:.3f}, {zmp_cmd[1]:.3f})')
+           self.get_logger().debug(f'MPC Step  ZMP Cmd: ({zmp_cmd[0]:.3f}, {zmp_cmd[1]:.3f})')
 
    def main(args=None):
        rclpy.init(args=args)
@@ -997,7 +997,7 @@ class CompleteBipedalController(Node):
         self.robot_y = 0.0
         self.robot_yaw = 0.0
         self.left_foot_pos = np.array([0.0, self.hip_offset, 0.0])
-        self.right_foot_pos = np.array([0.0, -self.hip_offset, 0.0])
+        self.right_foot_pos = np.array([0.0, self.hip_offset, 0.0])
         self.com_pos = np.array([0.0, 0.0, self.robot_height])
         
         # Walking state machine
@@ -1042,10 +1042,10 @@ class CompleteBipedalController(Node):
         # Simplified inverse kinematics for planar leg
         # foot_pos is [x, y, z] relative to hip
         
-        # Calculate hip-to-foot vector
+        # Calculate hiptofoot vector
         dx = foot_pos[0]
-        dy = foot_pos[1] - (self.hip_offset if leg_side == "left" else -self.hip_offset)
-        dz = foot_pos[2] - self.robot_height  # Hip height is at torso level
+        dy = foot_pos[1]  (self.hip_offset if leg_side == "left" else self.hip_offset)
+        dz = foot_pos[2]  self.robot_height  # Hip height is at torso level
         
         # Calculate leg length
         leg_length_sq = dx*dx + dy*dy + dz*dz
@@ -1057,7 +1057,7 @@ class CompleteBipedalController(Node):
             return [0.0, 0.0, 0.0]  # Return neutral position
         
         # Hip pitch (sagittal plane)
-        hip_pitch = math.atan2(-dz, math.sqrt(dx*dx + dy*dy))
+        hip_pitch = math.atan2(dz, math.sqrt(dx*dx + dy*dy))
         
         # Hip roll (coronal plane)
         hip_roll = math.atan2(dy, math.sqrt(dx*dx + dz*dz))
@@ -1069,7 +1069,7 @@ class CompleteBipedalController(Node):
         c = leg_length
         
         if a > 0 and b > 0 and c > 0:
-            knee_angle = math.pi - math.acos((a*a + b*b - c*c) / (2*a*b))
+            knee_angle = math.pi  math.acos((a*a + b*b  c*c) / (2*a*b))
         else:
             knee_angle = 0.0
         
@@ -1078,7 +1078,7 @@ class CompleteBipedalController(Node):
     def generate_walking_pattern(self):
         """Generate walking pattern for the current phase"""
         current_time = self.get_clock().now().nanoseconds / 1e9
-        time_in_step = current_time - self.last_step_time
+        time_in_step = current_time  self.last_step_time
         self.step_phase = time_in_step / self.step_duration
         
         if self.step_phase >= 1.0:
@@ -1086,11 +1086,11 @@ class CompleteBipedalController(Node):
             if self.swing_leg == "right":
                 self.swing_leg = "left"
                 self.left_foot_pos[0] = self.robot_x + self.step_length
-                self.left_foot_pos[1] = -self.hip_offset if self.phase == "stance" else self.hip_offset
+                self.left_foot_pos[1] = self.hip_offset if self.phase == "stance" else self.hip_offset
             else:
                 self.swing_leg = "right"
                 self.right_foot_pos[0] = self.robot_x + self.step_length
-                self.right_foot_pos[1] = self.hip_offset if self.phase == "stance" else -self.hip_offset
+                self.right_foot_pos[1] = self.hip_offset if self.phase == "stance" else self.hip_offset
             
             self.last_step_time = current_time
             self.step_phase = 0.0
@@ -1101,7 +1101,7 @@ class CompleteBipedalController(Node):
             # Right foot is swinging forward
             swing_progress = min(self.step_phase * 2, 1.0)  # Swing phase is first half of step
             target_x = self.robot_x + swing_progress * self.step_length
-            target_y = -self.hip_offset  # Start and end at nominal width
+            target_y = self.hip_offset  # Start and end at nominal width
             
             # Vertical trajectory (cycloid or similar)
             if swing_progress < 0.5:
@@ -1109,8 +1109,8 @@ class CompleteBipedalController(Node):
                 swing_vertical = swing_progress * 2 * self.step_height
             else:
                 # Fall
-                fall_progress = (swing_progress - 0.5) * 2
-                swing_vertical = self.step_height * (1 - fall_progress)
+                fall_progress = (swing_progress  0.5) * 2
+                swing_vertical = self.step_height * (1  fall_progress)
             
             self.right_foot_pos = np.array([target_x, target_y, swing_vertical])
         else:
@@ -1122,8 +1122,8 @@ class CompleteBipedalController(Node):
             if swing_progress < 0.5:
                 swing_vertical = swing_progress * 2 * self.step_height
             else:
-                fall_progress = (swing_progress - 0.5) * 2
-                swing_vertical = self.step_height * (1 - fall_progress)
+                fall_progress = (swing_progress  0.5) * 2
+                swing_vertical = self.step_height * (1  fall_progress)
             
             self.left_foot_pos = np.array([target_x, target_y, swing_vertical])
         
@@ -1135,7 +1135,7 @@ class CompleteBipedalController(Node):
         # Add some lateral offset toward stance foot
         stance_foot = "left" if self.swing_leg == "right" else "right"
         if stance_foot == "left":
-            com_offset_y = -0.02  # Slightly toward left foot
+            com_offset_y = 0.02  # Slightly toward left foot
         else:
             com_offset_y = 0.02   # Slightly toward right foot
         
@@ -1267,7 +1267,7 @@ class BalanceRecoveryController(Node):
         # State variables
         self.com_pos = np.array([0.0, 0.0, 0.84])
         self.left_foot = np.array([0.0, 0.15, 0.0])
-        self.right_foot = np.array([0.0, -0.15, 0.0])
+        self.right_foot = np.array([0.0, 0.15, 0.0])
         self.recovery_active = False
         
         # Recovery parameters
@@ -1295,11 +1295,11 @@ class BalanceRecoveryController(Node):
         
         # Determine support polygon (convex hull of feet)
         if self.left_foot[2] < 0.01 and self.right_foot[2] < 0.01:
-            # Both feet on ground - double support
+            # Both feet on ground  double support
             min_y = min(self.left_foot[1], self.right_foot[1])
             max_y = max(self.left_foot[1], self.right_foot[1])
             center_y = (min_y + max_y) / 2
-            support_width = max_y - min_y
+            support_width = max_y  min_y
         elif self.left_foot[2] < 0.01:
             # Left foot support
             center_y = self.left_foot[1]
@@ -1309,16 +1309,16 @@ class BalanceRecoveryController(Node):
             center_y = self.right_foot[1]
             support_width = 0.1  # Approximate foot size
         else:
-            # No support - critical condition
-            self.get_logger().error('NO FOOT SUPPORT - EMERGENCY!')
+            # No support  critical condition
+            self.get_logger().error('NO FOOT SUPPORT  EMERGENCY!')
             return
         
         # Check if ZMP is outside support region
-        margin = support_width / 2 - self.stability_threshold
-        if abs(zmp_y - center_y) > margin:
+        margin = support_width / 2  self.stability_threshold
+        if abs(zmp_y  center_y) > margin:
             # Robot is in danger of falling laterally
             self.initiate_lateral_recovery(zmp_y, center_y)
-        elif abs(zmp_x - (self.left_foot[0] + self.right_foot[0]) / 2) > 0.2:
+        elif abs(zmp_x  (self.left_foot[0] + self.right_foot[0]) / 2) > 0.2:
             # Robot is in danger of falling forward/backward
             self.initiate_angular_recovery(zmp_x)
         else:
@@ -1333,8 +1333,8 @@ class BalanceRecoveryController(Node):
         
         # Generate recovery command to shift CoM back to safe area
         recovery_cmd = Twist()
-        recovery_cmd.linear.y = -self.recovery_gain * (zmp_y - support_center_y)
-        recovery_cmd.angular.z = -0.3 * (zmp_y - support_center_y)  # Counter-rotate
+        recovery_cmd.linear.y = self.recovery_gain * (zmp_y  support_center_y)
+        recovery_cmd.angular.z = 0.3 * (zmp_y  support_center_y)  # Counterrotate
         
         self.recovery_cmd_pub.publish(recovery_cmd)
         
@@ -1350,7 +1350,7 @@ class BalanceRecoveryController(Node):
         # Generate recovery command to pitch the robot
         recovery_cmd = Twist()
         recovery_cmd.linear.x = 0.0  # Forward/backward motion
-        recovery_cmd.angular.y = -0.2 * (zmp_x - (self.left_foot[0] + self.right_foot[0]) / 2)
+        recovery_cmd.angular.y = 0.2 * (zmp_x  (self.left_foot[0] + self.right_foot[0]) / 2)
         
         self.recovery_cmd_pub.publish(recovery_cmd)
         
@@ -1386,7 +1386,7 @@ if __name__ == '__main__':
     main()
 ```
 
-## Mini-project
+## Miniproject
 
 Create a complete bipedal locomotion system that:
 
@@ -1399,22 +1399,22 @@ Create a complete bipedal locomotion system that:
 7. Tests the system with various perturbations and uneven terrain
 
 Your project should include:
-- Complete robot model with proper dynamics
-- LIPM and MPC controllers implementation
-- Footstep planning algorithm
-- Balance recovery system
-- Performance evaluation metrics
-- Isaac Sim integration for realistic physics simulation
+ Complete robot model with proper dynamics
+ LIPM and MPC controllers implementation
+ Footstep planning algorithm
+ Balance recovery system
+ Performance evaluation metrics
+ Isaac Sim integration for realistic physics simulation
 
 ## Summary
 
 This chapter covered bipedal locomotion and balance control:
 
-- **LIPM Control**: Linear Inverted Pendulum Model for balance control
-- **MPC Walking**: Model Predictive Control for dynamic walking patterns
-- **Gait Generation**: Creating stable walking patterns with proper foot placement
-- **Balance Recovery**: Strategies to maintain stability during perturbations
-- **Simulation**: Using Isaac Sim for realistic bipedal robot simulation
-- **Control Integration**: Combining multiple control strategies for robust locomotion
+ **LIPM Control**: Linear Inverted Pendulum Model for balance control
+ **MPC Walking**: Model Predictive Control for dynamic walking patterns
+ **Gait Generation**: Creating stable walking patterns with proper foot placement
+ **Balance Recovery**: Strategies to maintain stability during perturbations
+ **Simulation**: Using Isaac Sim for realistic bipedal robot simulation
+ **Control Integration**: Combining multiple control strategies for robust locomotion
 
 Bipedal locomotion requires sophisticated control algorithms that account for the underactuated nature of bipedal systems while maintaining stability through careful foot placement and CoM control.

@@ -1,95 +1,95 @@
----
-title: Ch18 - Cognitive Task Planning with GPT-4o
+-----
+title: Ch18  Cognitive Task Planning with GPT4o
 module: 4
 chapter: 18
-sidebar_label: Ch18: Cognitive Task Planning with GPT-4o
-description: Implementing cognitive task planning using GPT-4o for complex robotic manipulation and navigation
-tags: [gpt-4o, cognitive-planning, task-planning, robotics, ai-planning, hierarchical-task-network, ros2]
+sidebar_label: Ch18: Cognitive Task Planning with GPT4o
+description: Implementing cognitive task planning using GPT4o for complex robotic manipulation and navigation
+tags: [gpt4o, cognitiveplanning, taskplanning, robotics, aiplanning, hierarchicaltasknetwork, ros2]
 difficulty: advanced
 estimated_duration: 150
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
-# Cognitive Task Planning with GPT-4o
+# Cognitive Task Planning with GPT4o
 
 ## Learning Outcomes
-- Implement cognitive task planning using OpenAI's GPT-4o model
-- Design hierarchical task decomposition for complex robotic tasks
-- Integrate LLM-based planning with traditional robotic planning systems
-- Create context-aware task planners that understand the environment
-- Implement plan execution monitoring and recovery
-- Design feedback mechanisms for plan refinement
-- Evaluate cognitive planning performance and robustness
-- Handle ambiguity and uncertainty in task specifications
+ Implement cognitive task planning using OpenAI's GPT4o model
+ Design hierarchical task decomposition for complex robotic tasks
+ Integrate LLMbased planning with traditional robotic planning systems
+ Create contextaware task planners that understand the environment
+ Implement plan execution monitoring and recovery
+ Design feedback mechanisms for plan refinement
+ Evaluate cognitive planning performance and robustness
+ Handle ambiguity and uncertainty in task specifications
 
 ## Theory
 
 ### Cognitive Task Planning in Robotics
 
-Cognitive task planning involves high-level reasoning about complex tasks that require understanding of the environment, objects, and their relationships. This contrasts with low-level motion planning which deals with trajectory generation and collision avoidance.
+Cognitive task planning involves highlevel reasoning about complex tasks that require understanding of the environment, objects, and their relationships. This contrasts with lowlevel motion planning which deals with trajectory generation and collision avoidance.
 
 <MermaidDiagram chart={`
 graph TD;
-    A[High-Level Task] --> B[Task Decomposition];
-    B --> C[Subtask Identification];
-    C --> D[Primitive Action Sequences];
-    D --> E[Low-Level Controllers];
+    A[HighLevel Task] > B[Task Decomposition];
+    B > C[Subtask Identification];
+    C > D[Primitive Action Sequences];
+    D > E[LowLevel Controllers];
     
-    F[Environmental Context] --> G[Perception System];
-    G --> H[Object Recognition];
-    H --> I[Spatial Reasoning];
+    F[Environmental Context] > G[Perception System];
+    G > H[Object Recognition];
+    H > I[Spatial Reasoning];
     
-    B --> J[Context Integration];
-    C --> J;
-    I --> J;
+    B > J[Context Integration];
+    C > J;
+    I > J;
     
-    J --> K[Plan Generation];
-    K --> L[Plan Validation];
-    L --> M[Plan Execution];
-    M --> N[Monitoring & Recovery];
+    J > K[Plan Generation];
+    K > L[Plan Validation];
+    L > M[Plan Execution];
+    M > N[Monitoring & Recovery];
     
     style A fill:#4CAF50,stroke:#388E3C,color:#fff;
     style K fill:#2196F3,stroke:#0D47A1,color:#fff;
     style M fill:#FF9800,stroke:#E65100,color:#fff;
 `} />
 
-### GPT-4o for Task Planning
+### GPT4o for Task Planning
 
-GPT-4o provides several advantages for cognitive task planning:
+GPT4o provides several advantages for cognitive task planning:
 
-- **World Knowledge**: Understanding of physical objects, their properties, and relationships
-- **Logical Reasoning**: Ability to reason about cause and effect, preconditions and effects
-- **Contextual Understanding**: Ability to understand the environment and adapt plans accordingly
-- **Natural Language Interface**: Easy specification of tasks using natural language
+ **World Knowledge**: Understanding of physical objects, their properties, and relationships
+ **Logical Reasoning**: Ability to reason about cause and effect, preconditions and effects
+ **Contextual Understanding**: Ability to understand the environment and adapt plans accordingly
+ **Natural Language Interface**: Easy specification of tasks using natural language
 
 ### Hierarchical Task Networks (HTNs)
 
-HTNs break down complex tasks into hierarchically organized subtasks. The planning process involves decomposing high-level tasks into more specific subtasks until primitive actions are reached.
+HTNs break down complex tasks into hierarchically organized subtasks. The planning process involves decomposing highlevel tasks into more specific subtasks until primitive actions are reached.
 
 ### Plan Representation
 
 Plans can be represented as:
-- **Sequential**: Linear sequence of actions
-- **Partial Order**: Actions with temporal constraints
-- **Contingent**: Plans with conditional branches based on sensing results
-- **Hierarchical**: Tree structure of decomposed tasks
+ **Sequential**: Linear sequence of actions
+ **Partial Order**: Actions with temporal constraints
+ **Contingent**: Plans with conditional branches based on sensing results
+ **Hierarchical**: Tree structure of decomposed tasks
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
-### Lab 1: Setting up GPT-4o for Task Planning
+### Lab 1: Setting up GPT4o for Task Planning
 
 1. **Install required dependencies**:
    ```bash
    pip install openai==1.3.5
-   pip install langchain langchain-openai
+   pip install langchain langchainopenai
    pip install numpy scipy
    pip install gymnasium
    pip install ros2 rospy
    pip install py_trees  # Behavior trees library
    ```
 
-2. **Create a GPT-4o task planning interface** (`gpt_task_planner.py`):
+2. **Create a GPT4o task planning interface** (`gpt_task_planner.py`):
    ```python
    #!/usr/bin/env python3
 
@@ -105,7 +105,7 @@ Plans can be represented as:
    import yaml
 
    class GPTTaskPlanner:
-       def __init__(self, api_key: str, model_name: str = "gpt-4o"):
+       def __init__(self, api_key: str, model_name: str = "gpt4o"):
            openai.api_key = api_key
            self.client = openai.OpenAI(api_key=api_key)
            self.model_name = model_name
@@ -165,8 +165,8 @@ Plans can be represented as:
            except json.JSONDecodeError:
                rospy.logerr("Failed to parse execution feedback")
        
-       def generate_plan(self, task_description: str) -> Optional[Dict]:
-           """Generate a task plan using GPT-4o"""
+       def generate_plan(self, task_description: str) > Optional[Dict]:
+           """Generate a task plan using GPT4o"""
            # Get current environment context
            context = self.get_environment_context()
            
@@ -218,7 +218,7 @@ Plans can be represented as:
                    # Find the first '{' and last '}'
                    start_idx = response_text.find('{')
                    end_idx = response_text.rfind('}') + 1
-                   if start_idx != -1 and end_idx != -1:
+                   if start_idx != 1 and end_idx != 1:
                        response_text = response_text[start_idx:end_idx]
                    else:
                        rospy.logerr("Could not extract JSON from response")
@@ -232,7 +232,7 @@ Plans can be represented as:
                rospy.logerr(f"Error generating plan: {e}")
                return None
        
-       def construct_planning_prompt(self, task_description: str, context: Dict) -> str:
+       def construct_planning_prompt(self, task_description: str, context: Dict) > str:
            """Construct prompt for task planning"""
            prompt = f"""
            Task: {task_description}
@@ -240,15 +240,15 @@ Plans can be represented as:
            Environment Context: {json.dumps(context, indent=2)}
            
            Available Actions:
-           - move_to_location(location_name): Move robot to named location
-           - pick_object(object_name, grasp_pose): Pick up an object with specific grasp
-           - place_object(object_name, location, placement_pose): Place object at location
-           - open_object(object_name): Open a container or door
-           - close_object(object_name): Close a container or door
-           - detect_object(object_name): Detect presence of object in environment
-           - navigate_to_object(object_name): Navigate close to an object
-           - inspect_object(object_name): Inspect an object for damage or quality
-           - transport_object(from_location, to_location): Transport an object
+            move_to_location(location_name): Move robot to named location
+            pick_object(object_name, grasp_pose): Pick up an object with specific grasp
+            place_object(object_name, location, placement_pose): Place object at location
+            open_object(object_name): Open a container or door
+            close_object(object_name): Close a container or door
+            detect_object(object_name): Detect presence of object in environment
+            navigate_to_object(object_name): Navigate close to an object
+            inspect_object(object_name): Inspect an object for damage or quality
+            transport_object(from_location, to_location): Transport an object
            
            Generate a detailed plan to accomplish the task. The plan should be executable and consider:
            1. Preconditions for each step
@@ -261,7 +261,7 @@ Plans can be represented as:
            """
            return prompt
        
-       def get_environment_context(self) -> Dict:
+       def get_environment_context(self) > Dict:
            """Get current environment context"""
            # This would be populated from various ROS topics in a real implementation
            return {
@@ -304,7 +304,7 @@ Plans can be represented as:
                rospy.logerr(f"Failed to generate recovery plan for step {step_num}")
                self.publish_status(f"Recovery failed for step {step_num}")
        
-       def generate_recovery_plan(self, original_plan: Dict, failed_step: int, error: str) -> Optional[Dict]:
+       def generate_recovery_plan(self, original_plan: Dict, failed_step: int, error: str) > Optional[Dict]:
            """Generate a recovery plan after failure"""
            # Get environment context at the time of failure
            context = self.get_environment_context()
@@ -313,7 +313,7 @@ Plans can be represented as:
            Original Task: {original_plan['task']}
            
            Failed Step: {failed_step}
-           Original Step Plan: {json.dumps(original_plan['plan'][failed_step-1], indent=2)}
+           Original Step Plan: {json.dumps(original_plan['plan'][failed_step1], indent=2)}
            Error: {error}
            
            Current Environment: {json.dumps(context, indent=2)}
@@ -352,7 +352,7 @@ Plans can be represented as:
                if response_text.startswith('```'):
                    start_idx = response_text.find('{')
                    end_idx = response_text.rfind('}') + 1
-                   if start_idx != -1 and end_idx != -1:
+                   if start_idx != 1 and end_idx != 1:
                        response_text = response_text[start_idx:end_idx]
                    else:
                        rospy.logerr("Could not extract JSON from recovery response")
@@ -399,7 +399,7 @@ Plans can be represented as:
    import time
 
    class HTNPlanner:
-       def __init__(self, api_key: str, model_name: str = "gpt-4o"):
+       def __init__(self, api_key: str, model_name: str = "gpt4o"):
            self.client = openai.OpenAI(api_key=api_key)
            self.model_name = model_name
            
@@ -455,12 +455,12 @@ Plans can be represented as:
            else:
                rospy.logerr("Failed to generate HTN plan")
        
-       def generate_htn_plan(self, task_description: str) -> Optional[Dict]:
+       def generate_htn_plan(self, task_description: str) > Optional[Dict]:
            """Generate hierarchical task network plan"""
            # Get environment context
            context = self.get_environment_context()
            
-           # First, determine the high-level task type
+           # First, determine the highlevel task type
            task_type = self.identify_task_type(task_description)
            
            if task_type:
@@ -468,14 +468,14 @@ Plans can be represented as:
                plan = self.decompose_task(task_type, task_description, context)
                return plan
            else:
-               # Use GPT-4o to figure out the task structure
+               # Use GPT4o to figure out the task structure
                return self.generate_plan_with_gpt(task_description, context)
        
-       def identify_task_type(self, task_description: str) -> Optional[str]:
+       def identify_task_type(self, task_description: str) > Optional[str]:
            """Identify the type of task from description"""
            # Check against known task templates
            for task_template, _ in self.task_templates.items():
-               # Simple keyword-based classification
+               # Simple keywordbased classification
                keywords = {
                    "move_object": ["move", "transport", "carry", "place", "put"],
                    "assemble_objects": ["assemble", "build", "construct", "put together"],
@@ -488,7 +488,7 @@ Plans can be represented as:
            
            return None
        
-       def decompose_task(self, task_type: str, task_description: str, context: Dict) -> Dict:
+       def decompose_task(self, task_type: str, task_description: str, context: Dict) > Dict:
            """Decompose task into hierarchical subtasks"""
            if task_type in self.task_templates:
                template = self.task_templates[task_type]
@@ -510,12 +510,12 @@ Plans can be represented as:
                
                return plan
            else:
-               # Fallback to GPT-4o for unknown task types
+               # Fallback to GPT4o for unknown task types
                return self.generate_plan_with_gpt(task_description, context)
        
-       def instantiate_subtask(self, template: Dict, context: Dict, original_task: str) -> Dict:
+       def instantiate_subtask(self, template: Dict, context: Dict, original_task: str) > Dict:
            """Instantiate a subtask template with specific parameters"""
-           # Use GPT-4o to determine specific parameters based on context
+           # Use GPT4o to determine specific parameters based on context
            prompt = f"""
            Task: {original_task}
            
@@ -524,7 +524,7 @@ Plans can be represented as:
            Subtask Template: {json.dumps(template, indent=2)}
            
            Generate specific parameters for this subtask based on the environment context.
-           Return a JSON object with the subtask name and filled-in parameters.
+           Return a JSON object with the subtask name and filledin parameters.
            
            Example:
            {{
@@ -575,30 +575,30 @@ Plans can be represented as:
                    "effects": []
                }
        
-       def generate_plan_with_gpt(self, task_description: str, context: Dict) -> Optional[Dict]:
-           """Generate plan using GPT-4o for unknown task types"""
+       def generate_plan_with_gpt(self, task_description: str, context: Dict) > Optional[Dict]:
+           """Generate plan using GPT4o for unknown task types"""
            prompt = f"""
            Task: {task_description}
            
            Environment Context: {json.dumps(context, indent=2)}
            
            Available Actions:
-           - move_to_location(location)
-           - pick_object(object_name, grasp_type)
-           - place_object(object_name, location)
-           - navigate_to_object(object_name)
-           - inspect_object(object_name)
-           - open_container(container_name)
-           - close_container(container_name)
-           - detect_object(object_name)
-           - transport_object(from_location, to_location)
-           - assemble_parts(part1, part2)
-           - disassemble_part(object)
-           - charge_robot(at_charging_station)
+            move_to_location(location)
+            pick_object(object_name, grasp_type)
+            place_object(object_name, location)
+            navigate_to_object(object_name)
+            inspect_object(object_name)
+            open_container(container_name)
+            close_container(container_name)
+            detect_object(object_name)
+            transport_object(from_location, to_location)
+            assemble_parts(part1, part2)
+            disassemble_part(object)
+            charge_robot(at_charging_station)
            
            Generate a hierarchical task network plan for this task.
            The plan should include:
-           1. High-level task decomposition
+           1. Highlevel task decomposition
            2. Specific subtasks with parameters
            3. Precondition and effect definitions
            4. Temporal dependencies between tasks
@@ -645,7 +645,7 @@ Plans can be represented as:
                rospy.logerr(f"Error generating HTN plan: {e}")
                return None
        
-       def get_environment_context(self) -> Dict:
+       def get_environment_context(self) > Dict:
            """Get current environment context"""
            # This would be populated from sensors in a real implementation
            return {
@@ -744,7 +744,7 @@ Plans can be represented as:
            else:
                rospy.logwarn(f"Unknown command: {command}")
        
-       def convert_plan_to_bt(self, plan: Dict) -> Optional[py_trees.behaviour.Behaviour]:
+       def convert_plan_to_bt(self, plan: Dict) > Optional[py_trees.behaviour.Behaviour]:
            """Convert HTN plan to behavior tree"""
            try:
                # Create a sequence for the main plan
@@ -762,7 +762,7 @@ Plans can be represented as:
                rospy.logerr(f"Error converting plan to BT: {e}")
                return None
        
-       def create_task_behavior(self, task: Dict) -> Optional[py_trees.behaviour.Behaviour]:
+       def create_task_behavior(self, task: Dict) > Optional[py_trees.behaviour.Behaviour]:
            """Create a behavior tree node for a task"""
            task_name = task.get("name", "unknown_task")
            task_params = task.get("parameters", {})
@@ -828,7 +828,7 @@ Plans can be represented as:
                    self.publish_feedback({
                        "status": "running",
                        "tree_status": str(self.root_behavior_tree.status),
-                       "elapsed_time": time.time() - self.execution_start_time
+                       "elapsed_time": time.time()  self.execution_start_time
                    })
                    
                    rate.sleep()
@@ -890,7 +890,7 @@ Plans can be represented as:
            rospy.loginfo(f"Navigating to {self.location or self.navigation_pose}")
            
            # Simulate success/failure based on probability
-           if rospy.Time.now().to_sec() % 100 < (1 - self.success_probability) * 100:
+           if rospy.Time.now().to_sec() % 100 < (1  self.success_probability) * 100:
                # Simulate occasional failure
                self.feedback_message = "Navigation failed"
                return py_trees.common.Status.FAILURE
@@ -998,7 +998,7 @@ Plans can be represented as:
 
 ## Runnable Code Example
 
-Here's a complete system that ties GPT-based planning with behavior tree execution:
+Here's a complete system that ties GPTbased planning with behavior tree execution:
 
 ```python
 #!/usr/bin/env python3
@@ -1016,12 +1016,12 @@ import threading
 import queue
 
 class CompleteCognitivePlanningSystem:
-    """Complete cognitive planning system using GPT-4o and behavior trees"""
+    """Complete cognitive planning system using GPT4o and behavior trees"""
     
     def __init__(self, api_key: str):
         # Initialize OpenAI client
         self.client = openai.OpenAI(api_key=api_key)
-        self.model_name = "gpt-4o"
+        self.model_name = "gpt4o"
         
         # Initialize ROS
         rospy.init_node('complete_cognitive_planner', anonymous=True)
@@ -1052,7 +1052,7 @@ class CompleteCognitivePlanningSystem:
         """Handle incoming cognitive tasks"""
         rospy.loginfo(f"Received cognitive task: {msg.data}")
         
-        # Generate plan using GPT-4o
+        # Generate plan using GPT4o
         plan = self.generate_cognitive_plan(msg.data)
         
         if plan:
@@ -1088,8 +1088,8 @@ class CompleteCognitivePlanningSystem:
         except json.JSONDecodeError:
             rospy.logerr("Failed to parse status feedback")
     
-    def generate_cognitive_plan(self, task_description: str) -> dict:
-        """Generate cognitive plan using GPT-4o"""
+    def generate_cognitive_plan(self, task_description: str) > dict:
+        """Generate cognitive plan using GPT4o"""
         # Get environment context
         context = self.get_environment_context()
         
@@ -1100,29 +1100,29 @@ class CompleteCognitivePlanningSystem:
         Environment Context: {json.dumps(context, indent=2)}
         
         Available Robot Capabilities:
-        - Navigation: Move to locations, avoid obstacles
-        - Manipulation: Pick/place objects, open/close containers
-        - Perception: Detect objects, inspect areas, recognize faces
-        - Communication: Speak, listen, interact with humans
-        - Learning: Adapt to new situations, remember preferences
+         Navigation: Move to locations, avoid obstacles
+         Manipulation: Pick/place objects, open/close containers
+         Perception: Detect objects, inspect areas, recognize faces
+         Communication: Speak, listen, interact with humans
+         Learning: Adapt to new situations, remember preferences
         
-        High-Level Actions:
-        - move_to(location): Navigate to named location
-        - pick_object(object, grasp_type): Grasp an object
-        - place_object(object, location): Place object at location
-        - detect_object(object_type): Find an object in the environment
-        - navigate_to_object(object_type): Move near an object
-        - open_container(container): Open a door or drawer
-        - close_container(container): Close a door or drawer
-        - inspect_area(area): Survey a specific area
-        - interact_with_person(person): Approach and talk to someone
-        - find_person(person_name): Locate a specific person
-        - deliver_object(object, recipient): Transport and hand over object
-        - charge_robot(): Return to charging station
-        - wait_for(time_period): Pause execution
+        HighLevel Actions:
+         move_to(location): Navigate to named location
+         pick_object(object, grasp_type): Grasp an object
+         place_object(object, location): Place object at location
+         detect_object(object_type): Find an object in the environment
+         navigate_to_object(object_type): Move near an object
+         open_container(container): Open a door or drawer
+         close_container(container): Close a door or drawer
+         inspect_area(area): Survey a specific area
+         interact_with_person(person): Approach and talk to someone
+         find_person(person_name): Locate a specific person
+         deliver_object(object, recipient): Transport and hand over object
+         charge_robot(): Return to charging station
+         wait_for(time_period): Pause execution
         
         Generate a comprehensive cognitive plan that:
-        1. Breaks down the task into logical high-level steps
+        1. Breaks down the task into logical highlevel steps
         2. Considers environmental context and constraints
         3. Accounts for robot capabilities and limitations
         4. Includes error handling and recovery strategies
@@ -1132,7 +1132,7 @@ class CompleteCognitivePlanningSystem:
         Return as JSON with structure:
         {{
           "task": "original task description",
-          "reasoning": "step-by-step reasoning for the plan",
+          "reasoning": "stepbystep reasoning for the plan",
           "plan": [
             {{
               "step_id": 1,
@@ -1193,7 +1193,7 @@ class CompleteCognitivePlanningSystem:
             rospy.logerr(f"Error generating cognitive plan: {e}")
             return {}
     
-    def validate_plan(self, plan: dict) -> bool:
+    def validate_plan(self, plan: dict) > bool:
         """Validate the structure of a generated plan"""
         required_fields = ['task', 'plan', 'confidence']
         if not all(field in plan for field in required_fields):
@@ -1221,7 +1221,7 @@ class CompleteCognitivePlanningSystem:
         
         return True
     
-    def get_environment_context(self) -> dict:
+    def get_environment_context(self) > dict:
         """Get current environment context for planning"""
         # This would be populated from various sensors and state topics in a real system
         return {
@@ -1245,11 +1245,11 @@ class CompleteCognitivePlanningSystem:
                 {"name": "white_cup", "type": "container", "location": "kitchen", "pose": [1.2, 1.0]}
             ],
             "known_people": [
-                {"name": "john", "location": "office", "last_seen": "2023-10-15T10:30:00Z"},
-                {"name": "mary", "location": "kitchen", "last_seen": "2023-10-15T10:25:00Z"}
+                {"name": "john", "location": "office", "last_seen": "20231015T10:30:00Z"},
+                {"name": "mary", "location": "kitchen", "last_seen": "20231015T10:25:00Z"}
             ],
             "time_context": {
-                "hour_of_day": 10,  # 24-hour format
+                "hour_of_day": 10,  # 24hour format
                 "day_of_week": "monday",
                 "month": "october",
                 "is_daylight": True
@@ -1258,7 +1258,7 @@ class CompleteCognitivePlanningSystem:
                 "fragile_objects": ["glassware", "electronics"],
                 "restricted_areas": ["private_office"],
                 "noise_limitations": ["during_meeting_hours"],
-                "charging_deadline": "2023-10-15T18:00:00Z"
+                "charging_deadline": "20231015T18:00:00Z"
             }
         }
     
@@ -1312,8 +1312,8 @@ class CompleteCognitivePlanningSystem:
         self.publish_status(f"Recovery failed after {self.max_replanning_attempts} attempts")
         self.is_executing = False
     
-    def generate_recovery_plan(self, failed_step: int, error: str) -> dict:
-        """Generate a recovery plan using GPT-4o"""
+    def generate_recovery_plan(self, failed_step: int, error: str) > dict:
+        """Generate a recovery plan using GPT4o"""
         context = self.get_environment_context()
         
         prompt = f"""
@@ -1324,12 +1324,12 @@ class CompleteCognitivePlanningSystem:
         Current Environment: {json.dumps(context, indent=2)}
         
         Available Recovery Strategies:
-        - Retry step with different parameters
-        - Skip problematic step if possible
-        - Alternative approach to achieve same goal
-        - Abort task and return to safe state
-        - Request human assistance
-        - Charge robot if battery is low
+         Retry step with different parameters
+         Skip problematic step if possible
+         Alternative approach to achieve same goal
+         Abort task and return to safe state
+         Request human assistance
+         Charge robot if battery is low
         
         Generate a recovery plan that addresses the specific failure and attempts to continue task completion.
         The recovery plan should:
@@ -1403,38 +1403,38 @@ if __name__ == '__main__':
     main()
 ```
 
-## Mini-project
+## Miniproject
 
 Create a complete cognitive planning system that:
 
-1. Implements GPT-4o-based hierarchical task planning
+1. Implements GPT4obased hierarchical task planning
 2. Integrates with behavior tree execution for plan execution
-3. Handles complex multi-step tasks with dependencies
+3. Handles complex multistep tasks with dependencies
 4. Implements plan monitoring and execution feedback
-5. Creates context-aware planning considering environment state
+5. Creates contextaware planning considering environment state
 6. Implements recovery mechanisms for plan failures
 7. Evaluates the quality and efficiency of generated plans
-8. Demonstrates the system with complex multi-robot scenarios
+8. Demonstrates the system with complex multirobot scenarios
 
 Your project should include:
-- Complete GPT-4o integration for cognitive planning
-- Behavior tree execution system
-- Context-aware environment model
-- Plan monitoring and feedback mechanisms
-- Recovery and replanning capabilities
-- Performance evaluation metrics
-- Demo scenarios with complex tasks
+ Complete GPT4o integration for cognitive planning
+ Behavior tree execution system
+ Contextaware environment model
+ Plan monitoring and feedback mechanisms
+ Recovery and replanning capabilities
+ Performance evaluation metrics
+ Demo scenarios with complex tasks
 
 ## Summary
 
-This chapter covered cognitive task planning using GPT-4o for robotics:
+This chapter covered cognitive task planning using GPT4o for robotics:
 
-- **Cognitive Planning**: High-level reasoning about complex robotic tasks
-- **GPT-4o Integration**: Using large language models for plan generation
-- **Hierarchical Decomposition**: Breaking complex tasks into manageable subtasks
-- **Behavior Trees**: Executing plans with robust control structures
-- **Context Awareness**: Adapting plans based on environment state
-- **Recovery Mechanisms**: Handling failures and adapting plans
-- **Performance Evaluation**: Assessing plan quality and execution success
+ **Cognitive Planning**: Highlevel reasoning about complex robotic tasks
+ **GPT4o Integration**: Using large language models for plan generation
+ **Hierarchical Decomposition**: Breaking complex tasks into manageable subtasks
+ **Behavior Trees**: Executing plans with robust control structures
+ **Context Awareness**: Adapting plans based on environment state
+ **Recovery Mechanisms**: Handling failures and adapting plans
+ **Performance Evaluation**: Assessing plan quality and execution success
 
 Cognitive task planning with LLMs represents a significant advancement in robotics, enabling robots to understand complex tasks expressed in natural language and decompose them into executable actions while considering environmental context and potential failure modes.

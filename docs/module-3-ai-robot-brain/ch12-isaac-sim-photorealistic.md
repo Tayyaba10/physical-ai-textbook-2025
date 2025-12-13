@@ -1,26 +1,26 @@
----
-title: Ch12 - Isaac Sim – Photorealistic Simulation & Synthetic Data
+-----
+title: Ch12  Isaac Sim  Photorealistic Simulation & Synthetic Data
 module: 3
 chapter: 12
-sidebar_label: Ch12: Isaac Sim – Photorealistic Simulation & Synthetic Data
+sidebar_label: Ch12: Isaac Sim  Photorealistic Simulation & Synthetic Data
 description: Creating photorealistic simulations and generating synthetic data with Isaac Sim
-tags: [isaac-sim, omniverse, simulation, synthetic-data, photorealistic, rendering, ai-training]
+tags: [isaacsim, omniverse, simulation, syntheticdata, photorealistic, rendering, aitraining]
 difficulty: advanced
 estimated_duration: 120
----
+-----
 
 import MermaidDiagram from '@site/src/components/MermaidDiagram';
 
-# Isaac Sim – Photorealistic Simulation & Synthetic Data
+# Isaac Sim  Photorealistic Simulation & Synthetic Data
 
 ## Learning Outcomes
-- Create photorealistic simulation environments using Isaac Sim and Omniverse
-- Generate synthetic image and sensor data for AI training
-- Understand the USD (Universal Scene Description) format and workflows
-- Configure advanced rendering features including RTX ray tracing
-- Implement domain randomization techniques for robust AI models
-- Validate synthetic data quality and realism
-- Integrate synthetic data generation into AI development workflows
+ Create photorealistic simulation environments using Isaac Sim and Omniverse
+ Generate synthetic image and sensor data for AI training
+ Understand the USD (Universal Scene Description) format and workflows
+ Configure advanced rendering features including RTX ray tracing
+ Implement domain randomization techniques for robust AI models
+ Validate synthetic data quality and realism
+ Integrate synthetic data generation into AI development workflows
 
 ## Theory
 
@@ -30,26 +30,26 @@ Isaac Sim is built on NVIDIA's Omniverse platform, which provides a collaborativ
 
 <MermaidDiagram chart={`
 graph TD;
-    A[Isaac Sim] --> B[Omniverse Kit];
-    A --> C[PhysX Physics];
-    A --> D[RTX Rendering];
-    A --> E[USD Format];
+    A[Isaac Sim] > B[Omniverse Kit];
+    A > C[PhysX Physics];
+    A > D[RTX Rendering];
+    A > E[USD Format];
     
-    B --> F[Extensibility Framework];
-    B --> G[Multi-App Collaboration];
-    B --> H[Python API];
+    B > F[Extensibility Framework];
+    B > G[MultiApp Collaboration];
+    B > H[Python API];
     
-    C --> I[Realistic Physics Simulation];
-    C --> J[Collision Detection];
-    C --> K[Rigid Body Dynamics];
+    C > I[Realistic Physics Simulation];
+    C > J[Collision Detection];
+    C > K[Rigid Body Dynamics];
     
-    D --> L[Ray Tracing];
-    D --> M[Global Illumination];
-    D --> N[Physically-based Materials];
+    D > L[Ray Tracing];
+    D > M[Global Illumination];
+    D > N[Physicallybased Materials];
     
-    E --> O[Scalable Scene Representation];
-    E --> P[Asset Interchange];
-    E --> Q[Animation Support];
+    E > O[Scalable Scene Representation];
+    E > P[Asset Interchange];
+    E > Q[Animation Support];
     
     style A fill:#4CAF50,stroke:#388E3C,color:#fff;
     style D fill:#2196F3,stroke:#0D47A1,color:#fff;
@@ -59,30 +59,30 @@ graph TD;
 
 Isaac Sim uses RTX technology to achieve photorealistic rendering through:
 
-- **Path Tracing**: Simulates light transport for realistic global illumination
-- **Ray Tracing**: Accurate reflection, refraction, and shadow effects
-- **Physically-based Materials**: Realistic material responses to lighting
-- **Volumetric Effects**: Atmospheric effects like fog and smoke
+ **Path Tracing**: Simulates light transport for realistic global illumination
+ **Ray Tracing**: Accurate reflection, refraction, and shadow effects
+ **Physicallybased Materials**: Realistic material responses to lighting
+ **Volumetric Effects**: Atmospheric effects like fog and smoke
 
 ### Synthetic Data Generation
 
 Synthetic data generation in Isaac Sim provides:
 
-- **Ground Truth Annotations**: Pixel-perfect labels for training AI models
-- **Sensor Simulation**: Accurate simulation of cameras, LiDAR, IMU, etc.
-- **Domain Randomization**: Variation in lighting, textures, and objects to improve model robustness
-- **Large Scale Data**: Generate thousands of images without physical limitations
+ **Ground Truth Annotations**: Pixelperfect labels for training AI models
+ **Sensor Simulation**: Accurate simulation of cameras, LiDAR, IMU, etc.
+ **Domain Randomization**: Variation in lighting, textures, and objects to improve model robustness
+ **Large Scale Data**: Generate thousands of images without physical limitations
 
 ### USD (Universal Scene Description)
 
 USD is Pixar's scene description format that Isaac Sim uses:
 
-- **Scalability**: Handle complex scenes with millions of primitives
-- **Composition**: Combine multiple assets and scenes
-- **Animation**: Support for complex animation and simulation data
-- **Interchange**: Share assets between different 3D applications
+ **Scalability**: Handle complex scenes with millions of primitives
+ **Composition**: Combine multiple assets and scenes
+ **Animation**: Support for complex animation and simulation data
+ **Interchange**: Share assets between different 3D applications
 
-## Step-by-Step Labs
+## StepbyStep Labs
 
 ### Lab 1: Creating a Photorealistic Environment
 
@@ -132,16 +132,16 @@ USD is Pixar's scene description format that Isaac Sim uses:
        # Create walls
        wall_positions = [
            (0, 5, 2.5),    # North wall
-           (0, -5, 2.5),   # South wall
+           (0, 5, 2.5),   # South wall
            (5, 0, 2.5),    # East wall
-           (-5, 0, 2.5)    # West wall
+           (5, 0, 2.5)    # West wall
        ]
        
        wall_rotations = [
-           (0, 0, 0),      # North wall - no rotation
-           (0, 180, 0),    # South wall - 180° rotation
-           (0, 90, 0),     # East wall - 90° rotation
-           (0, -90, 0)     # West wall - -90° rotation
+           (0, 0, 0),      # North wall  no rotation
+           (0, 180, 0),    # South wall  180° rotation
+           (0, 90, 0),     # East wall  90° rotation
+           (0, 90, 0)     # West wall  90° rotation
        ]
        
        for i, (pos, rot) in enumerate(zip(wall_positions, wall_rotations)):
@@ -183,7 +183,7 @@ USD is Pixar's scene description format that Isaac Sim uses:
        "RectLight",
        position=(0, 0, 4.9),  # Position just below ceiling
        attributes={
-           "color": (0.9, 0.9, 1.0),  # Slightly blue-tinted white
+           "color": (0.9, 0.9, 1.0),  # Slightly bluetinted white
            "intensity": 500.0,
            "width": 1.5,
            "height": 1.0
@@ -209,9 +209,9 @@ USD is Pixar's scene description format that Isaac Sim uses:
    settings.set("/rtx/indirectSpecularQuality", 2)  # High quality
    ```
 
-2. **Add physically-based materials**:
+2. **Add physicallybased materials**:
    ```python
-   # Create a physically-based material
+   # Create a physicallybased material
    def create_pbr_material(material_path, base_color, roughness=0.5, metallic=0.0):
        # Create material using Omniverse Material Library
        omni.kit.commands.execute(
@@ -254,8 +254,8 @@ USD is Pixar's scene description format that Isaac Sim uses:
        # Add various objects with different materials
        objects = [
            {"name": "bottle", "usd": "omniverse://localhost/NVIDIA/Assets/Isaac/4.0/Isaac/Props/YCB/Axis_Aligned/035_power_drill.usd", "pos": (0.5, 0.5, 0.8)},
-           {"name": "can", "usd": "omniverse://localhost/NVIDIA/Assets/Isaac/4.0/Isaac/Props/YCB/Axis_Aligned/010_potted_meat_can.usd", "pos": (-0.3, 0.2, 0.8)},
-           {"name": "bowl", "usd": "omniverse://localhost/NVIDIA/Assets/Isaac/4.0/Isaac/Props/YCB/Axis_Aligned/025_mug.usd", "pos": (0.2, -0.4, 0.8)}
+           {"name": "can", "usd": "omniverse://localhost/NVIDIA/Assets/Isaac/4.0/Isaac/Props/YCB/Axis_Aligned/010_potted_meat_can.usd", "pos": (0.3, 0.2, 0.8)},
+           {"name": "bowl", "usd": "omniverse://localhost/NVIDIA/Assets/Isaac/4.0/Isaac/Props/YCB/Axis_Aligned/025_mug.usd", "pos": (0.2, 0.4, 0.8)}
        ]
        
        for i, obj in enumerate(objects):
@@ -354,10 +354,10 @@ class PhotorealisticSceneBuilder:
         
         # Create walls
         wall_positions = [
-            (0, 5, 2.5), (0, -5, 2.5), (5, 0, 2.5), (-5, 0, 2.5)
+            (0, 5, 2.5), (0, 5, 2.5), (5, 0, 2.5), (5, 0, 2.5)
         ]
         wall_rotations = [
-            (0, 0, 0), (0, 180, 0), (0, 90, 0), (0, -90, 0)
+            (0, 0, 0), (0, 180, 0), (0, 90, 0), (0, 90, 0)
         ]
         
         for i, (pos, rot) in enumerate(zip(wall_positions, wall_rotations)):
@@ -403,8 +403,8 @@ class PhotorealisticSceneBuilder:
         # Add 5 random objects
         for i in range(5):
             # Random position within bounds
-            x = np.random.uniform(-2, 2)
-            y = np.random.uniform(-2, 2)
+            x = np.random.uniform(2, 2)
+            y = np.random.uniform(2, 2)
             z = 0.1  # Just above floor
             
             # Add object to scene
@@ -737,21 +737,21 @@ class AdvancedSyntheticDataGenerator:
         if temp <= 66:
             red = 255
             green = temp
-            green = 99.4708025861 * np.log(green) - 161.1195681661
+            green = 99.4708025861 * np.log(green)  161.1195681661
         else:
-            red = temp - 60
-            red = 329.698727446 * (red ** -0.1332047592)
-            green = temp - 60
-            green = 288.1221695283 * (green ** -0.0755148492)
+            red = temp  60
+            red = 329.698727446 * (red ** 0.1332047592)
+            green = temp  60
+            green = 288.1221695283 * (green ** 0.0755148492)
         
-        blue = temp - 10
+        blue = temp  10
         if temp >= 66:
             blue = 255
         elif temp <= 19:
             blue = 0
         else:
-            blue = temp - 10
-            blue = 138.5177312231 * np.log(blue) - 305.0447927307
+            blue = temp  10
+            blue = 138.5177312231 * np.log(blue)  305.0447927307
         
         # Clamp values to [0, 255] and normalize to [0, 1]
         red = np.clip(red, 0, 255) / 255.0
@@ -807,7 +807,7 @@ class AdvancedSyntheticDataGenerator:
             
             # Save depth image
             if depth_data is not None:
-                depth_img = PIL.Image.fromarray((depth_data * 1000).astype(np.uint16))  # Scale for 16-bit
+                depth_img = PIL.Image.fromarray((depth_data * 1000).astype(np.uint16))  # Scale for 16bit
                 depth_img.save(f"{output_dir}/depth/{sample_idx:06d}.png")
             
             # Save segmentation
@@ -862,7 +862,7 @@ if __name__ == "__main__":
     create_photorealistic_scene_and_generate_data()
 ```
 
-## Mini-project
+## Miniproject
 
 Create a complete synthetic data generation pipeline that:
 
@@ -875,21 +875,21 @@ Create a complete synthetic data generation pipeline that:
 7. Compares performance of models trained on synthetic vs real data
 
 Your project should include:
-- Complete Isaac Sim scene with photorealistic rendering
-- Domain randomization system
-- Data capture pipeline with multiple sensors
-- Quality validation tools
-- Training pipeline that demonstrates the value of synthetic data
+ Complete Isaac Sim scene with photorealistic rendering
+ Domain randomization system
+ Data capture pipeline with multiple sensors
+ Quality validation tools
+ Training pipeline that demonstrates the value of synthetic data
 
 ## Summary
 
 This chapter covered photorealistic simulation and synthetic data generation with Isaac Sim:
 
-- **Photorealistic Rendering**: Using RTX technology and PhysX for realistic simulations
-- **USD Workflows**: Understanding Universal Scene Description for scalable scene management
-- **Synthetic Data Generation**: Creating ground truth datasets for AI training
-- **Domain Randomization**: Techniques to improve model robustness through variation
-- **Sensor Simulation**: Configuring realistic camera, LiDAR, and other sensor models
-- **Data Pipeline**: Complete workflow from scene creation to dataset generation
+ **Photorealistic Rendering**: Using RTX technology and PhysX for realistic simulations
+ **USD Workflows**: Understanding Universal Scene Description for scalable scene management
+ **Synthetic Data Generation**: Creating ground truth datasets for AI training
+ **Domain Randomization**: Techniques to improve model robustness through variation
+ **Sensor Simulation**: Configuring realistic camera, LiDAR, and other sensor models
+ **Data Pipeline**: Complete workflow from scene creation to dataset generation
 
-Isaac Sim provides powerful tools for creating realistic simulation environments and generating high-quality synthetic data essential for training robust AI models in robotics applications.
+Isaac Sim provides powerful tools for creating realistic simulation environments and generating highquality synthetic data essential for training robust AI models in robotics applications.
